@@ -130,3 +130,12 @@
     height: 2.25rem;
     width: auto;
   }
+
+  body {
+    background-color: #f8faf9;
+  }
+
+  .desc {
+    overflow: auto;
+    max-height: 10rem;
+  }

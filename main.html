@@ -27,48 +27,103 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <div class="row flex-fill">
-                <div class="col-0 col-lg-3"></div>
+            <div class="row flex-fill pl-md-4">
                 <div class="col-12 col-lg-6">
 
-                    <form class="form-inline justify-content-center " >
-                        <div class=" my-2 my-lg-0 flex-fill">    
+                    <form class="form-inline justify-content-center ">
+                        <div class=" my-2 my-lg-0 flex-fill">
                             <label for="search-bar" class="sr-only">Email</label>
-                            <input class="form-control w-100 mr-sm-2" id="search-bar" type="text" placeholder="Search" aria-label="Search">
-                        </form>
-                    </div>
+                            <input class="form-control w-100 mr-sm-2" id="search-bar" type="text" placeholder="Search"
+                                aria-label="Search">
+                    </form>
                 </div>
-                <div class="col-0 col-lg-3"></div>
             </div>
+            <div class="col-0 col-lg-6"></div>
+        </div>
 
-            <ul class="navbar-nav">
-                <li class="nav-item d-none d-lg-flex align-self-center mr-1">
-                    <img id="profile-pic" class="rounded-circle" src="./img/dummy-avt.png" alt="Circle image">
-                    
-                </li>
+        <ul class="navbar-nav">
+            <li class="nav-item d-none d-lg-flex align-self-center mr-1">
+                <img id="profile-pic" class="rounded-circle" src="./img/dummy-avt.png" alt="Circle image">
 
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Logout</a>
-                </li>
-            </ul>
+            </li>
+
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Logout</a>
+            </li>
+        </ul>
         </div>
     </header>
-    <div class="container-fluid">
-        <div class="col-12 col-md-3 col-xl-2">
-            something
-        </div>
-        <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content">
-            time for a f ing crusade
-        </main>
-        <div class="d-none d-xl-block col-xl-2">
-            something else
+    <div class="container-fluid ">
+        <div class="row flex-xl-nowrap">
+            <div class="col-12 col-md-3 col-xl-2 d-flex">
+                <div>
+
+                </div>
+                <div class="my-2 mt-md-3 flex-fill">
+                    <ul class="nav row justify-content-center">
+                        <li class="nav-item col-6 col-md-12 text-center text-md-left">
+                            <a class="nav-link active" href="#">Feeds</a>
+                        </li>
+                        <li class="nav-item col-6 col-md-12 text-center text-md-left">
+                            <a class="nav-link" href="#">Discover</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <main class="col-12 col-md-9 col-xl-8 py-md-3">
+                <div class="card p-2">
+                    <div class="align-self-center">
+                        <div class="btn-group" role="group" aria-label="Mode">
+                            <button type="button" class="btn btn-outline-primary">Album</button>
+                            <button type="button" class="btn btn-primary">Photo</button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="feed container-fluid">
+                        <div class="row">
+                            <div class="card col-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-12 px-0 h-100 align-self-center">
+                                            <img src="img/dummy-photo.jpg" class="img-fluid" alt="">
+                                    </div>
+                                    <div class="col-md-6 col-12 py-2 px-0">
+                                        <div class="col">
+
+                                            <p class="h3">Title</p>
+                                            <p class="text-secondary desc"> Lorem ipsum dolor sit amet, consectetur
+                                                adipiscing elit. Ut venenatis lectus sed magna dapibus mollis. Sed
+                                                venenatis ac velit in viverra. Vestibulum sed tincidunt lectus.
+                                                Vestibulum quis pellentesque neque. Maecenas congue augue quis mattis
+                                                mollis. Mauris eget dictum purus. Aliquam ullamcorper malesuada ante,
+                                                sed ullamcorper lorem dignissim sed. Aenean efficitur quam molestie
+                                                justo vehicula convallis. Duis vitae pulvinar ligula, ac varius orci.
+                                            </p>
+                                        </div>
+                                        <div class="col">
+                                            tim comment share
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-6 col-12">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <div class="d-none d-xl-block py-md-3 col-xl-2">
+                space-holder
+            </div>
         </div>
 
     </div>
