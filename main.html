@@ -19,20 +19,28 @@
 
 <body>
     <header class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#">Fotobook</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="row flex-fill">
+                <div class="col-0 col-lg-3"></div>
+                <div class="col-12 col-lg-6">
 
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-            </form>
+                    <form class="form-inline justify-content-center " >
+                        <div class=" my-2 my-lg-0 flex-fill">    
+                            <label for="search-bar" class="sr-only">Email</label>
+                            <input class="form-control w-100 mr-sm-2" id="search-bar" type="text" placeholder="Search" aria-label="Search">
+                        </form>
+                    </div>
+                </div>
+                <div class="col-0 col-lg-3"></div>
+            </div>
 
-            <ul class="navbar-nav flex-row ml-auto">
+            <ul class="navbar-nav">
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
@@ -45,6 +53,18 @@
             </ul>
         </div>
     </header>
+    <div class="container-fluid">
+        <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
+            something
+        </div>
+        <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content">
+            time for a f ing crusade
+        </main>
+        <div class="d-none d-xl-block col-xl-2 bd-toc">
+            something else
+        </div>
+
+    </div>
 </body>
 
 </html>
