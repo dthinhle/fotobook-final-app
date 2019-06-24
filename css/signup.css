@@ -2,10 +2,14 @@
   height: 100vh;
 }
 
-.signup-form{
-  height: 25rem;
-}
-
 .signup-bg{
   background-color: #3c5999;
+}
+
+.signup-devise{
+  height: 1.5em;
+}
+
+.input-group-text {
+  width: 3rem;
 }
