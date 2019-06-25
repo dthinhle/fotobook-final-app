@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Fotobook</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag    'signup', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'signup', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+  <div class="container-fluid signup-bg">
+    <div class="row flex-xl-nowrap">
+      <div class="col-12 col-md-3 col-xl-4 d-flex">
+      </div>
+      <main class="col-12 col-md-6 col-xl-4 py-3 signup-ctn">
+
+        <div class="d-flex align-items-center h-100">
+          <div class="w-100">
+            <div class="text-center">
+              <div class="h1 text-white pb-3">
+                Fotobook
+              </div>
+            </div>
+
+            <div class="signup-form card py-3 container-fluid ">
+              <%= yield %>
+            </div>
+          </div>
+
+        </div>
+    </div>
+    </main>
+    <div class="col-12 col-md-3 col-xl-4">
+    </div>
+  </div>
+
+</body>
+
+</html>
