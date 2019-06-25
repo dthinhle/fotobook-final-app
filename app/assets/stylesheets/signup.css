@@ -13,3 +13,7 @@
 .input-group-text {
   width: 3rem;
 }
+
+.signup-form{
+  max-width: 500px;
+}
