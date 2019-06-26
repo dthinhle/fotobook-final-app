@@ -9,7 +9,7 @@
 User.delete_all
 Photo.delete_all
 Album.delete_all
-User.create(email: "admin@nus.com",password:'$2a$11$EJqNptSA0EGGhZZxXxsg5.xZYHMVHOyK2dMIu.P.3zIgRcSXUvuAK',first_name: 'admin',last_name: 'admin')
+User.create(email: "admin@nus.com",password:'admin1',first_name: 'admin',last_name: 'admin')
 
 1.upto(5){|i|
   i = Photo.create([{title: "testPhoto#{i}"}])
@@ -20,6 +20,6 @@ User.create(email: "admin@nus.com",password:'$2a$11$EJqNptSA0EGGhZZxXxsg5.xZYHMV
 }
 
 2.upto(5){|i|
-  User.create(email: "testUser#{i}@nus.com",password:'$2a$11$zD1QPtCOmLqsq0EAhHyg0.JP8MoXHbi36UNhERE/9BzhfnDbOUqaW',first_name: 'dummy',last_name: "user#{i}")
+  User.create(email: "testUser#{i}@nus.com",password:'123456',first_name: 'dummy',last_name: "user#{i}")
 }
 
