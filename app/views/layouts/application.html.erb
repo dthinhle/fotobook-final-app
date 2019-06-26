@@ -10,6 +10,46 @@
   </head>
 
   <body>
+  <header class="navbar navbar-expand-lg navbar-dark ">
+    <a class="navbar-brand font-weight-bold" href="#">Fotobook</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="row flex-fill pl-lg-4">
+        <div class="col-12 col-lg-6">
+
+          <form class="form-inline justify-content-center ">
+            <div class=" my-2 my-lg-0 flex-fill">
+              <label for="search-bar" class="sr-only">Email</label>
+              <input class="form-control w-100 mr-sm-2" id="search-bar" type="text" placeholder="Search"
+                aria-label="Search">
+          </form>
+        </div>
+      </div>
+      <div class="col-0 col-lg-6"></div>
+    </div>
+
+    <ul class="navbar-nav">
+      <li class="nav-item d-none d-lg-flex align-self-center mr-1">
+        <%= image_tag  "dummy-profile.png", class: "rounded-circle", id: "profile-pic" %>
+      </li>
+
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'nav-link'  %>
+      </li>
+    </ul>
+    </div>
+  </header>
   <p>
   Test
 
