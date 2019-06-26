@@ -136,8 +136,7 @@ body {
   background-color: #f8faf9;
 }
 
-
-#profile-pic {
+.image-holder {
   height: 2.25rem;
-  width: auto;
+  width: 2.25rem;
 }

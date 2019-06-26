@@ -9,7 +9,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+
   <header class="navbar navbar-expand-lg navbar-dark ">
     <a class="navbar-brand font-weight-bold" href="#">Fotobook</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -34,7 +34,9 @@
 
     <ul class="navbar-nav">
       <li class="nav-item d-none d-lg-flex align-self-center mr-1">
-        <%= image_tag  "dummy-profile.png", class: "rounded-circle", id: "profile-pic" %>
+        <div class="image-holder">
+          <%= image_tag  "dummy-profile.png", class: "rounded-circle", id: "profile-pic" %>
+        </div>
       </li>
 
       </li>
@@ -50,11 +52,7 @@
     </ul>
     </div>
   </header>
-  <p>
-  Test
-
-  </p>
-
+  <body>
     <%= yield %>
   </body>
 </html>
