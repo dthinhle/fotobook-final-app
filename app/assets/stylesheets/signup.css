@@ -14,6 +14,6 @@
   width: 3rem;
 }
 
-.btn-devise{
-  width: 2.5rem;
+.signup-form{
+  max-width: 500px;
 }
