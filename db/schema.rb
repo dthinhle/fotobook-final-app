@@ -18,16 +18,21 @@ ActiveRecord::Schema.define(version: 2019_06_25_094940) do
   create_table "albums", force: :cascade do |t|
     t.string "title"
     t.string "desc"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_albums_on_user_id"
   end
 
   create_table "photos", force: :cascade do |t|
     t.string "title"
     t.string "desc"
     t.string "img"
+    t.string "imageable_type"
+    t.bigint "imageable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["imageable_type", "imageable_id"], name: "index_photos_on_imageable_type_and_imageable_id"
   end
 
   create_table "users", force: :cascade do |t|

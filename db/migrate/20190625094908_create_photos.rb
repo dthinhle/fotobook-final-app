@@ -5,6 +5,8 @@ class CreatePhotos < ActiveRecord::Migration[5.2]
       t.string :desc
       t.string :img
 
+      t.references :imageable, polymorphic: true, index: true
+
       t.timestamps
     end
   end
