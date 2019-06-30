@@ -32,133 +32,106 @@
 .signup-form
   max-width: 500px
 
+$bgDefault      : #3c5999
+$bgHighlight    : #2c4989
+$colDefault     : #f0f0f0
+$colHighlight   : #fefefe
+$dropDown       : false
+
 .navbar
-  background-color: #3c5999
-
-
-.navbar .navbar-brand
-  color: #f0f0f0
-
-
-.navbar .navbar-brand:hover, .navbar .navbar-brand:focus
-  color: #fefefe
-
-
-.navbar .navbar-text
-  color: #f0f0f0
-
-
-.navbar .navbar-text a
-  color: #fefefe
-
-
-.navbar .navbar-text a:hover, .navbar .navbar-text a:focus
-  color: #fefefe
-
-
-.navbar .navbar-nav .nav-link
-  color: #f0f0f0
-  border-radius: .25rem
-  margin: 0 0.25em
-
-
-.navbar .navbar-nav .nav-link:not(.disabled):hover, .navbar .navbar-nav .nav-link:not(.disabled):focus
-  color: #fefefe
-
-
-.navbar .navbar-nav .nav-item.active .nav-link, .navbar .navbar-nav .nav-item.active .nav-link:hover, .navbar .navbar-nav .nav-item.active .nav-link:focus, .navbar .navbar-nav .nav-item.show .nav-link, .navbar .navbar-nav .nav-item.show .nav-link:hover, .navbar .navbar-nav .nav-item.show .nav-link:focus
-  padding-left: 0.6rem
-  color: #fefefe
-  background-color: #2c4989
-
-
-.navbar .navbar-toggle
-  border-color: #2c4989
-
-
-.navbar .navbar-toggle:hover, .navbar .navbar-toggle:focus
-  background-color: #2c4989
-
-
-.navbar .navbar-toggle .navbar-toggler-icon
-  color: #f0f0f0
-
-
-.navbar .navbar-collapse, .navbar .navbar-form
-  border-color: #f0f0f0
-
-
-.navbar .navbar-link
-  color: #f0f0f0
-
-
-.navbar .navbar-link:hover
-  color: #fefefe
-
-
+  background-color: $bgDefault
+  .navbar-brand
+    color: $colDefault
+    &:hover, &:focus
+      color: $colHighlight
+  .navbar-text
+    color: $colDefault
+    a
+      color: $colHighlight
+      &:hover, &:focus
+        color: $colHighlight
+  .navbar-nav
+    .nav-link
+      color: $colDefault
+      border-radius: .25rem
+      margin: 0 0.25em
+      &:not(.disabled)
+        &:hover, &:focus
+          color: $colHighlight
+    @if $dropDown
+      .dropdown-menu
+        background-color: $bgDefault
+        border-color: $bgHighlight
+        .dropdown-item
+          color: $colDefault
+          &:hover, &:focus, &.active
+            padding-left:
+            color: $colHighlight
+            background-color: $bgHighlight
+        .dropdown-divider
+          border-top-color: $bgHighlight
+    .nav-item.active, .nav-item.show
+      .nav-link, .nav-link:hover, .nav-link:focus
+        padding-left: 0.5rem;
+        color: $colHighlight
+        background-color: $bgHighlight
+  .navbar-toggle
+    border-color: $bgHighlight
+    &:hover, &:focus
+      background-color: $bgHighlight
+    .navbar-toggler-icon
+      color: $colDefault
+  .navbar-collapse,
+  .navbar-form
+    border-color: $colDefault
+  .navbar-link
+    color: $colDefault
+    &:hover
+      color: $colHighlight
 @media (max-width: 575px)
-  .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item
-    color: #f0f0f0
-
-  .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item:hover, .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item:focus
-    color: #fefefe
-
-  .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item.active
-    color: #fefefe
-    background-color: #2c4989
-
-
-
+  .navbar-expend-sm .navbar-nav .show .dropdown-menu
+    .dropdown-item
+      color: $colDefault
+      &:hover, &:focus
+        color: $colHighlight
+    .dropdown-item.active
+      color: $colHighlight
+      background-color: $bgHighlight
 @media (max-width: 767px)
-  .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item
-    color: #f0f0f0
-
-  .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item:hover, .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item:focus
-    color: #fefefe
-
-  .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item.active
-    color: #fefefe
-    background-color: #2c4989
-
-
-
+  .navbar-expend-md .navbar-nav .show .dropdown-menu
+    .dropdown-item
+      color: $colDefault
+      &:hover, &:focus
+        color: $colHighlight
+    .dropdown-item.active
+      color: $colHighlight
+      background-color: $bgHighlight
 @media (max-width: 991px)
-  .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item
-    color: #f0f0f0
-
-  .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item:hover, .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item:focus
-    color: #fefefe
-
-  .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item.active
-    color: #fefefe
-    background-color: #2c4989
-
-
-
+  .navbar-expend-lg .navbar-nav .show .dropdown-menu
+    .dropdown-item
+      color: $colDefault
+      &:hover, &:focus
+        color: $colHighlight
+    .dropdown-item.active
+      color: $colHighlight
+      background-color: $bgHighlight
 @media (max-width: 1199px)
-  .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item
-    color: #f0f0f0
-
-  .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item:hover, .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item:focus
-    color: #fefefe
-
-  .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item.active
-    color: #fefefe
-    background-color: #2c4989
-
-
-
-.navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item
-  color: #f0f0f0
-
-
-.navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item:hover, .navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item:focus
-  color: #fefefe
-
-
-.navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item.active
-  color: #fefefe
-  background-color: #2c4989
+  .navbar-expend-xl .navbar-nav .show .dropdown-menu
+    .dropdown-item
+      color: $colDefault
+      &:hover, &:focus
+        color: $colHighlight
+    .dropdown-item.active
+      color: $colHighlight
+      background-color: $bgHighlight
+.navbar-expend .navbar-nav .show .dropdown-menu
+  .dropdown-item
+    color: $colDefault
+    &:hover, &:focus
+      color: $colHighlight
+  .dropdown-item.active
+    color: $colHighlight
+    background-color: $bgHighlight
 
 
 #profile-pic
