@@ -19,7 +19,6 @@
   height: 50px;
   width: 50px;
   /* margin: 0 auto; */
-  cursor: pointer;
 }
 
 .animate {
@@ -33,10 +32,4 @@
   100% {
     background-position: right
   }
-}
-
-.thumbnail{
-  background-image: url(../img/dummy-photo.jpg);
-  background-position: center;
-  background-size: cover;
 }
