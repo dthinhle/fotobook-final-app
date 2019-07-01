@@ -30,13 +30,13 @@
           <hr>
           <div class="container-fluid px-0">
             <div class="row no-gutters pb-2 feed-photo">
-              <%  1.upto(8) do |t| %>
-              <%= render  "imgpost" %>
+              <%  1.upto(10) do |t| %>
+              <%= render partial: "feed/thumbnail", locals: {mode: 'photo', src: "00#{t}"} %>
               <% end %>
             </div>
             <div class="row no-gutters pb-2 feed-album d-none">
               <%  1.upto(8) do |t| %>
-              <%= render  "albumpost" %>
+              <%= render partial: "feed/thumbnail", locals: {mode: 'album', src: ["00#{t}","00#{t+1}","00#{t+2}"]} %>
               <% end %>
             </div>
           </div>

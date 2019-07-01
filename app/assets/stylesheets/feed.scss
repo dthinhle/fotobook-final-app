@@ -4,6 +4,10 @@
 
 /* Feed CSS */
 
+.img-fluid{
+  max-height: 100%;
+}
+
 .desc {
   position: relative;
   top: 0rem;
@@ -11,6 +15,8 @@
   overflow: scroll;
   max-height: 12rem;
 }
+
+
 
 .HeartAnimation {
   padding-top: 2em;
@@ -97,7 +103,7 @@
   top: 50%;
   left: 50%;
   width: 70%;
-  transform: translate(-50%, -50%) rotate(-20deg);
+  transform: translate(-50%, -50%) rotate(-10deg);
 }
 
 .img-above-1 {
@@ -106,7 +112,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) rotate(-10deg);
+  transform: translate(-50%, -50%) rotate(-5deg);
 }
 
 .img-above-2 {
@@ -116,4 +122,30 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.album-animation-0{
+  animation: slide0 0.8s forwards;
+}
+
+.album-animation-1{
+  animation: slide1 0.8s forwards;
+}
+
+@keyframes slide0 {
+  from {
+
+  };
+  to {
+    transform: translate(-50%, -50%) rotate(10deg)
+  }
+}
+
+@keyframes slide1 {
+  from {
+
+  };
+  to {
+    transform: translate(-50%, -50%) rotate(0deg)
+  }
 }

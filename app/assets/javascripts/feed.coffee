@@ -18,3 +18,8 @@ $(document).on "turbolinks:load", ->
     if $(".feed-album").hasClass('d-none')
       $(".feed-photo").toggleClass('d-none')
       $(".feed-album").toggleClass('d-none')
+
+  $(".img-above-2").hover ->
+    $(this).toggleClass('album-animation-0')
+    $(this).siblings(".img-above-1").toggleClass('album-animation-1')
+    true
