@@ -5,9 +5,10 @@
 /* Feed CSS */
 
 .desc {
-  overflow: auto;
-  max-height: 7.5rem;
-  min-height: 7.5rem;
+  position: relative;
+  top: 0rem;
+  bottom: 0rem;
+  overflow: scroll;
 }
 
 .HeartAnimation {
@@ -33,4 +34,32 @@
   100% {
     background-position: right
   }
+}
+
+.thumbnail-feed{
+  height: 15.75vw;
+}
+@media (max-width: 1199px){
+  .thumbnail-feed{
+    height: 34.25vw;
+  }
+}
+@media (max-width: 991px){
+  .thumbnail-feed{
+    height: auto;
+  }
+}
+
+.thumbnail-desc{
+  height: 15.75vw;
+}
+@media (max-width: 1199px){
+  .thumbnail-desc{
+    height: auto;
+  }
+}
+
+.interactive-bar {
+  position: relative;
+  bottom: 0;
 }
