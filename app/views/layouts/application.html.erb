@@ -1,59 +1,85 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Fotobook</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+<head>
+  <title>Fotobook</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
 
-  <header class="navbar navbar-expand-lg navbar-dark ">
-    <a class="navbar-brand font-weight-bold" href="#">Fotobook</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+<header class="navbar navbar-expand-lg navbar-dark ">
+  <a class="navbar-brand font-weight-bold" href="#">Fotobook</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <div class="row flex-fill pl-lg-4">
-        <div class="col-12 col-lg-6">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="row flex-fill pl-lg-4">
+      <div class="col-12 col-lg-6">
 
-          <form class="form-inline justify-content-center ">
-            <div class=" my-2 my-lg-0 flex-fill">
-              <label for="search-bar" class="sr-only">Email</label>
-              <input class="form-control w-100 mr-sm-2" id="search-bar" type="text" placeholder="Search"
-                aria-label="Search">
-          </form>
+        <form class="form-inline justify-content-center ">
+          <div class=" my-2 my-lg-0 flex-fill">
+            <label for="search-bar" class="sr-only">Email</label>
+            <input class="form-control w-100 mr-sm-2" id="search-bar" type="text" placeholder="Search"
+              aria-label="Search">
+        </form>
+      </div>
+    </div>
+    <div class="col-0 col-lg-6"></div>
+  </div>
+
+  <ul class="navbar-nav">
+    <li class="nav-item d-none d-lg-flex align-self-center mr-1">
+      <div class="image-holder">
+        <%= image_tag  "dummy-profile.png", class: "rounded-circle", id: "profile-pic" %>
+      </div>
+    </li>
+    <%= link_to "My username", myprofile_path, class: 'nav-link'%>
+    <li class="nav-item active">
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Dashboard</a>
+    </li>
+    <li class="nav-item">
+      <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'nav-link'  %>
+    </li>
+  </ul>
+  </div>
+</header>
+
+<body>
+  <div class="container-fluid px-0 px-lg-3">
+    <div class="row flex-xl-nowrap">
+      <div class="col-12 col-md-3 col-xl-2 d-flex">
+        <div>
+
+        </div>
+        <div class="my-2 mt-md-3 flex-fill">
+          <ul class="nav row justify-content-center">
+            <li class="nav-item col-6 col-md-12 text-center text-md-left">
+              <%= link_to  "Feeds", 'home', class: 'nav-link active' %>
+            </li>
+            <li class="nav-item col-6 col-md-12 text-center text-md-left">
+              <%= link_to  "Discover", 'discover', class: 'nav-link active' %>
+            </li>
+          </ul>
         </div>
       </div>
-      <div class="col-0 col-lg-6"></div>
+      <%= yield %>
+      <div class="d-none d-xl-block py-md-3 col-xl-2">
+        space-holder
+      </div>
     </div>
 
-    <ul class="navbar-nav">
-      <li class="nav-item d-none d-lg-flex align-self-center mr-1">
-          <div class="image-holder">
-            <%= image_tag  "dummy-profile.png", class: "rounded-circle", id: "profile-pic" %>
-          </div>
-      </li>
-        <%= link_to "My username", myprofile_path, class: 'nav-link'%>
-      <li class="nav-item active">
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Dashboard</a>
-      </li>
-      <li class="nav-item">
-        <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'nav-link'  %>
-      </li>
-    </ul>
-    </div>
-  </header>
-  <body>
-    <%= yield %>
-  </body>
+  </div>
+</body>
+
 </html>
