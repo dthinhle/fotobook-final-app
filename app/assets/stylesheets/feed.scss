@@ -4,11 +4,19 @@
 
 /* Feed CSS */
 
-.desc {
-  overflow: auto;
-  max-height: 7.5rem;
-  min-height: 7.5rem;
+.img-fluid{
+  max-height: 100%;
 }
+
+.desc {
+  position: relative;
+  top: 0rem;
+  bottom: 0rem;
+  overflow: scroll;
+  max-height: 12rem;
+}
+
+
 
 .HeartAnimation {
   padding-top: 2em;
@@ -32,5 +40,112 @@
   }
   100% {
     background-position: right
+  }
+}
+
+.thumbnail-feed{
+  background-image: linear-gradient(to bottom right, #787878, #484848);
+  height: 15.75vw;
+}
+@media (max-width: 1199px){
+  .thumbnail-feed{
+    height: 34.25vw;
+  }
+}
+@media (max-width: 991px){
+  .thumbnail-feed{
+    height: auto;
+  }
+}
+
+.thumbnail-album{
+  background-image: linear-gradient(to bottom right, #787878, #484848);
+  height: 15.75vw;
+}
+@media (max-width: 1199px){
+  .thumbnail-album{
+    height: 34.25vw;
+  }
+}
+@media (max-width: 991px){
+  .thumbnail-album{
+    height: 70vw;
+  }
+}
+@media (max-width: 767px){
+  .thumbnail-album{
+    height: 95vw;
+  }
+}
+
+.thumbnail-desc{
+  height: 15.2vw;
+}
+@media (max-width: 1199px){
+  .thumbnail-desc{
+    height: 20rem;
+  }
+}
+@media (max-width: 991px){
+  .thumbnail-desc{
+    height: auto;
+  }
+}
+
+.interactive-bar {
+  position: relative;
+  bottom: 0;
+}
+
+.img-above-0 {
+  z-index: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 70%;
+  transform: translate(-50%, -50%) rotate(-10deg);
+}
+
+.img-above-1 {
+  z-index: 1;
+  width: 70%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-5deg);
+}
+
+.img-above-2 {
+  z-index: 2;
+  width: 70%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.album-animation-0{
+  animation: slide0 0.8s forwards;
+}
+
+.album-animation-1{
+  animation: slide1 0.8s forwards;
+}
+
+@keyframes slide0 {
+  from {
+
+  };
+  to {
+    transform: translate(-50%, -50%) rotate(10deg)
+  }
+}
+
+@keyframes slide1 {
+  from {
+
+  };
+  to {
+    transform: translate(-50%, -50%) rotate(0deg)
   }
 }
