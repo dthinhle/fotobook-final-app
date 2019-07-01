@@ -18,23 +18,26 @@
       <main class="col-12 col-md-9 col-xl-8 py-md-3">
         <div class="card pt-3">
           <div class="align-self-center">
-            <div class="btn-group" role="group" aria-label="Mode">
-              <button type="button" class="btn btn-outline-primary">Album</button>
-              <button type="button" class="btn btn-primary">Photo</button>
-            </div>
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-outline-primary active photo-mode">
+              <input type="radio" name="photo" id="photo-radio" autocomplete="off" checked> Photo
+            </label>
+            <label class="btn btn-outline-primary album-mode">
+              <input type="radio" name="album" id="album-radio" autocomplete="off"> Album
+            </label>
+          </div>
           </div>
           <hr>
-          <div class="feed container-fluid px-0">
-            <div class="row no-gutters pb-2">
+          <div class="container-fluid px-0">
+            <div class="row no-gutters pb-2 feed-photo">
+              <%  1.upto(8) do |t| %>
+              <%= render  "imgpost" %>
+              <% end %>
+            </div>
+            <div class="row no-gutters pb-2 feed-album d-none">
+              <%  1.upto(8) do |t| %>
               <%= render  "albumpost" %>
-              <%= render  "albumpost" %>
-              <%= render  "albumpost" %>
-              <%= render  "albumpost" %>
-              <%= render  "albumpost" %>
-              <%= render  "albumpost" %>
-              <%= render  "albumpost" %>
-              <%= render  "albumpost" %>
-
+              <% end %>
             </div>
           </div>
         </div>

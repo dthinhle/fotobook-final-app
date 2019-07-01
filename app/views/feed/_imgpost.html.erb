@@ -14,7 +14,15 @@
         <div class="thumbnail-desc">
           <div class="d-flex flex-column h-100 pl-2">
             <p class="h3">Title</p>
-            <p class="text-primary mb-2">Someone</p>
+            <div class="mb-2">
+
+            <% if current_page?(discover_path) %>
+              <button class="badge badge-pill btn-outline-primary btn-badge-border pull-right small mr-2">
+              Follow
+              </button>
+            <% end %>
+            <span class="text-primary">Someone</span>
+            </div>
             <div class="flex-xl-grow-1 desc">
               <p class="text-secondary"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                 tempor incididunt ut labore et dolore magna aliqua.Enim neque volutpat ac tincidunt vitae semper quis
