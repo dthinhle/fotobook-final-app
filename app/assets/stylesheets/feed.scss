@@ -9,6 +9,7 @@
   top: 0rem;
   bottom: 0rem;
   overflow: scroll;
+  max-height: 12rem;
 }
 
 .HeartAnimation {
@@ -51,9 +52,14 @@
 }
 
 .thumbnail-desc{
-  height: 15.75vw;
+  height: 15.2vw;
 }
 @media (max-width: 1199px){
+  .thumbnail-desc{
+    height: 20rem;
+  }
+}
+@media (max-width: 991px){
   .thumbnail-desc{
     height: auto;
   }
