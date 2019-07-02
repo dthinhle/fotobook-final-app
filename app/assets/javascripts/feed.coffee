@@ -47,7 +47,6 @@ $(document).on "turbolinks:load", ->
       $(".albumPreview").removeClass('d-none')
     $(".photoPreview").addClass('d-none')
 
-    $(".img-preview-body>img").attr('src', preview)
     text = $(this).parents(".img-section").next()
     title = text.find(".title").text().trim()
     author = text.find(".text-primary").text().trim()
