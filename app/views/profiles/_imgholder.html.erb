@@ -5,17 +5,17 @@
         <% if mode == 'photo' %>
           <% begin %>
             <% unless src == 'nil' %>
-              <%= image_tag  src, class: 'img-fit'%>
+              <%= image_tag  src.img, class: 'img-fit'%>
             <% end
           rescue => exception %>
           <%= image_tag  "dummy-photo.jpg", class: 'img-fluid img-fit'%>
           <% end
           else %>
-          <div class="h-75 d-flex flex-wrap justify-content-center">
             <% begin %>
               <% unless src == 'nil' %>
-                <% src.each_with_index do |img,idx| %>
-                  <%= image_tag  img, class: "img-fluid img-thumbnail shadow-sm img-above-#{idx}"%>
+                <% src.photos.each_with_index do |photo,idx| %>
+                  <% break if idx > 2 %>
+                  <%= image_tag photo.img, class: "img-fluid img-thumbnail shadow-sm img-above-#{idx}"%>
                 <% end %>
               <% end
             rescue => exception %>
@@ -23,9 +23,11 @@
               <%= image_tag  "dummy-photo.jpg", class: 'img-fluid img-thumbnail shadow-sm img-above-1'%>
               <%= image_tag  "dummy-photo.jpg", class: 'img-fluid img-thumbnail shadow-sm img-above-0'%>
             <% end %>
-          </div>
         <% end %>
       </div>
     </div>
+  </div>
+  <div class="text-center py-2">
+    <%= src.title %>
   </div>
 </div>
