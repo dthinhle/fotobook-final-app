@@ -2,16 +2,16 @@
 
   <div class="card shadow-sm">
     <div class="row no-gutters">
-      <div class="col-xl-6 col-12 pr-xl-0">
+      <div class="col-xl-6 col-12 pr-xl-0 img-section">
         <div class="thumbnail-feed">
           <% if mode == 'photo' %>
             <div class="h-100 d-flex flex-wrap justify-content-center">
               <% begin %>
                 <% unless src == 'nil' %>
-                  <%= image_tag  src, class: 'img-fluid'%>
+                  <%= image_tag  src, class: 'img-fluid img-photo'%>
                 <% end
               rescue => exception %>
-              <%= image_tag  "dummy-photo.jpg", class: 'img-fluid'%>
+              <%= image_tag  "dummy-photo.jpg", class: 'img-fluid img-photo'%>
               <% end %>
             </div>
           <% else %>
@@ -34,7 +34,16 @@
       <div class="col-xl-6 col-12 pt-2 pl-xl-0">
         <div class="thumbnail-desc">
           <div class="d-flex flex-column h-100 pl-2">
-            <p class="h3">Title</p>
+            <p class="h3 title">
+              <% begin %>
+
+                <% unless src == 'nil' %>
+                  <%= src.is_a?(Array) ? src[0] : src %>
+                <% end
+              rescue => exception %>
+              Title
+              <% end %>
+            </p>
             <div class="mb-2">
 
             <% if current_page?(discover_path) %>

@@ -15,35 +15,25 @@
           </ul>
         </div>
       </div>
-      <main class="col-12 col-md-9 col-xl-8 py-md-3">
-        <div class="card pt-3">
-          <div class="align-self-center">
-          <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-outline-primary active photo-mode">
-              <input type="radio" name="photo" id="photo-radio" autocomplete="off" checked> Photo
-            </label>
-            <label class="btn btn-outline-primary album-mode">
-              <input type="radio" name="album" id="album-radio" autocomplete="off"> Album
-            </label>
-          </div>
-          </div>
-          <hr>
-          <div class="container-fluid px-0">
-            <div class="row no-gutters pb-2 feed-photo">
-              <%  1.upto(10) do |t| %>
-              <%= render partial: "feed/thumbnail", locals: {mode: 'photo', src: "00#{t}"} %>
-              <% end %>
-            </div>
-            <div class="row no-gutters pb-2 feed-album d-none">
-              <%  1.upto(8) do |t| %>
-              <%= render partial: "feed/thumbnail", locals: {mode: 'album', src: ["00#{t}","00#{t+1}","00#{t+2}"]} %>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </main>
-      <div class="d-none d-xl-block py-md-3 col-xl-2">
-        space-holder
+    </div>
+    <hr>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+      Launch demo modal
+    </button>
+
+    <%= render  "modal" %>
+
+    <div class="container-fluid px-0">
+      <div class="row no-gutters pb-2 feed-photo">
+        <%  1.upto(10) do |t| %>
+        <%= render partial: "feed/thumbnail", locals: {mode: 'photo', src: "00#{t}"} %>
+        <% end %>
+      </div>
+      <div class="row no-gutters pb-2 feed-album d-none">
+        <%  1.upto(8) do |t| %>
+        <%= render partial: "feed/thumbnail", locals: {mode: 'album', src: ["00#{t}","00#{t+1}","00#{t+2}"]} %>
+        <% end %>
       </div>
     </div>
 
