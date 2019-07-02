@@ -1,0 +1,90 @@
+<main class="col-12 col-md-9 col-xl-8 py-md-3">
+  <div class="card pt-3">
+    <p class="h5 mb-0 px-3">
+      Edit User Profile
+    </p>
+    <hr>
+    <div class="d-flex justify-content-center px-3">
+      <div class="edit-form flex-grow-1">
+
+
+      <%= form_with model: @user, url: profile_path(@user), local: true do |f| %>
+        <div class="form-group row">
+          <%= f.label :profile_photo, class: "col-sm-4 col-form-label text-right font-weight-bold align-self-center" %>
+          <div class="col-sm-8">
+            <div>
+            <%= image_tag  "dummy-profile.png", class: 'myprofile-avatar' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <%= form_with model: @user, url: profile_path(@user), local: true, class: 'mt-5' do |f| %>
+        <div class="form-group row">
+          <div class="col-sm-8 offset-sm-4">
+            <span class="h5 text-primary">
+              User Information
+            </span>
+          </div>
+        </div>
+        <div class="form-group row">
+          <%= f.label :first_name, class: "col-sm-4 col-form-label text-right font-weight-bold" %>
+          <div class="col-sm-8">
+            <%= f.text_field :first_name, class: "form-control" %>
+          </div>
+        </div>
+        <div class="form-group row">
+          <%= f.label :last_name, class: "col-sm-4 col-form-label text-right font-weight-bold" %>
+          <div class="col-sm-8">
+            <%= f.text_field :last_name, class: "form-control" %>
+          </div>
+        </div>
+        <div class="form-group row">
+          <%= f.label :email, class: "col-sm-4 col-form-label text-right font-weight-bold" %>
+          <div class="col-sm-8">
+            <%= f.email_field :email, class: "form-control" %>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-8 offset-sm-4">
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </div>
+      <% end %>
+
+      <%= form_with model: @user, url: profile_path(@user), local: true, class: 'mt-5' do |f| %>
+        <div class="form-group row">
+          <div class="col-sm-8 offset-sm-4">
+            <span class="h5 text-primary">
+              Password
+            </span>
+          </div>
+        </div>
+        <div class="form-group row">
+          <%= f.label :password, class: "col-sm-4 col-form-label text-right font-weight-bold" %>
+          <div class="col-sm-8">
+            <%= f.password_field :password, class: "form-control" %>
+          </div>
+        </div>
+        <div class="form-group row">
+          <%= f.label :new_password, class: "col-sm-4 col-form-label text-right font-weight-bold" %>
+          <div class="col-sm-8">
+            <%= f.password_field :new_password, class: "form-control" %>
+          </div>
+        </div>
+        <div class="form-group row">
+          <%= f.label :new_password_confirmation, "Password Confirmation", class: "col-sm-4 col-form-label text-right font-weight-bold" %>
+          <div class="col-sm-8">
+            <%= f.password_field :new_password_confirmation, class: "form-control" %>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-8 offset-sm-4">
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </div>
+      <% end %>
+
+      </div>
+    </div>
+  </div>
+</main>
