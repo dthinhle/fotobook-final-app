@@ -39,7 +39,7 @@
         <%= image_tag  "dummy-profile.png", class: "rounded-circle", id: "profile-pic" %>
       </div>
     </li>
-    <%= link_to "My username", myprofile_path, class: 'nav-link'%>
+    <%= link_to "#{current_user.first_name.capitalize} #{current_user.last_name.capitalize}", myprofile_path, class: 'nav-link'%>
     <li class="nav-item active">
     </li>
     <li class="nav-item active">

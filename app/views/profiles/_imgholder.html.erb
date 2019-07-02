@@ -2,12 +2,28 @@
   <div class="card shadow-sm">
     <div class="thumbnail">
       <div class="h-100 d-flex flex-wrap justify-content-center">
-        <% begin %>
-          <% unless src == 'nil' %>
-            <%= image_tag  src, class: 'img-fluid'%>
+        <% if mode == 'photo' %>
+          <% begin %>
+            <% unless src == 'nil' %>
+              <%= image_tag  src, class: 'img-fit'%>
+            <% end
+          rescue => exception %>
+          <%= image_tag  "dummy-photo.jpg", class: 'img-fluid img-fit'%>
           <% end
-        rescue => exception %>
-        <%= image_tag  "dummy-photo.jpg", class: 'img-fluid'%>
+          else %>
+          <div class="h-75 d-flex flex-wrap justify-content-center">
+            <% begin %>
+              <% unless src == 'nil' %>
+                <% src.each_with_index do |img,idx| %>
+                  <%= image_tag  img, class: "img-fluid img-thumbnail shadow-sm img-above-#{idx}"%>
+                <% end %>
+              <% end
+            rescue => exception %>
+              <%= image_tag  "dummy-photo.jpg", class: 'img-fluid img-thumbnail shadow-sm img-above-2'%>
+              <%= image_tag  "dummy-photo.jpg", class: 'img-fluid img-thumbnail shadow-sm img-above-1'%>
+              <%= image_tag  "dummy-photo.jpg", class: 'img-fluid img-thumbnail shadow-sm img-above-0'%>
+            <% end %>
+          </div>
         <% end %>
       </div>
     </div>
