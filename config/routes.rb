@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     patch 'update_info'
   end
 
+  resources 'follows', only: ['create', 'destroy']
 
   root 'feed#home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
