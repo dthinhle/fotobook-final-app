@@ -14,15 +14,11 @@
               </button>
             <% elsif current_user.followees.pluck(:id).exclude? profile.id %>
               <div>
-                <%= form_for Follow.new , local:true do |f|%>
-                  <%= f.hidden_field :follower, value: current_user.id %>
-                  <%= f.hidden_field :followee, value: profile.id %>
-                  <%= f.submit  "Follow", class: "badge-mini badge-pill btn-outline-primary btn-badge-border"%>
-                <% end %>
+                <button class="badge-mini badge-pill btn-outline-primary btn-badge-border" id="follow">Follow</button>
               </div>
             <% else %>
               <div>
-                <%= button_to  "Unfollow", follow_path, method: :delete, class: "badge-mini badge-pill btn-outline-primary btn-badge-border" %>
+                <button class="badge-mini badge-pill btn-outline-primary btn-badge-border" id="unfollow">Unfollow</button>
               </div>
             <% end %>
           </div>

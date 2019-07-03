@@ -3,6 +3,14 @@ class ProfilesController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  # def myprofile
+  #   respond_to do |format|
+  #     format.json {
+  #       render json: {:current_user => current_user}
+  #     }
+  #   end
+  # end
+
   def update_password
     @user = current_user
     puts profile_password_params
