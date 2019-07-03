@@ -3,5 +3,5 @@ class Photo < ApplicationRecord
 
   validates :title, presence: true, length: { maximum: 140, too_long: "140 characters are maximum allowed!" }
   validates :desc, length: {maximum: 300, too_long: "300 characters are maximum allowed!" }
-  validates :imageable_type, exclusion: {in: %w"User Album", message: "%{value} is invalid."}
+  validates :imageable_type, inclusion: {in: %w"User Album", message: "%{value} is invalid."}
 end

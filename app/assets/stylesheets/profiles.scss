@@ -14,6 +14,8 @@
 }
 
 .thumbnail{
+  overflow: hidden;
+  background-image: linear-gradient(to bottom right, #787878, #484848);
   height: 14.75vw;
 }
 @media (max-width: 1199px){
@@ -35,4 +37,27 @@
   .thumbnail{
     height: 40.5vw;
   }
+}
+
+.collection {
+  min-height: 60vh;
+}
+
+.no-content{
+  position: relative;
+  top: 0rem;
+  bottom: 0rem;
+}
+
+.btn-click{
+  cursor: pointer;
+}
+
+.edit-form{
+  max-width: 600px;
+}
+
+.badge-mini{
+  font-size: 75%;
+  font-weight: 700;
 }

@@ -1,0 +1,88 @@
+<main class="col-12 col-md-9 col-xl-8 py-md-3">
+  <div class="card pt-3">
+    <div class="row my-md-2">
+      <div class="col-12 col-sm-auto ml-md-4 d-flex justify-content-center">
+        <%= image_tag  "dummy-profile.png", class: "myprofile-avatar" %>
+      </div>
+      <div class="col align-items-center d-flex">
+        <div class="w-100 pt-3 p-sm-0 ">
+
+          <div class="d-sm-block d-flex justify-content-center">
+            <% if profile == current_user %>
+              <button class="badge badge-pill btn-outline-primary btn-badge-border">
+                Edit profile
+              </button>
+            <% elsif current_user.followees.pluck(:id).exclude? profile.id %>
+              <div>
+                <button class="badge-mini badge-pill btn-outline-primary btn-badge-border" id="follow">Follow</button>
+              </div>
+            <% else %>
+              <div>
+                <button class="badge-mini badge-pill btn-outline-primary btn-badge-border" id="unfollow">Unfollow</button>
+              </div>
+            <% end %>
+          </div>
+          <div class="h1 mt-2 d-sm-block text-center text-md-left px-2">
+            <%= "#{profile.first_name.capitalize} #{profile.last_name.capitalize}" %>
+          </div>
+          <div class="row no-gutters h4">
+            <div class="col-md-auto col-12 justify-content-center">
+              <div class="text-center text-sm-left">
+                <a class="text-primary h5 pr-2 btn-photo btn-click"> <span class="h4">
+                  <%= profile.photos.size %>
+                </span> photos</a>
+                <a class="text-secondary h5 pr-2 btn-album btn-click"><span class="h4">
+                  <%= profile.albums.size %>
+                </span> albums</a>
+              </div>
+            </div>
+            <div class="col-md-auto col-12 pl-lg-2">
+              <div class="text-center text-sm-left">
+                <a class="text-secondary h5 pr-2 btn-click"> <span class="h4">
+                  <%= "#{profile.followers.size}" %>
+                </span> followers</a>
+                <a class="text-secondary h5 pr-2 btn-click"> <span class="h4">
+                  <%= "#{profile.followees.size}" %>
+                </span> following</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+    <div class="collection container-fluid">
+    <% content = false %>
+      <% if profile.photos.size > 0 %>
+        <div class="row px-1 pb-2 photo-collection">
+          <% profile.photos.each do |i| %>
+            <%= render partial: 'profiles/imgholder', locals: {mode: 'photo', src: i} %>
+          <% end %>
+        </div>
+        <% content = true %>
+      <% end %>
+
+      <% if profile.albums.size > 0 %>
+        <div class="row px-1 pb-2 album-collection d-none">
+          <% profile.albums.each do |a| %>
+            <%= render partial: 'profiles/imgholder', locals: {mode: 'album', src: a} %>
+          <% end %>
+        </div>
+        <% content = true %>
+      <% end %>
+      <% unless content %>
+        <div class="d-flex justify-content-center align-items-center h-100">
+          <div class="text-center text-dark">
+            <p class="h1">
+              <i class="fa fa-exclamation-triangle"></i>
+            </p>
+            <p>
+              This user haven't uploaded any photo yet!
+            </p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</main>

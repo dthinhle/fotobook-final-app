@@ -1,12 +1,33 @@
-            <!-- This is a image model -->
-            <div class="col-6 col-lg-3 pb-2 px-2">
-
-              <div class="card shadow-sm">
-                    <div class="thumbnail">
-                      <div class="h-100 d-flex flex-wrap align-content-center">
-
-                      <%= image_tag  "dummy-photo.jpg", class: 'img-fluid'%>
-                      </div>
-                    </div>
-              </div>
-            </div>
+<div class="col-6 col-lg-3 pb-2 px-2">
+  <div class="card shadow-sm">
+    <div class="thumbnail">
+      <div class="h-100 d-flex flex-wrap justify-content-center">
+        <% if mode == 'photo' %>
+          <% begin %>
+            <% unless src == 'nil' %>
+              <%= image_tag  src.img, class: 'img-fit'%>
+            <% end
+          rescue => exception %>
+          <%= image_tag  "dummy-photo.jpg", class: 'img-fluid img-fit'%>
+          <% end
+          else %>
+            <% begin %>
+              <% unless src == 'nil' %>
+                <% src.photos.each_with_index do |photo,idx| %>
+                  <% break if idx > 2 %>
+                  <%= image_tag photo.img, class: "img-fluid img-thumbnail shadow-sm img-above-#{idx}"%>
+                <% end %>
+              <% end
+            rescue => exception %>
+              <%= image_tag  "dummy-photo.jpg", class: 'img-fluid img-thumbnail shadow-sm img-above-2'%>
+              <%= image_tag  "dummy-photo.jpg", class: 'img-fluid img-thumbnail shadow-sm img-above-1'%>
+              <%= image_tag  "dummy-photo.jpg", class: 'img-fluid img-thumbnail shadow-sm img-above-0'%>
+            <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="text-center py-2">
+    <%= src.title %>
+  </div>
+</div>

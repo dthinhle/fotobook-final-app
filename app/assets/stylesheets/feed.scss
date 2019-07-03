@@ -16,7 +16,10 @@
   max-height: 12rem;
 }
 
-
+.img-fit{
+  width: inherit;
+  object-fit: cover;
+}
 
 .HeartAnimation {
   padding-top: 2em;
@@ -44,6 +47,7 @@
 }
 
 .thumbnail-feed{
+  overflow: hidden;
   background-image: linear-gradient(to bottom right, #787878, #484848);
   height: 15.75vw;
 }
@@ -59,6 +63,7 @@
 }
 
 .thumbnail-album{
+  overflow: hidden;
   background-image: linear-gradient(to bottom right, #787878, #484848);
   height: 15.75vw;
 }
@@ -102,26 +107,23 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 70%;
-  transform: translate(-50%, -50%) rotate(-10deg);
+  transform: translate(-50%, -50%) rotate(-10deg) scale(0.8,0.8);
 }
 
 .img-above-1 {
   z-index: 1;
-  width: 70%;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) rotate(-5deg);
+  transform: translate(-50%, -50%) rotate(-5deg) scale(0.8,0.8);
 }
 
 .img-above-2 {
   z-index: 2;
-  width: 70%;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(0.8,0.8);
 }
 
 .album-animation-0{
@@ -137,7 +139,7 @@
 
   };
   to {
-    transform: translate(-50%, -50%) rotate(10deg)
+    transform: translate(-50%, -50%) rotate(10deg) scale(0.8,0.8)
   }
 }
 
@@ -146,6 +148,6 @@
 
   };
   to {
-    transform: translate(-50%, -50%) rotate(0deg)
+    transform: translate(-50%, -50%) rotate(0deg) scale(0.8,0.8)
   }
 }
