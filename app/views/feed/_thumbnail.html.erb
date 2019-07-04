@@ -4,22 +4,20 @@
     <div class="row no-gutters">
       <div class="col-xl-6 col-12 pr-xl-0 img-section">
         <div class="thumbnail-feed">
-          <% if mode == 'photo' %>
             <div class="h-100 d-flex flex-wrap justify-content-center">
+          <% if mode == 'photo' %>
               <% begin %>
                 <% unless src == 'nil' %>
-                  <%= image_tag  src, class: 'img-fluid img-photo'%>
+                  <%= image_tag  src, class: 'img-fluid', 'data-id': src.id%>
                 <% end
               rescue => exception %>
               <%= image_tag  "dummy-photo.jpg", class: 'img-fluid img-photo'%>
               <% end %>
-            </div>
           <% else %>
-            <div class="h-100 d-flex flex-wrap justify-content-center">
               <% begin %>
                 <% unless src == 'nil' %>
                   <% src.each_with_index do |img,idx| %>
-                    <%= image_tag  img, class: "img-fluid img-thumbnail shadow-sm img-above-#{idx}"%>
+                    <%= image_tag  img, class: "img-fluid img-thumbnail shadow-sm img-above-#{idx}", 'data-id': src.id%>
                   <% end %>
                 <% end
               rescue => exception %>
@@ -27,8 +25,8 @@
                 <%= image_tag  "dummy-photo.jpg", class: 'img-fluid img-thumbnail shadow-sm img-above-1'%>
                 <%= image_tag  "dummy-photo.jpg", class: 'img-fluid img-thumbnail shadow-sm img-above-0'%>
               <% end %>
-            </div>
-          <% end %>
+            <% end %>
+          </div>
         </div>
       </div>
       <div class="col-xl-6 col-12 pt-2 pl-xl-0">

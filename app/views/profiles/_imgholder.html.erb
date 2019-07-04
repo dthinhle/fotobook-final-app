@@ -1,12 +1,42 @@
-            <!-- This is a image model -->
-            <div class="col-6 col-lg-3 pb-2 px-2">
-
-              <div class="card shadow-sm">
-                    <div class="thumbnail">
-                      <div class="h-100 d-flex flex-wrap align-content-center">
-
-                      <%= image_tag  "dummy-photo.jpg", class: 'img-fluid'%>
-                      </div>
-                    </div>
-              </div>
-            </div>
+<div class="col-6 col-lg-3 pb-2 px-2">
+  <div class="card shadow-sm">
+    <div class="thumbnail">
+      <% if (edit == true) %>
+        <% if src.private %>
+        <div class="btn-private bg-danger text-white rounded-circle text-center unlock">
+        <% else %>
+        <div class="btn-private text-white rounded-circle text-center lock">
+        <% end %>
+          <i class="fa fa-lock"></i>
+        </div>
+      <% end %>
+      <div class="h-100 d-flex flex-wrap justify-content-center">
+        <% if mode == 'photo' %>
+          <% begin %>
+            <% unless src == 'nil' %>
+              <%= image_tag  src.img, class: 'img-fit', 'data-id': src.id%>
+            <% end
+          rescue => exception %>
+          <%= image_tag  "dummy-photo.jpg", class: 'img-fluid img-fit'%>
+          <% end
+          else %>
+            <% begin %>
+              <% unless src == 'nil' %>
+                <% src.photos.each_with_index do |photo,idx| %>
+                  <% break if idx > 2 %>
+                  <%= image_tag photo.img, class: "img-fluid img-thumbnail shadow-sm img-above-#{idx}", 'data-id': src.id%>
+                <% end %>
+              <% end
+            rescue => exception %>
+              <%= image_tag  "dummy-photo.jpg", class: 'img-fluid img-thumbnail shadow-sm img-above-2'%>
+              <%= image_tag  "dummy-photo.jpg", class: 'img-fluid img-thumbnail shadow-sm img-above-1'%>
+              <%= image_tag  "dummy-photo.jpg", class: 'img-fluid img-thumbnail shadow-sm img-above-0'%>
+            <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="text-center py-2">
+    <%= src.title %>
+  </div>
+</div>

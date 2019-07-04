@@ -1,4 +1,8 @@
-# README
+# Fotobook Final App
+
+- Name: Lê Đức Thịnh
+- Email: dthinhlee@gmail.com
+- Phone: 0398321666
 
 This README would normally document whatever steps are necessary to get the
 application up and running.

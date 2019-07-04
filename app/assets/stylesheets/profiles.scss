@@ -13,7 +13,19 @@
   border: 1.5px solid;
 }
 
+.btn-private{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  background-color: rgba($color: #000000, $alpha: 0.75);
+}
+
 .thumbnail{
+  overflow: hidden;
+  background-image: linear-gradient(to bottom right, #787878, #484848);
   height: 14.75vw;
 }
 @media (max-width: 1199px){
@@ -35,4 +47,27 @@
   .thumbnail{
     height: 40.5vw;
   }
+}
+
+.collection {
+  min-height: 60vh;
+}
+
+.no-content{
+  position: relative;
+  top: 0rem;
+  bottom: 0rem;
+}
+
+.btn-click{
+  cursor: pointer;
+}
+
+.edit-form{
+  max-width: 600px;
+}
+
+.badge-mini{
+  font-size: 75%;
+  font-weight: 700;
 }
