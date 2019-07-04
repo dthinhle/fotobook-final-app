@@ -13,11 +13,11 @@
                 Edit profile
               </button>
             <% elsif current_user.followees.pluck(:id).exclude? profile.id %>
-              <div>
+              <div class="button-container">
                 <button class="badge-mini badge-pill btn-outline-primary btn-badge-border" id="follow">Follow</button>
               </div>
             <% else %>
-              <div>
+              <div class="button-container">
                 <button class="badge-mini badge-pill btn-outline-primary btn-badge-border" id="unfollow">Unfollow</button>
               </div>
             <% end %>

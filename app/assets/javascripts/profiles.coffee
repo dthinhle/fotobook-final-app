@@ -25,7 +25,10 @@ $(document).on "turbolinks:load", ->
 
   followee_id = window.location.pathname.match(/\d+$/)
 
-  $("#follow").click ->
+  $(".button-container").on "click","#follow", ->
+
+    $("#follow").text("Unfollow")
+    $("#follow").attr("id","unfollow")
     Rails.ajax
       type: "POST"
       url: "/task"
@@ -42,7 +45,9 @@ $(document).on "turbolinks:load", ->
           success: () ->
             false
 
-  $("#unfollow").click ->
+  $(".button-container").on "click","#unfollow", ->
+    $("#unfollow").text("Follow")
+    $("#unfollow").attr("id","follow")
     Rails.ajax
       type: "DELETE"
       url: "/follows/"+followee_id[0]

@@ -9,13 +9,13 @@ class FollowsController < ApplicationController
     else
       flash[:notice] = "You can't follow this user as another user"
     end
-    redirect_to profile_path(followee)
+    # redirect_to profile_path(followee)
   end
 
   def destroy
     follow_destroy = Follow.where("follower_id = ? AND followee_id = ?",current_user.id ,follow_destroy_params[:id]).take
     follow_destroy.destroy
-    redirect_to profile_path(params[:id])
+    # redirect_to profile_path(params[:id])
   end
 
   private
