@@ -8,7 +8,7 @@
           <% if mode == 'photo' %>
               <% begin %>
                 <% unless src == 'nil' %>
-                  <%= image_tag  src, class: 'img-fluid'%>
+                  <%= image_tag  src, class: 'img-fluid', 'data-id': src.id%>
                 <% end
               rescue => exception %>
               <%= image_tag  "dummy-photo.jpg", class: 'img-fluid'%>
@@ -17,7 +17,7 @@
               <% begin %>
                 <% unless src == 'nil' %>
                   <% src.each_with_index do |img,idx| %>
-                    <%= image_tag  img, class: "img-fluid img-thumbnail shadow-sm img-above-#{idx}"%>
+                    <%= image_tag  img, class: "img-fluid img-thumbnail shadow-sm img-above-#{idx}", 'data-id': src.id%>
                   <% end %>
                 <% end
               rescue => exception %>

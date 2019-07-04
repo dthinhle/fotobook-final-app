@@ -13,6 +13,16 @@
   border: 1.5px solid;
 }
 
+.btn-private{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  background-color: rgba($color: #000000, $alpha: 0.75);
+}
+
 .thumbnail{
   overflow: hidden;
   background-image: linear-gradient(to bottom right, #787878, #484848);

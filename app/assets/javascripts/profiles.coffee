@@ -55,3 +55,31 @@ $(document).on "turbolinks:load", ->
       dataType: 'json'
       success: () ->
         false
+
+  $(".thumbnail").on "click", ".lock", ->
+    $(this).addClass("bg-danger")
+    $(this).addClass("unlock")
+    $(this).removeClass("lock")
+    id = $(this).next().children().attr("data-id")
+
+    Rails.ajax
+      type: "POST"
+      url: "/task"
+      data: "request[task]=lock&request[param]="+id.toString()
+      dataType: 'json'
+      success: () ->
+        false
+
+  $(".thumbnail").on "click", ".unlock", ->
+    $(this).removeClass("bg-danger")
+    $(this).addClass("lock")
+    $(this).removeClass("unlock")
+    id = $(this).next().children().attr("data-id")
+
+    Rails.ajax
+      type: "POST"
+      url: "/task"
+      data: "request[task]=unlock&request[param]="+id.toString()
+      dataType: 'json'
+      success: () ->
+        false

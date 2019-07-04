@@ -11,6 +11,14 @@ class ProfilesController < ApplicationController
           render json: {:follower => current_user[:id],:followee => task_params[:param].to_i}
         }
       end
+    elsif task == 'lock'
+      photo = Photo.find task_params[:param]
+      photo.private = true
+      photo.save
+    elsif task == 'unlock'
+      photo = Photo.find task_params[:param]
+      photo.private = false
+      photo.save
     end
   end
 
