@@ -6,18 +6,18 @@
       </div>
       <div class="col align-items-center d-flex">
         <div class="w-100 pt-3 p-sm-0 ">
-
+          <% is_current_user = profile == current_user %>
           <div class="d-sm-block d-flex justify-content-center">
-            <% if profile == current_user %>
+            <% if is_current_user %>
               <button class="badge badge-pill btn-outline-primary btn-badge-border">
                 Edit profile
               </button>
             <% elsif current_user.followees.pluck(:id).exclude? profile.id %>
-              <div>
+              <div class="button-container">
                 <button class="badge-mini badge-pill btn-outline-primary btn-badge-border" id="follow">Follow</button>
               </div>
             <% else %>
-              <div>
+              <div class="button-container">
                 <button class="badge-mini badge-pill btn-outline-primary btn-badge-border" id="unfollow">Unfollow</button>
               </div>
             <% end %>
@@ -53,35 +53,47 @@
 
     <hr>
     <div class="collection container-fluid">
-    <% content = false %>
-      <% if profile.photos.size > 0 %>
+      <% photos_private = is_current_user ? profile.photos : profile.photos.public_photos %>
+      <% if photos_private.size > 0 %>
         <div class="row px-1 pb-2 photo-collection">
-          <% profile.photos.each do |i| %>
-            <%= render partial: 'profiles/imgholder', locals: {mode: 'photo', src: i} %>
+          <% photos_private.each do |i| %>
+            <%= render partial: 'profiles/imgholder', locals: {mode: 'photo', src: i, edit: is_current_user} %>
           <% end %>
         </div>
-        <% content = true %>
-      <% end %>
-
-      <% if profile.albums.size > 0 %>
-        <div class="row px-1 pb-2 album-collection d-none">
-          <% profile.albums.each do |a| %>
-            <%= render partial: 'profiles/imgholder', locals: {mode: 'album', src: a} %>
-          <% end %>
-        </div>
-        <% content = true %>
-      <% end %>
-      <% unless content %>
+      <% else %>
+      <div class="photo-collection h-100">
         <div class="d-flex justify-content-center align-items-center h-100">
           <div class="text-center text-dark">
             <p class="h1">
               <i class="fa fa-exclamation-triangle"></i>
             </p>
             <p>
-              This user haven't uploaded any photo yet!
+              This user haven't uploaded any pubilc photo yet!
             </p>
           </div>
         </div>
+      </div>
+      <% end %>
+      <% albums_private = is_current_user ? profile.albums : profile.albums.public_albums %>
+      <% if albums_private.size > 0 %>
+        <div class="row px-1 pb-2 album-collection d-none">
+          <% albums_private.each do |a| %>
+            <%= render partial: 'profiles/imgholder', locals: {mode: 'album', src: a, edit: is_current_user} %>
+          <% end %>
+        </div>
+      <% else %>
+      <div class="album-collection d-none h-100">
+        <div class="d-flex justify-content-center align-items-center h-100 ">
+          <div class="text-center text-dark">
+            <p class="h1">
+              <i class="fa fa-exclamation-triangle"></i>
+            </p>
+            <p>
+              This user haven't uploaded any pubilc album yet!
+            </p>
+          </div>
+        </div>
+      </div>
       <% end %>
     </div>
   </div>

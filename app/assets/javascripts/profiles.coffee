@@ -23,28 +23,63 @@ $(document).on "turbolinks:load", ->
 
   # Ajax script
 
-  # $("#follow").click ->
-  #   Rails.ajax
-  #     type: "GET"
-  #     url: "/myprofile"
-  #     data: "{
-  #       current_user: 'current'
-  #     }"
-  #     dataType: 'html'
-  #     success: () ->
-  #       console.log("ajax success")
-  #     error: () ->
-  #       console.log("ajax error")
+  followee_id = window.location.pathname.match(/\d+$/)
 
-  #   followee_id = window.location.pathname.match(/\d+$/)
-  #   mydata = 'follow[id]=' + followee_id.to_s
-  #   Rails.ajax
-  #     type: "POST"
-  #     url: "/follows"
-  #     data: 'follow[id]=9'
-  #     dataType: 'script'
-  #     success: () ->
-  #       console.log("ajax success")
-  #     error: () ->
-  #       console.log("ajax error")
-  #   console.log("end ajax")
+  $(".button-container").on "click","#follow", ->
+
+    $("#follow").text("Unfollow")
+    $("#follow").attr("id","unfollow")
+    Rails.ajax
+      type: "POST"
+      url: "/task"
+      data: "request[task]=follow&request[param]="+followee_id[0]
+      dataType: 'json'
+      success: (data) ->
+        console.log(data["follower"])
+
+        Rails.ajax
+          type: "POST"
+          url: "/follows"
+          data: "follow[follower]="+data["follower"]+"&follow[followee]="+data["followee"]
+          dataType: 'json'
+          success: () ->
+            false
+
+  $(".button-container").on "click","#unfollow", ->
+    $("#unfollow").text("Follow")
+    $("#unfollow").attr("id","follow")
+    Rails.ajax
+      type: "DELETE"
+      url: "/follows/"+followee_id[0]
+      data: "follow[id]="+followee_id[0]
+      dataType: 'json'
+      success: () ->
+        false
+
+  $(".thumbnail").on "click", ".lock", ->
+    $(this).addClass("bg-danger")
+    $(this).addClass("unlock")
+    $(this).removeClass("lock")
+    id = $(this).next().children().attr("data-id")
+
+    Rails.ajax
+      type: "POST"
+      url: "/task"
+      data: "request[task]=lock&request[param]="+id.toString()
+      dataType: 'json'
+      success: () ->
+        false
+
+  $(".thumbnail").on "click", ".unlock", ->
+    $(this).removeClass("bg-danger")
+    $(this).addClass("lock")
+    $(this).removeClass("unlock")
+    id = $(this).next().children().attr("data-id")
+
+    Rails.ajax
+      type: "POST"
+      url: "/task"
+      data: "request[task]=unlock&request[param]="+id.toString()
+      dataType: 'json'
+      success: () ->
+        false
