@@ -1,6 +1,7 @@
 class FollowsController < ApplicationController
 
   def create
+    puts params
     followee = User.find(follow_params[:followee])
     if follow_params[:follower].to_i == current_user.id
       new_follow = Follow.new(follower_id: follow_params[:follower], followee_id: follow_params[:followee])
@@ -12,7 +13,7 @@ class FollowsController < ApplicationController
   end
 
   def destroy
-    follow_destroy = Follow.where("follower_id = ? AND followee_id = ?",current_user.id ,params[:id]).take
+    follow_destroy = Follow.where("follower_id = ? AND followee_id = ?",current_user.id ,follow_destroy_params[:id]).take
     follow_destroy.destroy
     redirect_to profile_path(params[:id])
   end

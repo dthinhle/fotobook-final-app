@@ -23,28 +23,30 @@ $(document).on "turbolinks:load", ->
 
   # Ajax script
 
-  # $("#follow").click ->
-  #   Rails.ajax
-  #     type: "GET"
-  #     url: "/myprofile"
-  #     data: "{
-  #       current_user: 'current'
-  #     }"
-  #     dataType: 'html'
-  #     success: () ->
-  #       console.log("ajax success")
-  #     error: () ->
-  #       console.log("ajax error")
+  followee_id = window.location.pathname.match(/\d+$/)
 
-  #   followee_id = window.location.pathname.match(/\d+$/)
-  #   mydata = 'follow[id]=' + followee_id.to_s
-  #   Rails.ajax
-  #     type: "POST"
-  #     url: "/follows"
-  #     data: 'follow[id]=9'
-  #     dataType: 'script'
-  #     success: () ->
-  #       console.log("ajax success")
-  #     error: () ->
-  #       console.log("ajax error")
-  #   console.log("end ajax")
+  $("#follow").click ->
+    Rails.ajax
+      type: "POST"
+      url: "/task"
+      data: "request[task]=follow&request[param]="+followee_id[0]
+      dataType: 'json'
+      success: (data) ->
+        console.log(data["follower"])
+
+        Rails.ajax
+          type: "POST"
+          url: "/follows"
+          data: "follow[follower]="+data["follower"]+"&follow[followee]="+data["followee"]
+          dataType: 'json'
+          success: () ->
+            false
+
+  $("#unfollow").click ->
+    Rails.ajax
+      type: "DELETE"
+      url: "/follows/"+followee_id[0]
+      data: "follow[id]="+followee_id[0]
+      dataType: 'json'
+      success: () ->
+        false

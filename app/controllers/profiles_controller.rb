@@ -3,13 +3,16 @@ class ProfilesController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  # def myprofile
-  #   respond_to do |format|
-  #     format.json {
-  #       render json: {:current_user => current_user}
-  #     }
-  #   end
-  # end
+  def task
+    task = task_params[:task]
+    if task == 'follow'
+      respond_to do |format|
+        format.json {
+          render json: {:follower => current_user[:id],:followee => task_params[:param].to_i}
+        }
+      end
+    end
+  end
 
   def update_password
     @user = current_user
@@ -24,6 +27,7 @@ class ProfilesController < ApplicationController
   end
 
   def update_info
+    p params
     @user = current_user
     unless @user.update(profile_info_params)
       flash[:notice] = "Your info is invalid!"
@@ -40,9 +44,15 @@ class ProfilesController < ApplicationController
   end
 
   private
+
+  def task_params
+    params.require(:request).permit(:task, :param)
+  end
+
   def profile_info_params
     params.require(:user).permit(:first_name,:last_name,:email)
   end
+
   def profile_password_params
     params.require(:user).permit(:password, :new_password, :new_password_confirmation)
   end
