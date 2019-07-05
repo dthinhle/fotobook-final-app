@@ -16,6 +16,12 @@
   max-height: 12rem;
 }
 
+.img-preview-body {
+  position: relative;
+  flex: 1 1 auto;
+  padding: 0.25rem;
+}
+
 .img-fit{
   width: inherit;
   object-fit: cover;

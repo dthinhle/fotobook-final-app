@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get 'discover', to: 'feed#discover', as: 'discover'
   get 'myprofile', to: 'profiles#myprofile', as: 'myprofile'
   post 'task', to: 'profiles#task'
+  get 'albumpreview', to: 'feed#albumpreview'
+  get 'photopreview', to: 'feed#photopreview'
   get 'editprofile', to: 'profiles#editprofile', as: 'editprofile'
   resources 'profiles', only: ['show', 'edit'] do
     patch 'update_password'

@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
   def show
-    @user = User.find(params[:id])
+    @user = User.includes(:photos,:albums,:followers,:followees).find(params[:id])
   end
 
   def task

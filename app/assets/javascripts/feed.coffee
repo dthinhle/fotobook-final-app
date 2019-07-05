@@ -23,3 +23,26 @@ $(document).on "turbolinks:load", ->
     $(this).toggleClass('album-animation-0')
     $(this).siblings(".img-above-1").toggleClass('album-animation-1')
     true
+
+  $(".thumbnail-feed").on "click",".img-photo",->
+    id = $(this).attr("data-id")
+    Rails.ajax
+      type: "GET"
+      url: "/photopreview"
+      data: "request[param]="+id.toString()
+      dataType: 'script'
+      success: () ->
+        $("#imgPreviewModal").modal('show')
+        false
+
+
+  $(".thumbnail-feed").on "click",".img-above-2", ->
+    id = $(this).attr("data-id")
+    Rails.ajax
+      type: "GET"
+      url: "/albumpreview"
+      data: "request[param]="+id.toString()
+      dataType : 'script'
+      success: () ->
+        $("#imgPreviewModal").modal('show')
+        false
