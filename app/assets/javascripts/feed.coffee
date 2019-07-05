@@ -24,34 +24,25 @@ $(document).on "turbolinks:load", ->
     $(this).siblings(".img-above-1").toggleClass('album-animation-1')
     true
 
-  $(".img-photo").click ->
-    preview = $(this).attr('src')
-    if $(".photoPreview").hasClass('d-none')
-      $(".photoPreview").removeClass('d-none')
-    $(".albumPreview").addClass('d-none')
-
-    $(".img-preview-body>img").attr('src', preview)
-    text = $(this).parents(".img-section").next()
-    title = text.find(".title").text().trim()
-    author = text.find(".text-primary").text().trim()
-    desc = text.find(".text-secondary").text().trim()
-    $("#imgPreview").text(title)
-    $("#imgPreviewModal").find('.text-primary').text(author)
-    $("#imgPreviewModal").find('.text-secondary').text(desc)
-    $("#imgPreviewModal").modal('show')
+  $(".thumbnail-feed").on "click",".img-photo",->
+    id = $(this).attr("data-id")
+    Rails.ajax
+      type: "GET"
+      url: "/photopreview"
+      data: "request[param]="+id.toString()
+      dataType: 'script'
+      success: () ->
+        $("#imgPreviewModal").modal('show')
+        false
 
 
-  $(".img-above-2").click ->
-    preview = $(this).attr('src')
-    if $(".albumPreview").hasClass('d-none')
-      $(".albumPreview").removeClass('d-none')
-    $(".photoPreview").addClass('d-none')
-
-    text = $(this).parents(".img-section").next()
-    title = text.find(".title").text().trim()
-    author = text.find(".text-primary").text().trim()
-    desc = text.find(".text-secondary").text().trim()
-    $("#imgPreview").text(title)
-    $("#imgPreviewModal").find('.text-primary').text(author)
-    $("#imgPreviewModal").find('.text-secondary').text(desc)
-    $("#imgPreviewModal").modal('show')
+  $(".thumbnail-feed").on "click",".img-above-2", ->
+    id = $(this).attr("data-id")
+    Rails.ajax
+      type: "GET"
+      url: "/albumpreview"
+      data: "request[param]="+id.toString()
+      dataType : 'script'
+      success: () ->
+        $("#imgPreviewModal").modal('show')
+        false

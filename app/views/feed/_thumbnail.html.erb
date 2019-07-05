@@ -8,16 +8,18 @@
           <% if mode == 'photo' %>
               <% begin %>
                 <% unless src == 'nil' %>
-                  <%= image_tag  src, class: 'img-fluid', 'data-id': src.id%>
+                  <%= image_tag src.img, class: 'img-fit img-photo', 'data-id': src.id%>
                 <% end
               rescue => exception %>
-              <%= image_tag  "dummy-photo.jpg", class: 'img-fluid img-photo'%>
+              <%= image_tag  "dummy-photo.jpg", class: 'img-fit img-photo'%>
               <% end %>
           <% else %>
               <% begin %>
                 <% unless src == 'nil' %>
-                  <% src.each_with_index do |img,idx| %>
-                    <%= image_tag  img, class: "img-fluid img-thumbnail shadow-sm img-above-#{idx}", 'data-id': src.id%>
+                  <% src.photos.each_with_index do |img,idx| %>
+                    <% puts img %>
+                    <% break if idx > 2 %>
+                    <%= image_tag img.img, class: "img-fluid img-thumbnail shadow-sm img-above-#{idx}", 'data-id': src.id%>
                   <% end %>
                 <% end
               rescue => exception %>
@@ -34,9 +36,8 @@
           <div class="d-flex flex-column h-100 pl-2">
             <p class="h3 title">
               <% begin %>
-
                 <% unless src == 'nil' %>
-                  <%= src.is_a?(Array) ? src[0] : src %>
+                  <%= src.title %>
                 <% end
               rescue => exception %>
               Title
@@ -49,7 +50,18 @@
               Follow
               </button>
             <% end %>
-            <span class="text-primary">Someone</span>
+            <span class="text-primary">
+            <% begin %>
+              <% author = src.imageable.user %>
+            <% rescue => exception %>
+              <% if mode == 'photo' %>
+                <% author = src.imageable %>
+              <% else %>
+                <% author = src.user %>
+              <% end %>
+            <% end %>
+              <%= "#{author.first_name} #{author.last_name}" %>
+            </span>
             </div>
             <div class="flex-xl-grow-1 desc">
               <p class="text-secondary"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod

@@ -83,3 +83,26 @@ $(document).on "turbolinks:load", ->
       dataType: 'json'
       success: () ->
         false
+
+  $(".thumbnail").on "click",".img-fit",->
+    id = $(this).attr("data-id")
+    Rails.ajax
+      type: "GET"
+      url: "/photopreview"
+      data: "request[param]="+id.toString()
+      dataType: 'script'
+      success: () ->
+        $("#imgPreviewModal").modal('show')
+        false
+
+
+  $(".thumbnail").on "click",".img-above-2", ->
+    id = $(this).attr("data-id")
+    Rails.ajax
+      type: "GET"
+      url: "/albumpreview"
+      data: "request[param]="+id.toString()
+      dataType : 'script'
+      success: () ->
+        $("#imgPreviewModal").modal('show')
+        false
