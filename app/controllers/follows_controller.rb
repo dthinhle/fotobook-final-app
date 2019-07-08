@@ -1,14 +1,9 @@
 class FollowsController < ApplicationController
 
   def create
-    puts params
     followee = User.find(follow_params[:followee])
-    if follow_params[:follower].to_i == current_user.id
-      new_follow = Follow.new(follower_id: follow_params[:follower], followee_id: follow_params[:followee])
-      new_follow.save
-    else
-      flash[:notice] = "You can't follow this user as another user"
-    end
+    new_follow = Follow.new(follower_id: current_user.id, followee_id: follow_params[:followee])
+    new_follow.save
     # redirect_to profile_path(followee)
   end
 

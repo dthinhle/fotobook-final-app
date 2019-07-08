@@ -1,0 +1,43 @@
+<div class="col-6 col-md-4 col-xl-3 pb-3 px-lg-3 px-2">
+  <div class="card shadow-sm">
+    <div class="profile-card d-flex flex-column">
+      <div class="flex-grow-1 justify-content-center d-flex align-items-center">
+        <%= image_tag  "dummy-profile.png", class: 'myprofile-follow shadow my-3' %>
+      </div>
+      <div class="interact-section">
+      <p class="text-center h4">
+        <%= "#{src.first_name.capitalize} #{src.last_name.capitalize}" %>
+      </p>
+      <div class="d-flex flex-wrap justify-content-around text-center text-primary">
+        <div>
+          <p class="h2">
+            <%= "#{src.photos.count} "%>
+          </p>
+          <p class="my-0">
+            Photos
+          </p>
+        </div>
+        <div>
+          <p class="h2">
+            <%="#{src.albums.count} " %>
+          </p>
+          <p class="my-0">
+            Albums
+          </p>
+        </div>
+      </div>
+
+      <div class="button-container d-flex justify-content-center py-3">
+      <% if current_user.followees.pluck(:id).exclude? src.id %>
+        <button class="font-weight-bold badge-pill btn-outline-primary btn-badge-border"
+        data-id="<%= src.id%>" id="follow-group" >Follow</button>
+      <% else %>
+        <button class="font-weight-bold badge-pill btn-outline-primary btn-badge-border active"
+        data-id="<%= src.id%>" id="unfollow-group">Unfollow</button>
+      <% end %>
+      </div>
+
+      </div>
+    </div>
+  </div>
+</div>
