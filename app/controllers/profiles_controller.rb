@@ -5,13 +5,7 @@ class ProfilesController < ApplicationController
 
   def task
     task = task_params[:task]
-    if task == 'follow'
-      respond_to do |format|
-        format.json {
-          render json: {:follower => current_user[:id],:followee => task_params[:param].to_i}
-        }
-      end
-    elsif task == 'lock'
+    if task == 'lock'
       photo = Photo.find task_params[:param]
       photo.private = true
       photo.save
@@ -47,11 +41,30 @@ class ProfilesController < ApplicationController
     redirect_to editprofile_path
   end
 
+  def getprofilephotos
+    @user = User.includes(:photos, :albums).find(profile_data_params[:param])
+    @mode = profile_data_params[:mode]
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def getprofilefollows
+    @user = User.includes(:followers, :followees).find(profile_data_params[:param])
+    @mode = profile_data_params[:mode]
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def editprofile
     @user = current_user
   end
 
   private
+  def profile_data_params
+    params.require(:data).permit(:param,:mode)
+  end
 
   def task_params
     params.require(:request).permit(:task, :param)

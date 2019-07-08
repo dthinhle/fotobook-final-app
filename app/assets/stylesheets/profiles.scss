@@ -8,6 +8,13 @@
   border-radius: 50%;
 }
 
+.myprofile-follow{
+  height: 6rem;
+  width: 6rem;
+  border-radius: 50%;
+}
+
+
 .btn-badge-border{
   background-color: white;
   border: 1.5px solid;
@@ -45,8 +52,14 @@
 }
 @media (max-width: 575px){
   .thumbnail{
-    height: 40.5vw;
+    height: 45.5vw;
   }
+}
+
+.profile-card{
+  background-image: none;
+  background-color: white;
+  border-radius: 0.25rem;
 }
 
 .collection {
@@ -70,4 +83,9 @@
 .badge-mini{
   font-size: 75%;
   font-weight: 700;
+}
+
+.interact-section{
+  position: relative;
+  bottom: 0;
 }

@@ -1,0 +1,5 @@
+<% if @mode == "photos" %>
+$(".collection").html('<%= j (render partial: "profiles/profilephotos", locals: {profile: @user}) %>')
+<% elsif @mode == "albums" %>
+$(".collection").html('<%= j (render partial: "profiles/profilealbums", locals: {profile: @user}) %>')
+<% end %>

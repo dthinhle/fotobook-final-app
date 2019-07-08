@@ -1,0 +1,23 @@
+<% is_current_user = profile == current_user %>
+
+<% albums_private = is_current_user ? profile.albums : profile.albums.public_albums %>
+  <% if albums_private.size > 0 %>
+    <div class="row px-1 pb-2 album-collection">
+      <% albums_private.each do |a| %>
+        <%= render partial: 'profiles/imgholder', locals: {mode: 'album', src: a, edit: is_current_user} %>
+      <% end %>
+    </div>
+  <% else %>
+  <div class="album-collection d-none h-100">
+    <div class="d-flex justify-content-center align-items-center h-100 ">
+      <div class="text-center text-dark">
+        <p class="h1">
+          <i class="fa fa-exclamation-triangle"></i>
+        </p>
+        <p>
+          This user haven't uploaded any pubilc album yet!
+        </p>
+      </div>
+    </div>
+  </div>
+  <% end %>

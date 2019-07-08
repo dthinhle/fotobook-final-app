@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get 'albumpreview', to: 'feed#albumpreview'
   get 'photopreview', to: 'feed#photopreview'
   get 'editprofile', to: 'profiles#editprofile', as: 'editprofile'
+  get 'getphotos',to: 'profiles#getprofilephotos', as: 'getphotos'
+  get 'getfollows', to: 'profiles#getprofilefollows', as: 'getfollows'
   resources 'profiles', only: ['show', 'edit'] do
     patch 'update_password'
     patch 'update_info'
