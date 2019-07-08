@@ -63,18 +63,7 @@
           <% end %>
         </div>
       <% else %>
-      <div class="photo-collection h-100">
-        <div class="d-flex justify-content-center align-items-center h-100">
-          <div class="text-center text-dark">
-            <p class="h1">
-              <i class="fa fa-exclamation-triangle"></i>
-            </p>
-            <p>
-              This user haven't uploaded any pubilc photo yet!
-            </p>
-          </div>
-        </div>
-      </div>
+        <%= render partial: 'nocontentnotice', locals: {notice: "This user haven't uploaded any public photo yet!"} %>
       <% end %>
     </div>
   </div>

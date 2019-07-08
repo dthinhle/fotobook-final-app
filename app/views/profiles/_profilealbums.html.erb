@@ -8,16 +8,5 @@
       <% end %>
     </div>
   <% else %>
-  <div class="album-collection d-none h-100">
-    <div class="d-flex justify-content-center align-items-center h-100 ">
-      <div class="text-center text-dark">
-        <p class="h1">
-          <i class="fa fa-exclamation-triangle"></i>
-        </p>
-        <p>
-          This user haven't uploaded any pubilc album yet!
-        </p>
-      </div>
-    </div>
-  </div>
+  <%= render partial: 'nocontentnotice', locals: {notice: "This user haven't uploaded any public album yet!"} %>
   <% end %>

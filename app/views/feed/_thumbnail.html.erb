@@ -17,7 +17,6 @@
               <% begin %>
                 <% unless src == 'nil' %>
                   <% src.photos.each_with_index do |img,idx| %>
-                    <% puts img %>
                     <% break if idx > 2 %>
                     <%= image_tag img.img, class: "img-fluid img-thumbnail shadow-sm img-above-#{idx}", 'data-id': src.id%>
                   <% end %>
@@ -60,7 +59,7 @@
                 <% author = src.user %>
               <% end %>
             <% end %>
-              <%= "#{author.first_name} #{author.last_name}" %>
+              <%= link_to "#{author.first_name} #{author.last_name}", profile_path(author)%>
             </span>
             </div>
             <div class="flex-xl-grow-1 desc">

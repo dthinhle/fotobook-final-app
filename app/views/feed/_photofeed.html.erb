@@ -1,0 +1,30 @@
+<% if mode == 'albums' %>
+  <% if @album.length > 0 %>
+  <div class="container-fluid px-0">
+    <div class="row no-gutters pb-2 feed-photo">
+        <%  @album.each do |photo| %>
+        <%= render partial: "feed/thumbnail", locals: {mode: 'album', src: photo} %>
+        <% end %>
+    </div>
+  </div>
+  <% else %>
+    <div class="container-fluid collection">
+    <%= render partial: 'profiles/nocontentnotice', locals: {notice: "You haven't followed anyone yet!"} %>
+    </div>
+  <% end  %>
+<% elsif @mode == 'photos' %>
+  <% if @photo.length > 0 %>
+    <div class="container-fluid px-0">
+      <div class="row no-gutters pb-2 feed-photo">
+          <%  @photo.each do |photo| %>
+          <%= render partial: "feed/thumbnail", locals: {mode: 'photo', src: photo} %>
+          <% end %>
+      </div>
+    </div>
+  <% else %>
+    <div class="container-fluid collection">
+    <%= render partial: 'profiles/nocontentnotice', locals: {notice: "You haven't followed anyone yet!"} %>
+    </div>
+  <% end  %>
+<% end %>
+
