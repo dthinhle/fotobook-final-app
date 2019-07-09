@@ -2,7 +2,11 @@
   <div class="card shadow-sm">
     <div class="profile-card d-flex flex-column">
       <div class="flex-grow-1 justify-content-center d-flex align-items-center">
-        <%= image_tag  "dummy-profile.png", class: 'myprofile-follow shadow my-3' %>
+        <% if src.avatar.url %>
+          <%= image_tag  src.avatar.thumb.url, class: 'myprofile-follow shadow my-3' %>
+        <% else %>
+          <%= image_tag  "dummy-profile.png", class: 'myprofile-follow shadow my-3' %>
+        <% end %>
       </div>
       <div class="interact-section">
       <p class="text-center h4">

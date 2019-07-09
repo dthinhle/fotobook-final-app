@@ -55,7 +55,8 @@ $(document).on "turbolinks:load", ->
       success: () ->
         false
 
-
+  $("#editprofile").click ->
+     window.location.href = "/editprofile"
 
   $(".button-container").on "click","#follow", ->
     followee_id = $(this).attr("data-id")

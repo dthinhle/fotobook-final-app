@@ -13,7 +13,10 @@ Rails.application.routes.draw do
   resources 'profiles', only: ['show', 'edit'] do
     patch 'update_password'
     patch 'update_info'
+    patch 'update_avatar'
   end
+
+  resources 'photos', 'albums', only: ['show','edit','update','destroy']
 
   resources 'follows', only: ['create', 'destroy']
 
