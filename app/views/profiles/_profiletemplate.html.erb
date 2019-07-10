@@ -2,14 +2,18 @@
   <div class="card pt-3">
     <div class="row my-md-2">
       <div class="col-12 col-sm-auto ml-sm-3 ml-md-4 d-flex justify-content-center">
-        <%= image_tag  "dummy-profile.png", class: "myprofile-avatar", 'data-id': profile.id %>
+        <% if profile.avatar.url %>
+          <%= image_tag  profile.avatar.thumb.url, class: "myprofile-avatar", 'data-id': profile.id %>
+        <% else %>
+          <%= image_tag  "dummy-profile.png", class: "myprofile-avatar", 'data-id': profile.id %>
+        <% end %>
       </div>
       <div class="col align-items-center d-flex">
         <div class="w-100 pt-3 p-sm-0 ">
           <% is_current_user = profile == current_user %>
           <div class="d-sm-block d-flex justify-content-center">
             <% if is_current_user %>
-              <button class="badge badge-pill btn-outline-primary btn-badge-border">
+              <button class="badge badge-pill btn-outline-primary btn-badge-border" id="editprofile">
                 Edit profile
               </button>
             <% elsif current_user.followees.pluck(:id).exclude? profile.id %>
@@ -57,24 +61,14 @@
     <div class="collection container-fluid">
       <% photos_private = is_current_user ? profile.photos : profile.photos.public_photos %>
       <% if photos_private.size > 0 %>
+      <% byebug %>
       <div class="row px-1 pb-2 photo-collection">
           <% photos_private.each do |i| %>
             <%= render partial: 'profiles/imgholder', locals: {mode: 'photo', src: i, edit: is_current_user} %>
           <% end %>
         </div>
       <% else %>
-      <div class="photo-collection h-100">
-        <div class="d-flex justify-content-center align-items-center h-100">
-          <div class="text-center text-dark">
-            <p class="h1">
-              <i class="fa fa-exclamation-triangle"></i>
-            </p>
-            <p>
-              This user haven't uploaded any pubilc photo yet!
-            </p>
-          </div>
-        </div>
-      </div>
+        <%= render partial: 'nocontentnotice', locals: {notice: "This user haven't uploaded any public photo yet!"} %>
       <% end %>
     </div>
   </div>

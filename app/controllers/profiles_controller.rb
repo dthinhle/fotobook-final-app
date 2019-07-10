@@ -16,20 +16,28 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def update_avatar
+    @user = current_user
+    @user.avatar =  profile_avt_params[:avatar]
+    if @user.save
+      redirect_to editprofile_path
+    else
+      render 'editprofile'
+    end
+  end
+
   def update_password
     @user = current_user
     puts profile_password_params
 
     if profile_password_params[:password] == profile_password_params[:new_password]
       flash[:notice] = "Your new password can not be identical to the old one!"
-    else
       @user.update(profile_password_params)
     end
     redirect_to editprofile_path
   end
 
   def update_info
-    p params
     @user = current_user
     unless @user.update(profile_info_params)
       flash[:notice] = "Your info is invalid!"
@@ -68,6 +76,10 @@ class ProfilesController < ApplicationController
 
   def task_params
     params.require(:request).permit(:task, :param)
+  end
+
+  def profile_avt_params
+    params.require(:user).permit(:avatar)
   end
 
   def profile_info_params

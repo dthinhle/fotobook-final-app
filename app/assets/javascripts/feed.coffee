@@ -7,24 +7,27 @@ $(document).on "turbolinks:load", ->
     $(this).toggleClass "animate"
 
   $(".photo-mode").click ->
-    console.log("photo")
-    if $(".feed-photo").hasClass('d-none')
-      $(".feed-photo").toggleClass('d-none')
-      $(".feed-album").toggleClass('d-none')
+    site = $(this).children().attr("data-site")
+    Rails.ajax
+      type: "GET"
+      url: "/"+site
+      data: "request[mode]=photos"
+      dataType: 'script'
+      success: () ->
+        false
 
 
   $(".album-mode").click ->
-    console.log("album")
-    if $(".feed-album").hasClass('d-none')
-      $(".feed-photo").toggleClass('d-none')
-      $(".feed-album").toggleClass('d-none')
+    site = $(this).children().attr("data-site")
+    Rails.ajax
+      type: "GET"
+      url: "/"+site
+      data: "request[mode]=albums"
+      dataType: 'script'
+      success: () ->
+        false
 
-  $(".img-above-2").hover ->
-    $(this).toggleClass('album-animation-0')
-    $(this).siblings(".img-above-1").toggleClass('album-animation-1')
-    true
-
-  $(".thumbnail-feed").on "click",".img-photo",->
+  $(".content-field").on "click",".img-photo",->
     id = $(this).attr("data-id")
     Rails.ajax
       type: "GET"
@@ -35,8 +38,17 @@ $(document).on "turbolinks:load", ->
         $("#imgPreviewModal").modal('show')
         false
 
+  $(".content-field").on "mouseenter",".img-above-2", ->
+    $(this).toggleClass('album-animation-0')
+    $(this).siblings(".img-above-1").toggleClass('album-animation-1')
+    true
 
-  $(".thumbnail-feed").on "click",".img-above-2", ->
+  $(".content-field").on "mouseleave",".img-above-2", ->
+    $(this).toggleClass('album-animation-0')
+    $(this).siblings(".img-above-1").toggleClass('album-animation-1')
+    true
+
+  $(".content-field").on "click",".img-above-2", ->
     id = $(this).attr("data-id")
     Rails.ajax
       type: "GET"
