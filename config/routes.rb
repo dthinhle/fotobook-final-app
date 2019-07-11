@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     patch 'update_avatar'
   end
 
-  resources 'photos', 'albums', only: ['show','edit','update','destroy']
+  resources 'photos', 'albums', except: ['show']
 
   resources 'follows', only: ['create', 'destroy']
 

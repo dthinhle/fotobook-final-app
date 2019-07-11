@@ -6,21 +6,30 @@
     <hr>
     <div class="d-flex justify-content-center px-3">
       <div class="edit-form flex-grow-1">
-
-
       <%= form_with model: @user, html: { multipart: true }, url: profile_update_avatar_path(@user), local: true, id: 'user-profile-picture' do |f| %>
         <div class="form-group row">
           <%= f.label :profile_photo, class: "col-sm-4 col-form-label text-right font-weight-bold align-self-center" %>
           <div class="col-sm-8">
             <div>
-            <% if @user.avatar.url %>
-              <%= image_tag  @user.avatar.thumb.url, class: 'myprofile-avatar' %>
-            <% else %>
-              <%= image_tag  "dummy-profile.png", class: 'myprofile-avatar' %>
-            <% end %>
-            <%= f.file_field :avatar%>
-            <%= f.submit %>
+              <div class="img-uploader">
+                <% if @user.avatar.url %>
+                  <%= image_tag  @user.avatar.thumb.url, class: 'myprofile-avatar img-fit' %>
+                <% else %>
+                  <%= image_tag  "dummy-profile.png", class: 'myprofile-avatar img-fit' %>
+                <% end %>
+                <div class="img-uploader-over d-flex justify-content-center">
+                  <div class="badge badge-pill btn-outline-primary btn-badge-border btn-click" id="btn-file">
+                    Choose Image
+                  </div>
+                </div>
+              </div>
+              <%= f.file_field :avatar, accept: "image/jpeg, image/png, image/gif", class:"d-none", id: 'new-file' %>
             </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-8 offset-sm-4">
+            <button id="avatar-submit"type="submit" class="btn btn-primary">Save</button>
           </div>
         </div>
       <% end %>
@@ -36,28 +45,37 @@
           <%= f.label :first_name, class: "col-sm-4 col-form-label text-right font-weight-bold" %>
           <div class="col-sm-8">
             <%= f.text_field :first_name, class: "form-control" %>
+            <div class="error-notice">
+              <label id="user_first_name-error" class="error text-danger text-small" for="user_first_name"></label>
+            </div>
           </div>
         </div>
         <div class="form-group row">
           <%= f.label :last_name, class: "col-sm-4 col-form-label text-right font-weight-bold" %>
           <div class="col-sm-8">
             <%= f.text_field :last_name, class: "form-control" %>
+            <div class="error-notice">
+              <label id="user_last_name-error" class="error text-danger text-small" for="user_last_name"></label>
+            </div>
           </div>
         </div>
         <div class="form-group row">
           <%= f.label :email, class: "col-sm-4 col-form-label text-right font-weight-bold" %>
           <div class="col-sm-8">
             <%= f.email_field :email, class: "form-control" %>
+            <div class="error-notice">
+              <label id="user_email-error" class="error text-danger text-small" for="user_email"></label>
+            </div>
           </div>
         </div>
         <div class="form-group row">
           <div class="col-sm-8 offset-sm-4">
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button id="info-btn" type="submit" class="btn btn-primary">Save</button>
           </div>
         </div>
       <% end %>
 
-      <%= form_with model: @user, url: profile_update_password_path(@user), local: true, class: 'mt-5', id: 'user-password' do |f| %>
+      <%= form_with model: @user, url: profile_update_password_path(@user), local: true, class: 'mt-5', id: 'user-password-form' do |f| %>
         <div class="form-group row">
           <div class="col-sm-8 offset-sm-4">
             <span class="h5 text-primary">
@@ -66,21 +84,30 @@
           </div>
         </div>
         <div class="form-group row">
-          <%= f.label :password, class: "col-sm-4 col-form-label text-right font-weight-bold" %>
+          <%= f.label :current_password, class: "col-sm-4 col-form-label text-right font-weight-bold" %>
           <div class="col-sm-8">
-            <%= f.password_field :password, class: "form-control" %>
+            <%= f.password_field :current_password, class: "form-control" %>
+            <div class="error-notice">
+              <label id="user_current_password-error" class="error text-danger text-small" for="user_current_password"></label>
+            </div>
           </div>
         </div>
         <div class="form-group row">
-          <%= f.label :new_password, class: "col-sm-4 col-form-label text-right font-weight-bold" %>
+          <%= f.label :password, "New Password", class: "col-sm-4 col-form-label text-right font-weight-bold" %>
           <div class="col-sm-8">
-            <%= f.password_field :new_password, class: "form-control" %>
+            <%= f.password_field :password, class: "form-control" %>
+            <div class="error-notice">
+              <label id="user_password-error" class="error text-danger text-small" for="user_password"></label>
+            </div>
           </div>
         </div>
         <div class="form-group row">
           <%= f.label :new_password_confirmation, "Password Confirmation", class: "col-sm-4 col-form-label text-right font-weight-bold" %>
           <div class="col-sm-8">
-            <%= f.password_field :new_password_confirmation, class: "form-control" %>
+            <%= f.password_field :password_confirmation, class: "form-control" %>
+            <div class="error-notice">
+              <label id="user_password_confirmation-error" class="error text-danger text-small" for="user_password_confirmation"></label>
+            </div>
           </div>
         </div>
         <div class="form-group row">
