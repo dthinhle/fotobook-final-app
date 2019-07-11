@@ -14,6 +14,8 @@
 //= require activestorage
 //= require jquery
 //= require jquery_ujs
+//= require popper
+//= require jquery.validate
 //= require turbolinks
 //= require bootstrap
 //= require_tree .

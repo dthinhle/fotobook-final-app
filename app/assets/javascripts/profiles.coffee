@@ -162,3 +162,81 @@ $(document).on "turbolinks:load", ->
       dataType: 'json'
       success: () ->
         false
+
+# Edit profile
+
+  $("#btn-file").click ->
+    $("#new-file").click()
+
+  $("#user-profile-picture").validate
+    rules:
+      "user[avatar]":
+        accept: "image/*"
+        extension: "png|jpeg|jpg|gif"
+        required: true
+
+  $("#avatar-submit").click (e) ->
+    if $("#new-file").val() == ""
+      alert("You haven't selected any photo yet")
+      e.preventDefault()
+
+  $("#new-file").change (e) ->
+    input = e.target
+    if input.files and input.files[0]
+      file = input.files[0]
+      reader = new FileReader()
+
+    reader.readAsDataURL(file)
+    reader.onload = (e) ->
+      mimeType = reader.result.split(",")[0].split(":")[1].split(";")[0];
+      if ["image/png","image/jpeg","image/jpg","image/gif"].includes(mimeType)
+        $(".myprofile-avatar").attr("src",reader.result)
+      else
+        $("#new-file").val('')
+        alert "This file type is not supported"
+    return
+
+
+
+# jQuery validations
+
+  jQuery.validator.addMethod "notEqual", ((value, element, param) ->
+    console.log(value.toString() + $(param).val().toString())
+    value != $(param).val()
+  ), "Your new password can't be your old password"
+
+  $("#user-info-form").validate
+    rules:
+      "user[first\_name]":
+        required: true
+        maxlength: 25
+      "user[last\_name]":
+        required: true
+        maxlength: 25
+      "user[email]":
+        required: true
+        email: true
+        maxlength: 255
+
+  $("#user-password-form").validate
+    rules:
+      "user[current\_password]":
+        required: true
+        minlength: 6
+        maxlength: 64
+      "user[password]":
+        required: true
+        minlength: 6
+        maxlength: 64
+        notEqual: "#user_current_password"
+      "user[password\_confirmation]":
+        required: true
+        minlength: 6
+        maxlength: 64
+        equalTo: "#user_password"
+    messages:
+      "user[password\_confirmation]":
+        equalTo: "Your password confirmation does not match."
+
+
+  false

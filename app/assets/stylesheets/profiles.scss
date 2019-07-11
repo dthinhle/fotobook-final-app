@@ -89,3 +89,52 @@
   position: relative;
   bottom: 0;
 }
+
+.img-uploader{
+  height: 12rem;
+}
+
+.img-uploader-over{
+  position: relative;
+  width: 12rem;
+  bottom: 2.5rem;
+}
+
+.btn-add-photo{
+  position: absolute;
+  right: 3rem;
+  bottom: 0rem;
+}
+
+.btn-edit-photo{
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  height: 22px;
+  width: 40px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  border-radius: 13px;
+  cursor: pointer;
+  background-color: rgba($color: #000000, $alpha: 0.75);
+}
+
+.photo-upload{
+  height: 18rem;
+  width: 18rem;
+  :hover{
+    background-color: #e0e0e0
+  }
+  :active{
+    background-color: #d0d0d0
+  }
+}
+
+.photo-upload-border{
+  border: 5px dashed rgb(160, 160, 160)
+}
+
+.photo-upload-btn{
+  color: rgb(160, 160, 160);
+  font-size: 5rem;
+}

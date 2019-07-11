@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   def show
+    byebug
     @user = User.includes(:photos,:albums,:followers,:followees).find(params[:id])
   end
 
@@ -19,20 +20,22 @@ class ProfilesController < ApplicationController
   def update_avatar
     @user = current_user
     @user.avatar =  profile_avt_params[:avatar]
-    if @user.save
-      redirect_to editprofile_path
-    else
-      render 'editprofile'
+    unless @user.save
+      flash[:notice] = "Your selected file is invalid"
     end
+    redirect_to editprofile_path
   end
 
   def update_password
     @user = current_user
     puts profile_password_params
 
-    if profile_password_params[:password] == profile_password_params[:new_password]
+    if profile_password_params[:password] == profile_password_params[:current_password]
       flash[:notice] = "Your new password can not be identical to the old one!"
-      @user.update(profile_password_params)
+    elsif profile_password_params[:password] != profile_password_params[:password_confirmation]
+      flash[:notice] = "Your new password confirmation does not match!"
+    else
+      @user.update_with_password(profile_password_params)
     end
     redirect_to editprofile_path
   end
@@ -40,7 +43,9 @@ class ProfilesController < ApplicationController
   def update_info
     @user = current_user
     unless @user.update(profile_info_params)
-      flash[:notice] = "Your info is invalid!"
+      msg = []
+      @user.errors.each {|key, value| msg <<value}
+      flash[:notice] = msg
     else
       puts profile_info_params
       flash[:notice] = "Your info is successfully changed."
@@ -87,6 +92,6 @@ class ProfilesController < ApplicationController
   end
 
   def profile_password_params
-    params.require(:user).permit(:password, :new_password, :new_password_confirmation)
+    params.require(:user).permit(:current_password, :password, :password_confirmation)
   end
 end

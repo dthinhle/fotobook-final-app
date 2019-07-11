@@ -1,4 +1,4 @@
-img = "<img class='img-fluid view-model' src='<%= j @photo.img%>'>"
+img = "<img class='img-fluid view-model' src='<%= j @photo.img.url%>'>"
 $(".img-preview-body").children().replaceWith(img)
 $("#imgPreview").text()
 
