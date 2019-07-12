@@ -20,7 +20,7 @@ $(document).on "turbolinks:load", ->
         required:true
 
   $("#new-album-submit").click (e) ->
-    if $("#new-photo").val() == ""
+    if $("#new-album").val() == ""
       if $(this).attr("data-mode") == "new"
         alert("You haven't selected any photo yet")
         e.preventDefault()

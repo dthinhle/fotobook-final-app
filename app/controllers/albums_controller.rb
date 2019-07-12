@@ -4,17 +4,14 @@ class AlbumsController < ApplicationController
   end
 
   def create
-    @album = Album.new
-    @album.title = album_params[:title]
-    @album.desc = album_params[:desc]
+    a_params = album_params.to_h
+    a_params.delete(:img)
+    @album = Album.new(a_params)
     @album.user_id = current_user.id
-    @album.private = album_params[:private]
-    byebug
     if @album.save
+      a_params[:title] += "_album"
       album_params[:img].each do|x|
-        photo = Photo.new
-        photo.title = "#{album_params[:title]}_album"
-        photo.private = false
+        photo = Photo.new(a_params)
         photo.img = x
         photo.imageable = @album
         photo.save
@@ -27,6 +24,30 @@ class AlbumsController < ApplicationController
 
   def edit
     @album = Album.find params[:id]
+  end
+
+  def update
+    a_params = album_params.to_h
+    a_params.delete(:img)
+    @album = Album.find params[:id]
+    if @album.update(a_params)
+      a_params[:title] += "_album"
+      album_params[:img].each do |x|
+        photo = Photo.new(a_params)
+        photo.img = x
+        photo.imageable = @album
+        photo.save
+      end
+      redirect_to myprofile_path
+    else
+      render 'new'
+    end
+  end
+
+  def destroy
+    @album = Album.find params[:id]
+    @album.destroy
+    redirect_to myprofile_path
   end
 
   private
