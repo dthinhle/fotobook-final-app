@@ -15,7 +15,7 @@
           <% begin %>
 
             <% unless src == 'nil' %>
-              <%= image_tag  src.img.url, class: 'img-fit', 'data-id': src.id%>
+              <%= image_tag  src.img.thumb.url, class: 'img-fit', 'data-id': src.id%>
             <% end
           rescue => exception %>
           <%= image_tag  "dummy-photo.jpg", class: 'img-fluid img-fit'%>
@@ -25,7 +25,7 @@
               <% unless src == 'nil' %>
                 <% src.photos.each_with_index do |photo,idx| %>
                   <% break if idx > 2 %>
-                  <%= image_tag photo.img.url, class: "img-fluid img-thumbnail shadow-sm img-above-#{idx}", 'data-id': src.id%>
+                  <%= image_tag photo.img.url, class: "img-fluid img-thumbnail shadow-sm img-above-#{2-idx}", 'data-id': src.id%>
                 <% end %>
               <% end
             rescue => exception %>
@@ -36,10 +36,18 @@
         <% end %>
       </div>
       <% if (edit == true) %>
-        <%= link_to edit_photo_path(src) do %>
-          <div class="btn-edit-photo text-white text-center">
-            Edit
-          </div>
+        <% if mode == 'photo' %>
+          <%= link_to edit_photo_path(src) do %>
+            <div class="btn-edit-photo text-white text-center">
+              Edit
+            </div>
+          <% end %>
+        <% else %>
+          <%= link_to edit_album_path(src) do %>
+            <div class="btn-edit-photo text-white text-center">
+              Edit
+            </div>
+          <% end %>
         <% end %>
       <% end %>
     </div>

@@ -1,0 +1,77 @@
+<main class="col-12 col-md-9 col-xl-8 py-md-3">
+  <div class="card pt-3">
+    <p class="h5 mb-0 px-3">
+      New Album
+    </p>
+    <hr>
+    <div class="d-flex justify-content-center px-3">
+      <div class="edit-form flex-grow-1">
+      <%= form_with model: @album, html: { multipart: true }, local: true, id: 'album-upload', class: 'form-group' do |f| %>
+        <div class="row">
+          <div class="col-sm-6">
+            <div>
+              <%= f.label :title, "Album Title",class: "font-weight-bold" %><br>
+              <%= f.text_field :title, class: "form-control" %>
+              <div class="error-notice">
+                <label id="album_title-error" class="error text-danger text-small" for="album_title"></label>
+              </div>
+            </div>
+            <div>
+              <%= f.label :private, "Sharing Mode",class: "font-weight-bold" %><br>
+              <%= f.select :private, [['Private','true'], ['Public','false']],{ include_blank: false }, {class: 'custom-select col-auto'} %>
+              <div class="error-notice">
+                <label id="album_private-error" class="error text-danger text-small" for="album_private"></label>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <%= f.label :desc, "Desciption" %><br>
+            <%= f.text_area :desc, class: "form-control form-photo-desc" %>
+            <div class="error-notice">
+              <label id="album_desc-error" class="error text-danger text-small" for="album_desc"></label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+              <% if mode == "edit" %>
+            <p class="font-weight-bold my-3">
+              Current Photos
+            </p>
+              <div class="album-upload-container d-flex flex-wrap align-content-start">
+                <% @album.photos.each do |photo| %>
+                  <%= render partial: 'albumthumbnail', locals: {photo: photo} %>
+                <% end %>
+
+              </div>
+              <% end %>
+            <%= f.label :img, "Add New Photos", class: "font-weight-bold my-3" %>
+            <div class="album-container d-flex flex-wrap align-content-start">
+                <div class="album-upload">
+                  <div class="p-3 photo-upload-border h-100 d-flex justify-content-center align-items-center rounded-lg">
+                    <div class="photo-upload-btn">
+                      <i class="fa fa-plus"></i>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <%= f.file_field :img, multiple: true, class: 'd-none', id: 'new-album'%>
+            <div class="mt-3">
+              <% if mode == "edit" %>
+                <%= f.submit "Update Album", id: 'new-album-submit', class: 'btn btn-success', 'data-mode':"edit" %>
+                <%= link_to album_path(@album), method: :delete, data: "Are you sure you want to delete this album?" do %>
+                  <div class="btn btn-danger">
+                    Delete
+                  </div>
+                <% end %>
+              <% else %>
+                <%= f.submit "Add Album", id: 'new-album-submit', class: 'btn btn-success', 'data-mode':"new"%>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</main>

@@ -6,3 +6,23 @@
   min-height: 8.25rem;
   max-height: 8.25rem;
 }
+
+.photo-upload-border{
+  border: 5px dashed rgb(160, 160, 160)
+}
+
+.photo-upload-btn{
+  color: rgb(160, 160, 160);
+  font-size: 5rem;
+}
+
+.photo-upload{
+  height: 18rem;
+  width: 18rem;
+  :hover{
+    background-color: #e0e0e0
+  }
+  :active{
+    background-color: #d0d0d0
+  }
+}

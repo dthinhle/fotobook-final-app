@@ -2,7 +2,7 @@ class FeedController < ApplicationController
   before_action :authenticate_user!
 
   def home
-    user_lst = current_user.followees.map {|x| x.id}
+    user_lst = current_user.followees.map {|x| x.id} <<current_user.id
     @photo = Photo.where(imageable_type: 'User').where(imageable_id: user_lst)
     @album = Album.where(user_id: user_lst)
     begin
@@ -17,7 +17,7 @@ class FeedController < ApplicationController
   end
 
   def discover
-    user_lst = current_user.followees.map {|x| x.id}
+    user_lst = current_user.followees.map {|x| x.id} <<current_user.id
     @photo = Photo.where(imageable_type: 'User').where.not(imageable_id: user_lst)
     @album = Album.where.not(user_id: user_lst)
     begin

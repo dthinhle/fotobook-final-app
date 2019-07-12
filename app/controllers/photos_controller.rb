@@ -10,7 +10,6 @@ class PhotosController < ApplicationController
   def update
     @photo = Photo.find(params[:id])
     if @photo.update(photo_params)
-      byebug
       redirect_to myprofile_path
     else
       render 'edit'
@@ -20,22 +19,29 @@ class PhotosController < ApplicationController
   def destroy
     @photo = Photo.find(params[:id])
     @photo.destroy
-    redirect_to myprofile_path
+    begin
+      delete_task_params[:task] == "delete"
+    rescue => exception
+      redirect_to myprofile_path
+    end
   end
 
   def create
     @photo = Photo.new(photo_params)
     @photo.imageable = current_user
-    byebug
     if @photo.save
       @photo.img = photo_params[:img]
-      redirect_to new_photo_path
+      redirect_to myprofile_path
     else
       render 'new'
     end
   end
 
   private
+  def delete_task_params
+    params.require(:album).permit(:task)
+  end
+
   def photo_params
     params.require(:photo).permit(:title, :private, :desc, :img)
   end
