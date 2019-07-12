@@ -1,4 +1,4 @@
-<div id="albumPreview" class="carousel slide" data-ride="carousel">
+<div id="albumPreview" class="carousel slide w-100" data-ride="carousel">
   <div class="carousel-inner" role="listbox">
     <% album.photos.each_with_index do |photo,idx| %>
       <% if idx == 0 %>
@@ -6,7 +6,9 @@
       <% else %>
         <div class="carousel-item">
       <% end %>
-          <%= image_tag  photo.img, class: 'img-fluid' %>
+          <div class="w-100 d-flex justify-content-center">
+            <%= image_tag  photo.img.url, class: 'img-fluid' %>
+          </div>
         </div>
     <% end %>
   </div>

@@ -85,6 +85,15 @@
   font-weight: 700;
 }
 
+.badge-medium{
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.badge-medium.badge-pill{
+  padding: 0.3em 0.8em;
+}
+
 .interact-section{
   position: relative;
   bottom: 0;
@@ -102,8 +111,14 @@
 
 .btn-add-photo{
   position: absolute;
-  right: 3rem;
-  bottom: 0rem;
+  right: 2.5rem;
+  bottom: -2.45rem;
+}
+
+.btn-add-album{
+  position: absolute;
+  right: 10rem;
+  bottom: -2.45rem;
 }
 
 .btn-edit-photo{
@@ -119,22 +134,6 @@
   background-color: rgba($color: #000000, $alpha: 0.75);
 }
 
-.photo-upload{
-  height: 18rem;
-  width: 18rem;
-  :hover{
-    background-color: #e0e0e0
-  }
-  :active{
-    background-color: #d0d0d0
-  }
-}
-
-.photo-upload-border{
-  border: 5px dashed rgb(160, 160, 160)
-}
-
-.photo-upload-btn{
-  color: rgb(160, 160, 160);
-  font-size: 5rem;
+a[data-slide]:hover{
+  background-color: rgba(25, 25, 25, 0.5)
 }
