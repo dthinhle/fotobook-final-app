@@ -15,7 +15,7 @@
           <% begin %>
 
             <% unless src == 'nil' %>
-              <%= image_tag  src.img.url, class: 'img-fit', 'data-id': src.id%>
+              <%= image_tag  src.img.thumb.url, class: 'img-fit', 'data-id': src.id%>
             <% end
           rescue => exception %>
           <%= image_tag  "dummy-photo.jpg", class: 'img-fluid img-fit'%>

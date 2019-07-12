@@ -8,7 +8,7 @@
           <% if mode == 'photo' %>
               <% begin %>
                 <% unless src == 'nil' %>
-                  <%= image_tag src.img.url, class: 'img-fit img-photo', 'data-id': src.id%>
+                  <%= image_tag src.img.thumb.url, class: 'img-fit img-photo', 'data-id': src.id%>
                 <% end
               rescue => exception %>
               <%= image_tag  "dummy-photo.jpg", class: 'img-fit img-photo'%>
@@ -18,7 +18,7 @@
                 <% unless src == 'nil' %>
                   <% src.photos.each_with_index do |img,idx| %>
                     <% break if idx > 2 %>
-                    <%= image_tag img.img.url, class: "img-fluid img-thumbnail shadow-sm img-above-#{idx}", 'data-id': src.id%>
+                    <%= image_tag img.img.url, class: "img-fluid img-thumbnail shadow-sm img-above-#{2-idx}", 'data-id': src.id%>
                   <% end %>
                 <% end
               rescue => exception %>

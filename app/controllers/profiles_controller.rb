@@ -1,6 +1,5 @@
 class ProfilesController < ApplicationController
   def show
-    byebug
     @user = User.includes(:photos,:albums,:followers,:followees).find(params[:id])
   end
 

@@ -10,7 +10,6 @@ class PhotosController < ApplicationController
   def update
     @photo = Photo.find(params[:id])
     if @photo.update(photo_params)
-      byebug
       redirect_to myprofile_path
     else
       render 'edit'
@@ -30,7 +29,6 @@ class PhotosController < ApplicationController
   def create
     @photo = Photo.new(photo_params)
     @photo.imageable = current_user
-    byebug
     if @photo.save
       @photo.img = photo_params[:img]
       redirect_to myprofile_path
