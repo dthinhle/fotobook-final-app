@@ -30,4 +30,86 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  albums:
+    albumtemplate:
+      title: "New Album"
+      f-title: "Album Title"
+      f-sharing: "Sharing Mode"
+      f-private: "Private"
+      f-public: "Public"
+      f-desc: "Description"
+      f-cur-photos: "Current Photos"
+      f-upl-photos: "Add New Photos"
+      f-update: "Update Album"
+      f-delete: "Delete Album"
+      f-delete-message: "Are you sure you want to delete this album?"
+      f-create: "Add Album"
+
+  feeds:
+    albumpreview:
+      c-prev: "Previous"
+      c-next: "Next"
+
+    discover:
+    home:
+
+  photos:
+    phototemplate:
+      title: "New Photos"
+      f-title: "Photo Title"
+      f-sharing: "Sharing Mode"
+      f-private: "Private"
+      f-public: "Public"
+      f-desc: "Description"
+      f-upl-photo: "New Photo"
+      f-update: "Update Photo"
+      f-delete: "Delete Photo"
+      f-delete-message: "Are you sure you want to delete this photo?"
+      f-create: "Add Photo"
+
+  profiles:
+
+    editprofile:
+      save: "Save"
+      title: "Edit Your Profile"
+      profile-photo: "Profile Photo"
+      upl-avatar: "Choose Image"
+      user-info: "User Infomation"
+      first-name: "First Name"
+      last-name: "Last Name"
+      email: "Email"
+      password: "Password"
+      cur-password: "Current Password"
+      new-password: "New Password"
+      password-confirm: "Password Confirmation"
+
+
+    index:
+    myprofile:
+    show:
+
+  title: "Title"
+  follow: "Follow"
+  unfollow: "Unfollow"
+  photo: "Photo"
+  album: "Album"
+  follower: "Follower"
+  followee: "Following"
+  feeds: "Feeds"
+  discover: "Discover"
+  views: {
+    zero: "No views",
+    one: "1 view",
+    other: "%{count} views"
+  }
+  notice: "Notice"
+  no-albums-notice: "This user haven't uploaded any public albums yet"
+  no-photos-notice: "This user haven't uploaded any public photos yet"
+  no-followers-notice: "This user doesn't have any followers"
+  no-followees-notice: "Nobody has followed this user yet"
+  no-fl-notice: "You haven't followed anyone yet"
+  editprofile: "Edit Profile"
+  search: "Search"
+  logout: "Logout"
+  new-photo: "Add Photo"
+  new-album: "Add Album"

@@ -19,7 +19,3 @@
 //= require turbolinks
 //= require bootstrap
 //= require_tree .
-$(function(){
-  $(".toast").toast('show')
-
-});

@@ -8,5 +8,5 @@
       <% end %>
     </div>
   <% else %>
-  <%= render partial: 'nocontentnotice', locals: {notice: "This user haven't uploaded any public album yet!"} %>
+  <%= render partial: 'nocontentnotice', locals: {notice: t("no-albums-notice")} %>
   <% end %>

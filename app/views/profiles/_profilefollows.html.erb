@@ -10,5 +10,9 @@
     <% end %>
   </div>
 <% else %>
-  <%= render partial: 'nocontentnotice', locals: {notice: "This user doesn't have any #{mode}!"} %>
+  <% if mode == 'followers' %>
+    <%= render partial: 'nocontentnotice', locals: {notice: t("no-followers-notice")} %>
+  <% else %>
+    <%= render partial: 'nocontentnotice', locals: {notice: t("no-followees-notice")} %>
+  <% end %>
 <% end %>

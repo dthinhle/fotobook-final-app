@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
   get 'profiles/myprofile'
   devise_for :users
-  get 'home', to: 'feed#home', as: 'home'
-  get 'discover', to: 'feed#discover', as: 'discover'
+  get 'home', to: 'feeds#home', as: 'home'
+  get 'discover', to: 'feeds#discover', as: 'discover'
   get 'myprofile', to: 'profiles#myprofile', as: 'myprofile'
   post 'task', to: 'profiles#task'
-  get 'albumpreview', to: 'feed#albumpreview'
-  get 'photopreview', to: 'feed#photopreview'
+  get 'albumpreview', to: 'feeds#albumpreview'
+  get 'photopreview', to: 'feeds#photopreview'
   get 'editprofile', to: 'profiles#editprofile', as: 'editprofile'
   get 'getphotos',to: 'profiles#getprofilephotos', as: 'getphotos'
   get 'getfollows', to: 'profiles#getprofilefollows', as: 'getfollows'
@@ -20,6 +20,6 @@ Rails.application.routes.draw do
 
   resources 'follows', only: ['create', 'destroy']
 
-  root 'feed#home'
+  root 'feeds#home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

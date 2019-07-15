@@ -33,10 +33,12 @@ class AlbumsController < ApplicationController
     if @album.update(a_params)
       a_params[:title] += "_album"
       album_params[:img].each do |x|
-        photo = Photo.new(a_params)
-        photo.img = x
-        photo.imageable = @album
-        photo.save
+        Photo.transaction do
+          photo = Photo.new(a_params)
+          photo.img = x
+          photo.imageable = @album
+          photo.save
+        end
       end
       redirect_to myprofile_path
     else
