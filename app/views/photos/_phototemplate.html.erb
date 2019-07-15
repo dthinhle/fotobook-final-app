@@ -55,7 +55,7 @@
                 <%= f.submit t('.f-update'), id: 'new-photo-submit', class: 'btn btn-success', 'data-mode':"edit" %>
                 <%= link_to photo_path(@photo), method: :delete, data: {confirm: t('.f-delete-message')} do %>
                   <div class="btn btn-danger">
-                    <%= t('f-delete') %>
+                    <%= t('.f-delete') %>
                   </div>
                 <% end %>
               <% else %>

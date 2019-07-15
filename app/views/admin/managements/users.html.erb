@@ -1,0 +1,39 @@
+<main class="col-12 col-md-9 col-xl-8 py-md-3">
+  <div class="card pt-3">
+    <p class="h5 mb-0 px-3">
+      <%= t '.title' %>
+    </p>
+    <hr>
+    <div class="d-flex justify-content-center px-3">
+      <div class="manage-view w-100">
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Last Signed In</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @users.each do |u| %>
+            <tr>
+              <td> <%= u.first_name %></td>
+              <td> <%= u.last_name %></td>
+              <td> <%= u.email %></td>
+              <td> <%= u.last_sign_in_at %></td>
+              <td> <%= link_to  "Edit", editprofile_path %> </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <div class="d-flex justify-content-center w-100 pagination-bar">
+        <%= paginate @users %>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
