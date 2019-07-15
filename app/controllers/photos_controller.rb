@@ -1,16 +1,24 @@
 class PhotosController < ApplicationController
   def new
     @photo = Photo.new
+    session[:referrer] = request.referer
   end
 
   def edit
     @photo = Photo.find(params[:id])
+    session[:referrer] = request.referer
   end
 
   def update
     @photo = Photo.find(params[:id])
     if @photo.update(photo_params)
-      redirect_to myprofile_path
+      begin
+        referrer = session.delete(:referrer)
+        redirect_to referrer
+      rescue => exception
+        flash[:notice] = "You are request edit from an invalid location"
+        redirect_to myprofile_path
+      end
     else
       render 'edit'
     end
@@ -31,7 +39,13 @@ class PhotosController < ApplicationController
     @photo.imageable = current_user
     if @photo.save
       @photo.img = photo_params[:img]
-      redirect_to myprofile_path
+      begin
+        referrer = session.delete(:referrer)
+        redirect_to referrer
+      rescue => exception
+        flash[:notice] = "You are request edit from an invalid location"
+        redirect_to myprofile_path
+      end
     else
       render 'new'
     end

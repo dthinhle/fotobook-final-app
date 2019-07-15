@@ -3,9 +3,9 @@
     <div class="thumbnail">
       <% if (edit == true) %>
         <% if src.private %>
-        <div class="btn-private bg-danger text-white rounded-circle text-center unlock">
+        <div class="btn-private bg-danger text-white rounded-circle text-center unlock btn-overlay">
         <% else %>
-        <div class="btn-private text-white rounded-circle text-center lock">
+        <div class="btn-private text-white rounded-circle text-center lock btn-overlay">
         <% end %>
           <i class="fa fa-lock"></i>
         </div>
@@ -25,7 +25,7 @@
               <% unless src == 'nil' %>
                 <% src.photos.each_with_index do |photo,idx| %>
                   <% break if idx > 2 %>
-                  <%= image_tag photo.img.url, class: "img-fluid img-thumbnail shadow-sm img-above-#{2-idx}", 'data-id': src.id%>
+                  <%= image_tag photo.img.album_thumb.url, class: "img-fluid img-thumbnail shadow-sm img-above-#{2-idx}", 'data-id': src.id%>
                 <% end %>
               <% end
             rescue => exception %>
@@ -38,14 +38,14 @@
       <% if (edit == true) %>
         <% if mode == 'photo' %>
           <%= link_to edit_photo_path(src) do %>
-            <div class="btn-edit-photo text-white text-center">
-              Edit
+            <div class="btn-edit-photo text-white text-center btn-overlay">
+              <%= t(:edit) %>
             </div>
           <% end %>
         <% else %>
           <%= link_to edit_album_path(src) do %>
-            <div class="btn-edit-photo text-white text-center">
-              Edit
+            <div class="btn-edit-photo text-white text-center btn-overlay">
+              <%= t(:edit) %>
             </div>
           <% end %>
         <% end %>

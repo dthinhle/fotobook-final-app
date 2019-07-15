@@ -4,7 +4,7 @@ class FeedsController < ApplicationController
   def home
     user_lst = current_user.followees.map {|x| x.id} <<current_user.id
     @photo = Photo.where(imageable_type: 'User').where(imageable_id: user_lst)
-    @album = Album.where(user_id: user_lst)
+    @album = Album.includes(:photos).where(user_id: user_lst)
     begin
       @mode = mode_params[:mode]
       puts @mode

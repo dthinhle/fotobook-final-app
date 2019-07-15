@@ -1,6 +1,7 @@
 class AlbumsController < ApplicationController
   def new
     @album = Album.new
+    session[:referrer] = request.referer
   end
 
   def create
@@ -16,7 +17,13 @@ class AlbumsController < ApplicationController
         photo.imageable = @album
         photo.save
       end
-      redirect_to myprofile_path
+      begin
+        referrer = session.delete(:referrer)
+        redirect_to referrer
+      rescue => exception
+        flash[:notice] = "You are request edit from an invalid location"
+        redirect_to myprofile_path
+      end
     else
       render 'new'
     end
@@ -24,6 +31,7 @@ class AlbumsController < ApplicationController
 
   def edit
     @album = Album.find params[:id]
+    session[:referrer] = request.referer
   end
 
   def update
@@ -37,10 +45,16 @@ class AlbumsController < ApplicationController
           photo = Photo.new(a_params)
           photo.img = x
           photo.imageable = @album
-          photo.save
+          photo.save!
         end
       end
-      redirect_to myprofile_path
+      begin
+        referrer = session.delete(:referrer)
+        redirect_to referrer
+      rescue => exception
+        flash[:notice] = "You are request edit from an invalid location"
+        redirect_to myprofile_path
+      end
     else
       render 'new'
     end

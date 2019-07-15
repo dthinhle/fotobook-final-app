@@ -2,7 +2,10 @@ class Photo < ApplicationRecord
   belongs_to :imageable, polymorphic: true, optional: true
 
   scope :public_photos, -> { where(private: false) }
+  scope :single_photos, -> { where(imageable_type: "User")}
   default_scope {order(created_at: :desc)}
+
+  paginates_per 20
 
   mount_uploader :img, PhotoUploader
 
