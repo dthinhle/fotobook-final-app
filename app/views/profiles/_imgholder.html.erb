@@ -25,7 +25,7 @@
               <% unless src == 'nil' %>
                 <% src.photos.each_with_index do |photo,idx| %>
                   <% break if idx > 2 %>
-                  <%= image_tag photo.img.url, class: "img-fluid img-thumbnail shadow-sm img-above-#{2-idx}", 'data-id': src.id%>
+                  <%= image_tag photo.img.album_thumb.url, class: "img-fluid img-thumbnail shadow-sm img-above-#{2-idx}", 'data-id': src.id%>
                 <% end %>
               <% end
             rescue => exception %>
