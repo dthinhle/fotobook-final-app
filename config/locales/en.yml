@@ -96,6 +96,7 @@ en:
   follower: "Follower"
   followee: "Following"
   feeds: "Feeds"
+  edit: "Edit"
   discover: "Discover"
   views: {
     zero: "No views",

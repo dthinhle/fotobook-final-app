@@ -37,7 +37,7 @@ class AlbumsController < ApplicationController
           photo = Photo.new(a_params)
           photo.img = x
           photo.imageable = @album
-          photo.save
+          photo.save!
         end
       end
       redirect_to myprofile_path
