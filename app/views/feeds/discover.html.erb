@@ -4,11 +4,11 @@
     <div class="btn-group btn-group-toggle" data-toggle="buttons">
       <label class="btn btn-outline-primary active photo-mode">
         <input type="radio" name="photo" id="photo-radio"
-        autocomplete="off" data-site="discover" checked> Photo
+        autocomplete="off" data-site="discover" checked> <%= t :photo %>
       </label>
       <label class="btn btn-outline-primary album-mode">
         <input type="radio" name="album" id="album-radio"
-        autocomplete="off" data-site="discover"> Album
+        autocomplete="off" data-site="discover"> <%= t :album %>
       </label>
     </div>
     </div>
@@ -19,13 +19,13 @@
           <div class="container-fluid px-0">
             <div class="row no-gutters pb-2 feed-photo">
                 <%  @photo.each do |photo| %>
-                <%= render partial: "feed/thumbnail", locals: {mode: 'photo', src: photo} %>
+                <%= render partial: "feeds/thumbnail", locals: {mode: 'photo', src: photo} %>
                 <% end %>
             </div>
           </div>
         <% else %>
           <div class="container-fluid collection">
-          <%= render partial: 'profiles/nocontentnotice', locals: {notice: "You haven't followed anyone yet!"} %>
+          <%= render partial: 'profiles/nocontentnotice', locals: {notice: t('no-fl-notice')} %>
           </div>
         <% end  %>
       </div>

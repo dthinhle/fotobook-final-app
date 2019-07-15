@@ -24,9 +24,9 @@
 
         <form class="form-inline justify-content-center ">
           <div class=" my-2 my-lg-0 flex-fill">
-            <label for="search-bar" class="sr-only">Email</label>
+            <label for="search-bar" class="sr-only"><%= t 'search' %></label>
             <input class="form-control w-100 mr-sm-2" id="search-bar" type="text" placeholder="Search"
-              aria-label="Search">
+              aria-label="<%= t 'search'%>">
         </form>
       </div>
     </div>
@@ -48,7 +48,7 @@
     <li class="nav-item active">
     </li>
     <li class="nav-item">
-      <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'nav-link font-weight-bold'  %>
+      <%= link_to t(:logout), destroy_user_session_path, method: :delete, class: 'nav-link font-weight-bold'  %>
     </li>
   </ul>
   </div>
@@ -63,10 +63,10 @@
         <div class="my-2 mt-md-3 flex-fill">
           <ul class="nav row justify-content-center">
             <li class="nav-item col-6 col-md-12 text-center text-md-left">
-              <%= link_to  "Feeds", home_path, class: 'nav-link active' %>
+              <%= link_to  t(:feeds), home_path, class: 'nav-link active' %>
             </li>
             <li class="nav-item col-6 col-md-12 text-center text-md-left">
-              <%= link_to  "Discover", discover_path, class: 'nav-link active' %>
+              <%= link_to  t(:discover), discover_path, class: 'nav-link active' %>
             </li>
           </ul>
         </div>
@@ -77,7 +77,7 @@
           <div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;" data-autohide="false" >
             <div class="toast w-100" style="position: absolute; top: 0; right: 0;"  data-delay="<%= notice.is_a?(Array) ? notice.length*2000 : 2000 %>">
               <div class="toast-header bg-primary text-white">
-                <strong class="mr-auto">Notice</strong>
+                <strong class="mr-auto"><%= t :notice %></strong>
                 <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>

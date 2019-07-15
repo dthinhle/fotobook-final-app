@@ -1,5 +1,0 @@
-<% if @mode == "albums" %>
-$(".content-field").html('<%= j (render partial: "feed/photofeed", locals: {mode:"albums"}) %>')
-<% elsif @mode == "photos" %>
-$(".content-field").html('<%= j (render partial: "feed/photofeed", locals: {mode:"photos"}) %>')
-<% end %>

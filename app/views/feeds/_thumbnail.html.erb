@@ -39,14 +39,14 @@
                   <%= src.title %>
                 <% end
               rescue => exception %>
-              Title
+              <%= t :title %>
               <% end %>
             </p>
             <div class="mb-2">
 
             <% if current_page?(discover_path) %>
               <button class="badge badge-pill btn-outline-primary btn-badge-border pull-right small mr-2">
-              Follow
+              <%= t :follow %>
               </button>
             <% end %>
             <span class="text-primary">
@@ -73,7 +73,7 @@
                   <div class="HeartAnimation"></div>
                   <div class="text-secondary small">10</div>
                 </div>
-                <div class="mr-4 text-secondary small">50 views</div>
+                <div class="mr-4 text-secondary small"><%= t :views, count: 40 %></div>
               </div>
             </div>
           </div>

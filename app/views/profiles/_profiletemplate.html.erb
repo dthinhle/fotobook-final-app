@@ -14,17 +14,17 @@
           <div class="d-sm-block d-flex justify-content-center">
             <% if is_current_user %>
               <button class="badge badge-pill btn-outline-primary btn-badge-border" id="editprofile">
-                Edit profile
+                <%= t(:editprofile) %>
               </button>
             <% elsif current_user.followees.pluck(:id).exclude? profile.id %>
               <div class="button-container">
                 <button class="badge-mini badge-pill btn-outline-primary btn-badge-border"
-                data-id="<%= profile.id%>"  id="follow">Follow</button>
+                data-id="<%= profile.id%>"  id="follow"><%= t(:follow) %></button>
               </div>
             <% else %>
               <div class="button-container">
                 <button class="badge-mini badge-pill btn-outline-primary btn-badge-border active"
-                data-id="<%= profile.id%>"  id="unfollow">Unfollow</button>
+                data-id="<%= profile.id%>"  id="unfollow"><%= t(:unfollow) %></button>
               </div>
             <% end %>
           </div>
@@ -35,33 +35,33 @@
             <div class="col-md-auto col-12 justify-content-center">
               <div class="text-center text-sm-left text-secondary">
                 <a class="text-primary h5 pr-2 btn-photo btn-click"> <span class="h4">
-                  <%= profile.photos.size %>
-                </span> photos</a>
+                  <%= photos_size = profile.photos.size %>
+                </span> <%= photos_size != 1 ? t(:photo).pluralize : t(:photo) %></a>
                 <a class="h5 pr-2 btn-album btn-click"><span class="h4">
-                  <%= profile.albums.size %>
-                </span> albums</a>
+                  <%= albums_size = profile.albums.size %>
+                </span> <%= albums_size != 1 ? t(:album).pluralize : t(:album) %></a>
               </div>
             </div>
             <div class="col-md-auto col-12 pl-lg-2">
               <div class="text-center text-sm-left text-secondary">
                 <a class="h5 pr-2 btn-follower btn-click"> <span class="h4">
-                  <%= "#{profile.followers.size}" %>
-                </span> followers</a>
+                  <%= followers_size = profile.followers.size %>
+                </span> <%= followers_size != 1 ? t(:follower).pluralize : t(:follower) %></a>
                 <a class="h5 pr-2 btn-followee btn-click"> <span class="h4">
-                  <%= "#{profile.followees.size}" %>
-                </span> following</a>
+                  <%= followees_size = profile.followees.size %>
+                </span> <%= followees_size != 1 ? t(:follower).pluralize : t(:follower) %></a>
               </div>
             </div>
           </div>
             <% if is_current_user %>
               <%=link_to new_photo_path do%>
               <div class="btn-add-photo badge-medium badge-pill btn-primary">
-                <i class="fa fa-plus"> </i> <span>Add Photo</span>
+                <i class="fa fa-plus"> </i> <span><%= t("new-photo") %></span>
               </div>
               <% end %>
               <%=link_to new_album_path do%>
               <div class="btn-add-album badge-medium badge-pill btn-primary">
-                <i class="fa fa-plus"> </i> <span>Add Album</span>
+                <i class="fa fa-plus"> </i> <span><%= t("new-album") %></span>
               </div>
               <% end %>
             <% end %>
@@ -79,9 +79,9 @@
           <% end %>
         </div>
       <% else %>
-        <%= render partial: 'nocontentnotice', locals: {notice: "This user haven't uploaded any public photo yet!"} %>
+        <%= render partial: 'nocontentnotice', locals: {notice: t("no-photos-notice")} %>
       <% end %>
     </div>
   </div>
 </main>
-<%= render  "feed/modal" %>
+<%= render  "feeds/modal" %>
