@@ -37,8 +37,11 @@ $(document).on "turbolinks:load", ->
 
       readFile = (index) ->
         if index >= album.length
+          $("#progress-bar").css("width", "100%" )
           return
         else
+          len = index / album.length *100
+          $("#progress-bar").css("width", len.toString() + "%" )
           file = album[index];
           reader.onload = (e) ->
             mimeType = reader.result.split(",")[0].split(":")[1].split(";")[0];

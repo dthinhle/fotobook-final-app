@@ -6,7 +6,7 @@
     <hr>
     <div class="d-flex justify-content-center px-3">
       <div class="edit-form flex-grow-1">
-        <%= form_with model: @user, html: { multipart: true }, url: profile_update_avatar_path(@user), local: true, id: 'user-profile-picture' do |f| %>
+        <%= form_with model: @user, html: { multipart: true }, url: admin_updateavtuser_path(@user), local: true, id: 'user-profile-picture' do |f| %>
         <div class="form-group row">
           <%= f.label :profile_photo, t(".profile-photo"), class: "col-sm-4 col-form-label text-right font-weight-bold align-self-center" %>
           <div class="col-sm-8">
@@ -15,7 +15,7 @@
                 <% if @user.avatar.url %>
                 <%= image_tag  @user.avatar.thumb.url, class: 'editprofile-avatar img-fit' %>
                 <% else %>
-                <%= image_tag  dummy_avatar(@user), class: 'editprofile-avatar img-fit' %>
+                <%= image_tag dummy_avatar(@user), class: 'editprofile-avatar img-fit' %>
                 <% end %>
                 <div class="img-uploader-over d-flex justify-content-center">
                   <div class="badge badge-pill btn-outline-primary btn-badge-border btn-click" id="btn-file">
@@ -33,7 +33,7 @@
           </div>
         </div>
         <% end %>
-        <%= form_with model: @user, url: profile_update_info_path(@user), local: true, class: 'mt-5', id: 'user-info-form' do |f| %>
+        <%= form_with model: @user, url: admin_updateuser_path(@user), local: true, class: 'mt-5', id: 'user-info-form' do |f| %>
         <div class="form-group row">
           <div class="col-sm-8 offset-sm-4">
             <span class="h5 text-primary">
@@ -69,32 +69,7 @@
           </div>
         </div>
         <div class="form-group row">
-          <div class="col-sm-8 offset-sm-4">
-            <button id="info-btn" type="submit" class="btn btn-primary"><%= t(".save") %></button>
-          </div>
-        </div>
-        <% end %>
-
-        <%= form_with model: @user, url: profile_update_password_path(@user), local: true, class: 'mt-5', id: 'user-password-form' do |f| %>
-        <div class="form-group row">
-          <div class="col-sm-8 offset-sm-4">
-            <span class="h5 text-primary">
-              <%= t(".password") %>
-            </span>
-          </div>
-        </div>
-        <div class="form-group row">
-          <%= f.label :current_password, t(".cur-password"), class: "col-sm-4 col-form-label text-right font-weight-bold" %>
-          <div class="col-sm-8">
-            <%= f.password_field :current_password, class: "form-control" %>
-            <div class="error-notice">
-              <label id="user_current_password-error" class="error text-danger text-small"
-                for="user_current_password"></label>
-            </div>
-          </div>
-        </div>
-        <div class="form-group row">
-          <%= f.label :password, t(".new-password"), class: "col-sm-4 col-form-label text-right font-weight-bold" %>
+          <%= f.label :password, t(".password"), class: "col-sm-4 col-form-label text-right font-weight-bold" %>
           <div class="col-sm-8">
             <%= f.password_field :password, class: "form-control" %>
             <div class="error-notice">
@@ -103,12 +78,13 @@
           </div>
         </div>
         <div class="form-group row">
-          <%= f.label :new_password_confirmation, t(".password-confirm"), class: "col-sm-4 col-form-label text-right font-weight-bold" %>
-          <div class="col-sm-8">
-            <%= f.password_field :password_confirmation, class: "form-control" %>
+          <div class="col-sm-8 offset-sm-4">
+              <div class="custom-control custom-checkbox mb-2">
+                <%= f.check_box :blocked, class: "custom-control-input" %>
+                <%= f.label :blocked, class: "custom-control-label" %>
+              </div>
             <div class="error-notice">
-              <label id="user_password_confirmation-error" class="error text-danger text-small"
-                for="user_password_confirmation"></label>
+              <label id="user_blocked-error" class="error text-danger text-small" for="user_blocked"></label>
             </div>
           </div>
         </div>

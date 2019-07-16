@@ -44,10 +44,15 @@
             </p>
             <div class="mb-2">
 
-            <% if current_page?(discover_path) %>
-              <button class="badge badge-pill btn-outline-primary btn-badge-border pull-right small mr-2">
-              <%= t :follow %>
-              </button>
+            <% if !current_user.nil? && current_page?(discover_path) %>
+              <% if current_user.followees.pluck(:id).exclude? src.id %>
+              <button class="badge badge-pill btn-outline-primary btn-badge-border pull-right small mr-2"
+              data-id="<%= src.id%>" id="follow-group"><%= t :follow %></button>
+              <% else %>
+              <button class="badge badge-pill btn-outline-primary btn-badge-border pull-right small mr-2 active"
+              data-id="<%= src.id%>" id="follow-group"><%= t :follow %></button>
+              <% end %>
+
             <% end %>
             <span class="text-primary">
             <% begin %>
@@ -70,10 +75,11 @@
             <div class="interactive-bar">
               <div class="align-content-center d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center">
-                  <div class="HeartAnimation"></div>
-                  <div class="text-secondary small">10</div>
+                  <div class="heart-animation<%= " heart-on" if current_user.nil? ? false : src.likes.include?(current_user.id) %>"
+                  data-id="<%= src.id %>" data-mode="<%= mode %>" data-guest="<%= current_user.nil? ? "true" : "false" %>"></div>
+                  <div class="text-secondary small"><%= src.likes.size %></div>
                 </div>
-                <div class="mr-4 text-secondary small"><%= t :views, count: 40 %></div>
+                <div class="mr-4 text-secondary small"><%= src.created_at.strftime("%Y-%m-%d %H:%M:%S")%></div>
               </div>
             </div>
           </div>

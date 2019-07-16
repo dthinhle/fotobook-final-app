@@ -12,7 +12,7 @@
 
 
 <header class="navbar navbar-expand-lg navbar-dark ">
-  <a class="navbar-brand font-weight-bold" href="#">Fotobook</a>
+  <a class="navbar-brand font-weight-bold" href="#">Fotobook <%= ' Admin' if current_user.nil? ? false :  current_user.admin %></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -38,12 +38,17 @@
     <li class="nav-item d-none d-lg-flex align-self-center mr-1">
       <div class="image-holder">
 
-        <% if current_user.avatar.url %>
-          <%= image_tag  current_user.avatar.thumb.url, class: "rounded-circle", id: "profile-pic" %>
+        <% unless current_user.nil? %>
+          <% if current_user.avatar.url %>
+            <%= image_tag  current_user.avatar.thumb.url, class: "rounded-circle", id: "profile-pic" %>
+          <% else %>
+                      <%= image_tag  dummy_avatar(current_user), class: "rounded-circle", id: "profile-pic" %>
+          <% end %>
         <% else %>
-          <%= image_tag  "dummy-profile.png", class: "rounded-circle", id: "profile-pic" %>
+          <%= image_tag  dummy_avatar(User.new(first_name: 'Guest', last_name: 'User')), class: "rounded-circle", id: "profile-pic" %>
         <% end %>
       </div>
+    <% unless current_user.nil? %>
     </li>
     <%= link_to "#{current_user.first_name.capitalize} #{current_user.last_name.capitalize}", myprofile_path, class: 'nav-link font-weight-bold'%>
     <li class="nav-item active">
@@ -51,12 +56,14 @@
     <li class="nav-item">
       <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'nav-link font-weight-bold'  %>
     </li>
+    <% else %>
+    <li class="nav-item">
+      <%= link_to "Log in", new_user_session_path, :class => 'nav-link font-weight-bold'  %>
+    </li>
+    <% end %>
   </ul>
   </div>
 </header>
-
-
-
 <body>
   <div class="container-fluid px-0 px-lg-3">
     <div class="row flex-xl-nowrap">
@@ -69,7 +76,7 @@
             <li class="nav-item col-6 col-md-12 text-center text-md-left">
               <%= link_to  "Discover", discover_path, class: 'nav-link active' %>
             </li>
-            <% if current_user.admin %>
+            <% if !current_user.nil? && current_user.admin %>
               <li class="nav-item col-6 col-md-12 text-center text-md-left">
                 <%= link_to  "Manage Photos", admin_managephotos_path, class: 'nav-link active' %>
               </li>
@@ -80,6 +87,7 @@
                 <%= link_to  "Manage Users", admin_manageusers_path, class: 'nav-link active' %>
               </li>
             <% end %>
+          <% current_user = nil %>
 
           </ul>
         </div>

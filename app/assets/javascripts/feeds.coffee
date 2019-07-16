@@ -3,8 +3,42 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).on "turbolinks:load", ->
-  $(".HeartAnimation").on "click", (event) ->
-    $(this).toggleClass "animate"
+  $(".content-field").on "click", ".heart-animation", (event) ->
+    if $(this).attr("data-guest") == "false"
+      heartBtn = $(this)
+      if $(heartBtn).hasClass("heart-on")
+        $(this).removeClass "animate"
+        $(this).removeClass "heart-on"
+
+        mode = heartBtn.attr("data-mode")
+        id = heartBtn.attr("data-id")
+
+        heartBtn.next().text(parseInt(heartBtn.next().text()) - 1)
+
+        Rails.ajax
+          type: "POST"
+          url: "/"+mode+"s/"+id+"/unlike"
+          dataType: 'script'
+          success: () ->
+            false
+      else
+        $(this).addClass "animate"
+        setTimeout ->
+          heartBtn.addClass "heart-on"
+        , 1
+
+        mode = heartBtn.attr("data-mode")
+        id = heartBtn.attr("data-id")
+
+        heartBtn.next().text(parseInt(heartBtn.next().text()) + 1)
+
+        Rails.ajax
+          type: "POST"
+          url: "/"+mode+"s/"+id+"/like"
+          dataType: 'script'
+          success: () ->
+            false
+
 
   $(".photo-mode").click ->
     site = $(this).children().attr("data-site")

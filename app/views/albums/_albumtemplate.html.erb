@@ -56,17 +56,24 @@
                 </div>
             </div>
             <%= f.file_field :img, multiple: true, class: 'd-none', id: 'new-album'%>
-            <div class="mt-3">
-              <% if mode == "edit" %>
-                <%= f.submit t('.f-update'), id: 'new-album-submit', class: 'btn btn-success', 'data-mode':"edit" %>
-                <%= link_to album_path(@album), method: :delete, data: t('.f-delete-message') do %>
-                  <div class="btn btn-danger">
-                    <%= t('.f-delete') %>
-                  </div>
+            <div class="mt-3 row no-gutters">
+              <div class="col-auto">
+                <% if mode == "edit" %>
+                  <%= f.submit t('.f-update'), id: 'new-album-submit', class: 'btn btn-success', 'data-mode':"edit" %>
+                  <%= link_to album_path(@album), method: :delete, data: t('.f-delete-message') do %>
+                    <div class="btn btn-danger">
+                      <%= t('.f-delete') %>
+                    </div>
+                  <% end %>
+                <% else %>
+                  <%= f.submit t('.f-create'), id: 'new-album-submit', class: 'btn btn-success', 'data-mode':"new"%>
                 <% end %>
-              <% else %>
-                <%= f.submit t('.f-create'), id: 'new-album-submit', class: 'btn btn-success', 'data-mode':"new"%>
-              <% end %>
+              </div>
+              <div class="flex-fill px-3 align-items-center d-flex">
+                <div class="progress w-100">
+                  <div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

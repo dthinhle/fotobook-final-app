@@ -186,14 +186,14 @@ $(document).on "turbolinks:load", ->
       file = input.files[0]
       reader = new FileReader()
 
-    reader.readAsDataURL(file)
-    reader.onload = (e) ->
-      mimeType = reader.result.split(",")[0].split(":")[1].split(";")[0];
-      if ["image/png","image/jpeg","image/jpg","image/gif"].includes(mimeType)
-        $(".myprofile-avatar").attr("src",reader.result)
-      else
-        $("#new-file").val('')
-        alert "This file type is not supported"
+      reader.readAsDataURL(file)
+      reader.onload = (e) ->
+        mimeType = reader.result.split(",")[0].split(":")[1].split(";")[0];
+        if ["image/png","image/jpeg","image/jpg","image/gif"].includes(mimeType)
+          $(".editprofile-avatar").attr("src",reader.result)
+        else
+          $("#new-file").val('')
+          alert "This file type is not supported"
     return
 
 

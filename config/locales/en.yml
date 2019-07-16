@@ -30,6 +30,20 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  admin:
+    managements:
+      edituser:
+        save: "Save"
+        title: "Edit User Profile"
+        profile-photo: "Profile Photo"
+        upl-avatar: "Choose Image"
+        user-info: "Basic Infomation"
+        first-name: "First Name"
+        last-name: "Last Name"
+        email: "Email"
+        password: "Password"
+        blocked: "Active?"
+
   albums:
     albumtemplate:
       title: "New Album"
