@@ -6,6 +6,11 @@
         <%= render partial: "feeds/thumbnail", locals: {mode: 'album', src: photo} %>
         <% end %>
     </div>
+    <div class="row justify-content-center d-flex ">
+      <div id="infinite-scrolling" data-mode="albums">
+        <%= paginate @album %>
+      </div>
+    </div>
   </div>
   <% else %>
     <div class="container-fluid collection">
@@ -19,6 +24,11 @@
           <%  @photo.each do |photo| %>
           <%= render partial: "feeds/thumbnail", locals: {mode: 'photo', src: photo} %>
           <% end %>
+      </div>
+      <div class="row justify-content-center d-flex ">
+        <div id="infinite-scrolling" data-mode="photos">
+          <%= paginate @photo %>
+        </div>
       </div>
     </div>
   <% else %>

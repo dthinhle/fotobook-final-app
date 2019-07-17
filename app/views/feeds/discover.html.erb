@@ -1,16 +1,16 @@
 <main class="col-12 col-md-9 col-xl-8 py-md-3 no-gutters">
   <div class="card pt-3">
     <div class="align-self-center">
-    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-      <label class="btn btn-outline-primary active photo-mode">
-        <input type="radio" name="photo" id="photo-radio"
-        autocomplete="off" data-site="discover" checked> <%= t :photo %>
-      </label>
-      <label class="btn btn-outline-primary album-mode">
-        <input type="radio" name="album" id="album-radio"
-        autocomplete="off" data-site="discover"> <%= t :album %>
-      </label>
-    </div>
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-outline-primary active photo-mode">
+          <input type="radio" name="photo" id="photo-radio"
+          autocomplete="off" data-site="discover" checked> <%= t :photo %>
+        </label>
+        <label class="btn btn-outline-primary album-mode">
+          <input type="radio" name="album" id="album-radio"
+          autocomplete="off" data-site="discover"> <%= t :album %>
+        </label>
+      </div>
     </div>
     <hr>
     <div class="container-fluid px-0">
@@ -24,10 +24,9 @@
             </div>
           </div>
           <div class="row justify-content-center d-flex ">
-            <div class="spinner-grow m-3" role="status">
-              <span class="sr-only">Loading...</span>
+            <div id="infinite-scrolling" data-mode="photos">
+              <%= paginate @photo %>
             </div>
-
           </div>
         <% else %>
           <div class="container-fluid collection">

@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   # Feeds controller
 
   get 'home', to: 'feeds#home', as: 'home'
+  get 'loadhome', to: 'feeds#loadhome'
   get 'discover', to: 'feeds#discover', as: 'discover'
+  get 'loaddiscover', to: 'feeds#loaddiscover'
   get 'albumpreview', to: 'feeds#albumpreview'
   get 'photopreview', to: 'feeds#photopreview'
 

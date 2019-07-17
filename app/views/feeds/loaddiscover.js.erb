@@ -1,0 +1,19 @@
+<% if @mode == 'photos' %>
+
+  $('.feed-photo').append('<%= j (render partial: "feeds/lazyphoto") %>');
+  <% if @photo.next_page %>
+    $('.pagination').replaceWith('<%= j paginate @photo %>');
+  <% else %>
+    $('.pagination').html("");
+  <% end %>
+
+<% elsif @mode == 'albums' %>
+
+  $('.feed-photo').append('<%= j (render partial: "feeds/lazyalbum") %>');
+  <% if @album.next_page %>
+    $('.pagination').replaceWith('<%= j paginate @album %>');
+  <% else %>
+    $('.pagination').html("");
+  <% end %>
+
+<% end %>

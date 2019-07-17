@@ -1,0 +1,3 @@
+<% @album.each do |photo| %>
+  <%= render partial: "feeds/thumbnail", locals: {mode: 'album', src: photo} %>
+<% end %>
