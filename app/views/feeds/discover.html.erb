@@ -14,7 +14,7 @@
     </div>
     <hr>
     <div class="container-fluid px-0">
-      <div class="content-field">
+      <div class="content-field collection">
         <% if @photo.length > 0 %>
           <div class="container-fluid px-0">
             <div class="row no-gutters pb-2 feed-photo">
@@ -30,7 +30,7 @@
           </div>
         <% else %>
           <div class="container-fluid collection">
-          <%= render partial: 'profiles/nocontentnotice', locals: {notice: t('no-fl-notice')} %>
+          <%= render partial: 'profiles/nocontentnotice', locals: {notice: t('no-images-notice')} %>
           </div>
         <% end  %>
       </div>

@@ -4,7 +4,7 @@ $(document).on "turbolinks:load", ->
     if $('#infinite-scrolling').size() > 0
       more_posts_url = $('.pagination .page-next').attr('href')
       mode = $('#infinite-scrolling').attr("data-mode")
-      if more_posts_url && $(window).scrollTop() > $(document).height() - $(window).height() - 60
+      if more_posts_url && $(window).scrollTop() > $(document).height() - $(window).height() - 400
         $('.pagination').html('<img src="https://i.imgur.com/uMQxKUN.gif" alt="Loading..." title="Loading..." />')
         Rails.ajax
           type: "GET"

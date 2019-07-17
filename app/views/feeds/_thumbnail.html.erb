@@ -42,19 +42,6 @@
               <%= t :title %>
               <% end %>
             </p>
-            <div class="mb-2">
-
-            <% if !current_user.nil? && current_page?(discover_path) %>
-              <% if current_user.followees.pluck(:id).exclude? src.id %>
-              <button class="badge badge-pill btn-outline-primary btn-badge-border pull-right small mr-2"
-              data-id="<%= src.id%>" id="follow-group"><%= t :follow %></button>
-              <% else %>
-              <button class="badge badge-pill btn-outline-primary btn-badge-border pull-right small mr-2 active"
-              data-id="<%= src.id%>" id="follow-group"><%= t :follow %></button>
-              <% end %>
-
-            <% end %>
-            <span class="text-primary">
             <% begin %>
               <% author = src.imageable.user %>
             <% rescue => exception %>
@@ -64,6 +51,17 @@
                 <% author = src.user %>
               <% end %>
             <% end %>
+            <div class="mb-2">
+            <% if !current_user.nil? && current_page?(discover_path) %>
+              <% if current_user.followees.pluck(:id).exclude? author.id %>
+              <button class="badge badge-pill btn-outline-primary btn-badge-border pull-right small mr-2"
+              data-id="<%= author.id%>" id="follow-group"><%= t :follow %></button>
+              <% else %>
+              <button class="badge badge-pill btn-outline-primary btn-badge-border pull-right small mr-2 active"
+              data-id="<%= author.id%>" id="unfollow-group"><%= t :unfollow %></button>
+              <% end %>
+            <% end %>
+            <span class="text-primary">
               <%= link_to "#{author.first_name} #{author.last_name}", profile_path(author)%>
             </span>
             </div>

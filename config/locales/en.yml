@@ -122,7 +122,7 @@ en:
   no-photos-notice: "This user haven't uploaded any public photos yet"
   no-followers-notice: "This user doesn't have any followers"
   no-followees-notice: "Nobody has followed this user yet"
-  no-fl-notice: "You haven't followed anyone yet"
+  no-images-notice: "There aren't any posts to display"
   editprofile: "Edit Profile"
   search: "Search"
   logout: "Logout"
