@@ -5,7 +5,7 @@
         <% if profile.avatar.url %>
           <%= image_tag  profile.avatar.thumb.url, class: "myprofile-avatar", 'data-id': profile.id %>
         <% else %>
-          <%= image_tag  "dummy-profile.png", class: "myprofile-avatar", 'data-id': profile.id %>
+          <%= image_tag  dummy_avatar(profile), class: "myprofile-avatar", 'data-id': profile.id %>
         <% end %>
       </div>
       <div class="col align-items-center d-flex">

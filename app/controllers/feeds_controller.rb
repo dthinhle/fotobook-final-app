@@ -1,14 +1,19 @@
 class FeedsController < ApplicationController
-  before_action :authenticate_user!
 
+  skip_before_action :authenticate_user!
   def home
-    user_lst = current_user.followees.map {|x| x.id} <<current_user.id
-    @photo = Photo.where(imageable_type: 'User').where(imageable_id: user_lst)
-    @album = Album.includes(:photos).where(user_id: user_lst)
-    begin
-      @mode = mode_params[:mode]
-      puts @mode
-    rescue => e
+    if current_user
+      user_lst = current_user.followees.map {|x| x.id} <<current_user.id
+      @photo = Photo.where(imageable_type: 'User').where(imageable_id: user_lst).page
+      @album = Album.includes(:photos).where(user_id: user_lst).page
+
+      begin
+        @mode = mode_params[:mode]
+        puts @mode
+      rescue => e
+      end
+    else
+      redirect_to discover_path
     end
     respond_to do |format|
       format.html
@@ -17,9 +22,15 @@ class FeedsController < ApplicationController
   end
 
   def discover
-    user_lst = current_user.followees.map {|x| x.id} <<current_user.id
-    @photo = Photo.where(imageable_type: 'User').where.not(imageable_id: user_lst)
-    @album = Album.where.not(user_id: user_lst)
+    unless current_user.nil?
+      user_lst = current_user.followees.map {|x| x.id} <<current_user.id
+      @photo = Photo.where(imageable_type: 'User').where.not(imageable_id: user_lst).page params[:page]
+      @album = Album.where.not(user_id: user_lst).page params[:page]
+    else
+      # @photo = Photo.where(imageable_type: 'User')
+      @photo = Photo.all
+      @album = Album.all
+    end
     begin
       @mode = mode_params[:mode]
     rescue => e
@@ -27,6 +38,36 @@ class FeedsController < ApplicationController
     end
     respond_to do |format|
       format.html
+      format.js
+    end
+  end
+
+  def loaddiscover
+    user_lst = current_user.followees.map {|x| x.id} <<current_user.id
+    @photo = Photo.where(imageable_type: 'User').where.not(imageable_id: user_lst).page params[:page]
+    @album = Album.where.not(user_id: user_lst).page params[:page]
+    begin
+      @mode = mode_params[:mode]
+    rescue => e
+      @mode = 'photos'
+    end
+    puts @mode
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def loadhome
+    user_lst = current_user.followees.map {|x| x.id} <<current_user.id
+    @photo = Photo.where(imageable_type: 'User').where(imageable_id: user_lst).page params[:page]
+    @album = Album.where(user_id: user_lst).page params[:page]
+    begin
+      @mode = mode_params[:mode]
+    rescue => e
+      @mode = 'photos'
+    end
+    puts @mode
+    respond_to do |format|
       format.js
     end
   end
@@ -47,6 +88,13 @@ class FeedsController < ApplicationController
     end
     respond_to do |format|
       format.js
+    end
+  end
+
+  def pagination
+    photo = Photo.where(imageable_type: 'User').where(imageable_id: user_lst).page(params[:page])
+    photo.each do |image|
+      render partial: "feeds/thumbnail", locals: {mode: 'photo', src: image}
     end
   end
 

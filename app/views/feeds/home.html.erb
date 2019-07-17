@@ -19,13 +19,18 @@
           <div class="container-fluid px-0">
             <div class="row no-gutters pb-2 feed-photo">
                 <%  @photo.each do |photo| %>
-                <%= render partial: "feeds/thumbnail", locals: {mode: 'photo', src: photo} %>
+                  <%= render partial: "feeds/thumbnail", locals: {mode: 'photo', src: photo} %>
                 <% end %>
+            </div>
+          </div>
+          <div class="row justify-content-center d-flex ">
+            <div id="infinite-scrolling" data-mode="photos">
+              <%= paginate @photo %>
             </div>
           </div>
         <% else %>
           <div class="container-fluid collection">
-          <%= render partial: 'profiles/nocontentnotice', locals: {notice: t('no-fl-notice')} %>
+          <%= render partial: 'profiles/nocontentnotice', locals: {notice: t('no-images-notice')} %>
           </div>
         <% end  %>
       </div>

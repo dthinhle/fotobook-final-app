@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   # Feeds controller
 
   get 'home', to: 'feeds#home', as: 'home'
+  get 'loadhome', to: 'feeds#loadhome'
   get 'discover', to: 'feeds#discover', as: 'discover'
+  get 'loaddiscover', to: 'feeds#loaddiscover'
   get 'albumpreview', to: 'feeds#albumpreview'
   get 'photopreview', to: 'feeds#photopreview'
 
@@ -23,7 +25,10 @@ Rails.application.routes.draw do
 
   # Photos and Albums interaction
 
-  resources 'photos', 'albums', except: ['show']
+  resources 'photos', 'albums', except: ['show'] do |item|
+    post 'like'
+    post 'unlike'
+  end
 
   resources 'follows', only: ['create', 'destroy']
 
@@ -33,8 +38,15 @@ Rails.application.routes.draw do
     get 'managephotos', to: 'managements#photos'
     get 'managealbums', to: 'managements#albums'
     get 'manageusers', to: 'managements#users'
+    get 'users/:id/edit', to: 'managements#edituser', as: 'edituser'
+    patch 'users/:id', to: 'managements#updateavtuser', as: 'updateavtuser'
+    patch 'users/:id', to: 'managements#updateuser', as: 'updateuser'
+    delete 'users/:id', to: 'managements#deleteuser', as: 'deleteuser'
   end
 
-  root 'feeds#home'
+  authenticated :user do
+    root 'feeds#home', as: :authenticated_root
+  end
+  root 'feeds#discover'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

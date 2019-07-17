@@ -2,4 +2,7 @@
 $(".img-preview-body").html('<%= j (render partial: "feeds/albumpreview", locals: {album: @album}) %>')
 <% author = User.find(@album.user_id)%>
 <% author_txt = "#{author.first_name} #{author.last_name}"%>
+
+$("#imgPreviewModal").find('.modal-title').text('<%= j @album.title%>')
 $("#imgPreviewModal").find('.text-primary').text('<%= j author_txt%>')
+$("#imgPreviewModal").find('.text-secondary').text('<%= j @album.desc.html_safe %>')

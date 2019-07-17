@@ -6,17 +6,15 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Photo.delete_all
-Album.delete_all
-t = User.first(5)
+t = User.take
 
-1.upto(5){|i|
-  i = Photo.create([{title: "testPhoto#{i}", imageable_id: "#{t[i-1][:id]}", imageable_type: "user"}])
+1.upto(50){|i|
+  i = Photo.create([{title: "testPhoto#{i}", imageable_id: "#{t[:id]}", imageable_type: "User"}])
   p "photo #{i}"
 }
 
-1.upto(5){|i|
-  i = Album.create([{title: "testAlbum#{i}", user_id: "#{t[i-1][:id]}"}])
+1.upto(50){|i|
+  i = Album.create([{title: "testAlbum#{i}", user_id: "#{t[:id]}"}])
   p "album #{i}"
 }
 

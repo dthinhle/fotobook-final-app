@@ -11,11 +11,13 @@ class AlbumsController < ApplicationController
     @album.user_id = current_user.id
     if @album.save
       a_params[:title] += "_album"
-      album_params[:img].each do|x|
-        photo = Photo.new(a_params)
-        photo.img = x
-        photo.imageable = @album
-        photo.save
+      album_params[:img].each do |x|
+        Photo.transaction do
+          photo = Photo.new(a_params)
+          photo.img = x
+          photo.imageable = @album
+          photo.save!
+        end
       end
       begin
         referrer = session.delete(:referrer)
@@ -39,15 +41,16 @@ class AlbumsController < ApplicationController
     a_params.delete(:img)
     @album = Album.find params[:id]
     if @album.update(a_params)
-      a_params[:title] += "_album"
-      album_params[:img].each do |x|
-        Photo.transaction do
-          photo = Photo.new(a_params)
-          photo.img = x
-          photo.imageable = @album
-          photo.save!
-        end
-      end
+      AlbumWorker.perform_async(album_params, @album)
+      # a_params[:title] += "_album"
+      # album_params[:img].each do |x|
+      #   Photo.transaction do
+      #     photo = Photo.new(a_params)
+      #     photo.img = x
+      #     photo.imageable = @album
+      #     photo.save!
+      #   end
+      # end
       begin
         referrer = session.delete(:referrer)
         redirect_to referrer

@@ -30,6 +30,20 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  admin:
+    managements:
+      edituser:
+        save: "Save"
+        title: "Edit User Profile"
+        profile-photo: "Profile Photo"
+        upl-avatar: "Choose Image"
+        user-info: "Basic Infomation"
+        first-name: "First Name"
+        last-name: "Last Name"
+        email: "Email"
+        password: "Password"
+        blocked: "Active?"
+
   albums:
     albumtemplate:
       title: "New Album"
@@ -108,7 +122,7 @@ en:
   no-photos-notice: "This user haven't uploaded any public photos yet"
   no-followers-notice: "This user doesn't have any followers"
   no-followees-notice: "Nobody has followed this user yet"
-  no-fl-notice: "You haven't followed anyone yet"
+  no-images-notice: "There aren't any posts to display"
   editprofile: "Edit Profile"
   search: "Search"
   logout: "Logout"
