@@ -66,10 +66,10 @@ class FeedsController < ApplicationController
   def loadhome
     unless current_user.nil?
       user_lst = current_user.followees.map {|x| x.id} <<current_user.id
-      @photo = Photo.where(imageable_type: 'User').where.not(imageable_id: user_lst)
-      @album = Album.includes(:photos).where.not(user_id: user_lst)
+      @photo = Photo.where(imageable_type: 'User').where(imageable_id: user_lst)
+      @album = Album.includes(:photos).where(user_id: user_lst)
     else
-      @photo = Photo.all
+      @photo = Photo.where(imageable_type: 'User')
       @album = Album.all
     end
     @photo = @photo.page(params[:page]).per(10)

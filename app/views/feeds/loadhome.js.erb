@@ -1,5 +1,4 @@
 <% if @mode == 'photos' %>
-
   $('.feed-photo').append('<%= j (render partial: "feeds/lazyphoto") %>');
   <% if @photo.next_page %>
     $('.pagination').replaceWith('<%= j paginate @photo %>');
