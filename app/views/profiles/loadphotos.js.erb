@@ -1,0 +1,15 @@
+<% if @mode == "photos" %>
+  $(".photo-collection").append('<%= j (render partial: "profiles/photos", locals: {profile: @user, page: @page}) %>')
+  <% if @photo.next_page %>
+    $('.pagination').replaceWith('<%= j paginate @photo %>');
+  <% else %>
+    $('.pagination').html("");
+  <% end %>
+<% elsif @mode == "albums" %>
+  $(".album-collection").append('<%= j (render partial: "profiles/albums", locals: {profile: @user, page: @page}) %>')
+  <% if @album.next_page %>
+    $('.pagination').replaceWith('<%= j paginate @album %>');
+  <% else %>
+    $('.pagination').html("");
+  <% end %>
+<% end %>

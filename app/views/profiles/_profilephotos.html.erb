@@ -2,10 +2,16 @@
 
 <% photos_private = is_current_user ? profile.photos : profile.photos.public_photos %>
   <% if photos_private.size > 0 %>
+    <% photos = photos_private.page(page).per(12) %>
     <div class="row px-1 pb-2 photo-collection">
-      <% photos_private.each do |i| %>
+      <% photos.each do |i| %>
         <%= render partial: 'profiles/imgholder', locals: {mode: 'photo', src: i, edit: is_current_user} %>
       <% end %>
+    </div>
+    <div class="row justify-content-center d-flex ">
+      <div id="infinite-scrolling-profile" data-mode="photos">
+        <%= paginate photos %>
+      </div>
     </div>
   <% else %>
     <%= render partial: 'nocontentnotice', locals: {notice: t("no-photos-notice")} %>

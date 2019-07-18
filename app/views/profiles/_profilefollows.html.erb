@@ -3,11 +3,17 @@
 <% else %>
   <% follow = profile.followees %>
 <% end %>
+<% follow = follow.page(page).per(12) %>
 <% if follow.size > 0 %>
-  <div class="row px-xl-3 px-2 pb-2 album-collection">
+  <div class="row px-xl-3 px-2 pb-2 follow-collection">
     <% follow.each do |a| %>
       <%= render partial: 'profiles/followuser', locals: {src: a} %>
     <% end %>
+  </div>
+  <div class="row justify-content-center d-flex ">
+    <div id="infinite-scrolling-profile" data-mode="<%= mode %>">
+      <%= paginate follow %>
+    </div>
   </div>
 <% else %>
   <% if mode == 'followers' %>

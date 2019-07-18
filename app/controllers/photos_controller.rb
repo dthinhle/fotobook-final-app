@@ -16,7 +16,6 @@ class PhotosController < ApplicationController
         referrer = session.delete(:referrer)
         redirect_to referrer
       rescue => exception
-        flash[:notice] = "You are request edit from an invalid location"
         redirect_to myprofile_path
       end
     else
@@ -43,7 +42,6 @@ class PhotosController < ApplicationController
         referrer = session.delete(:referrer)
         redirect_to referrer
       rescue => exception
-        flash[:notice] = "You are request edit from an invalid location"
         redirect_to myprofile_path
       end
     else
@@ -52,7 +50,6 @@ class PhotosController < ApplicationController
   end
 
   def like
-    puts "#{current_user.id} likes #{params[:photo_id]}"
     @photo = Photo.find params[:photo_id]
     unless @photo.likes.include?(current_user.id)
       @photo.likes << current_user.id
@@ -61,7 +58,6 @@ class PhotosController < ApplicationController
   end
 
   def unlike
-    puts "#{current_user.id} unlikes #{params[:photo_id]}"
     @photo = Photo.find params[:photo_id]
     if @photo.likes.include?(current_user.id)
       @photo.likes.delete current_user.id

@@ -1,0 +1,9 @@
+<% if mode == 'followers' %>
+  <% follow = profile.followers %>
+<% else %>
+  <% follow = profile.followees %>
+<% end %>
+<% follow = follow.page(page).per(12) %>
+<% follow.each do |a| %>
+  <%= render partial: 'profiles/followuser', locals: {src: a} %>
+<% end %>

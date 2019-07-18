@@ -23,7 +23,6 @@ class AlbumsController < ApplicationController
         referrer = session.delete(:referrer)
         redirect_to referrer
       rescue => exception
-        flash[:notice] = "You are request edit from an invalid location"
         redirect_to myprofile_path
       end
     else
@@ -55,7 +54,6 @@ class AlbumsController < ApplicationController
         referrer = session.delete(:referrer)
         redirect_to referrer
       rescue => exception
-        flash[:notice] = "You are request edit from an invalid location"
         redirect_to myprofile_path
       end
     else

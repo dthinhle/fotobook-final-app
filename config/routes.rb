@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   post 'task', to: 'profiles#task'
   get 'editprofile', to: 'profiles#editprofile', as: 'editprofile'
   get 'getphotos',to: 'profiles#getprofilephotos', as: 'getphotos'
+  get 'loadphotos', to: 'profiles#loadphotos'
+  get 'loadfollows', to: 'profiles#loadfollows'
   get 'getfollows', to: 'profiles#getprofilefollows', as: 'getfollows'
   resources 'profiles', only: ['show', 'edit'] do
     patch 'update_password'
