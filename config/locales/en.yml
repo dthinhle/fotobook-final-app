@@ -43,6 +43,12 @@ en:
         email: "Email"
         password: "Password"
         blocked: "Active?"
+      photos:
+        title: "Manage Photos"
+      albums:
+        title: "Manage Albums"
+      users:
+        title: "Manage Users"
 
   albums:
     albumtemplate:

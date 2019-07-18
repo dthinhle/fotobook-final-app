@@ -33,6 +33,10 @@ class Admin::ManagementsController < ApplicationController
     end
   end
 
+  def photos
+    @photos = Photo.single_photos.order(:id).page params[:page]
+  end
+
   def editphoto
     @photo = Photo.find params[:id]
     render 'photos/edit'
@@ -45,10 +49,6 @@ class Admin::ManagementsController < ApplicationController
     else
       render 'photos/edit'
     end
-  end
-
-  def photos
-    @photos = Photo.single_photos.order(:id).page params[:page]
   end
 
   def users
