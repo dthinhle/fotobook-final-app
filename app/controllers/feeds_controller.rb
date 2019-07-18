@@ -20,15 +20,8 @@ class FeedsController < ApplicationController
   end
 
   def discover
-    unless current_user.nil?
-      user_lst = current_user.followees.map {|x| x.id} <<current_user.id
-      @photo = Photo.where(imageable_type: 'User').where.not(imageable_id: user_lst)
-      @album = Album.includes(:photos).where.not(user_id: user_lst)
-    else
-      # @photo = Photo.where(imageable_type: 'User')
-      @photo = Photo.where(imageable_type: 'User')
-      @album = Album.all
-    end
+    @photo = Photo.where(imageable_type: 'User')
+    @album = Album.all
     @photo = @photo.page(1).per(10)
     @album = @album.page(1).per(10)
     begin
@@ -43,14 +36,8 @@ class FeedsController < ApplicationController
   end
 
   def loaddiscover
-    unless current_user.nil?
-      user_lst = current_user.followees.map {|x| x.id} <<current_user.id
-      @photo = Photo.where(imageable_type: 'User').where.not(imageable_id: user_lst)
-      @album = Album.includes(:photos).where.not(user_id: user_lst)
-    else
-      @photo = Photo.where(imageable_type: 'User')
-      @album = Album.all
-    end
+    @photo = Photo.where(imageable_type: 'User')
+    @album = Album.all
     @photo = @photo.page(params[:page]).per(10)
     @album = @album.page(params[:page]).per(10)
     begin
