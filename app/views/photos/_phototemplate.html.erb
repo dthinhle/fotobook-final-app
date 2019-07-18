@@ -6,7 +6,8 @@
     <hr>
     <div class="d-flex justify-content-center px-3">
       <div class="edit-form flex-grow-1">
-      <%= form_with model: @photo, html: { multipart: true }, local: true, id: 'photo-upload', class: 'form-group' do |f| %>
+      <% url = current_page?(admin_editphoto_path) ? admin_updatephoto_path : photo_path %>
+      <%= form_with model: @photo,url: url, html: { multipart: true }, local: true, id: 'photo-upload', class: 'form-group' do |f| %>
         <div class="row">
           <div class="col-sm-6">
             <div>

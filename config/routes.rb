@@ -38,7 +38,11 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get 'managephotos', to: 'managements#photos'
+    get 'photos/:id', to: 'managements#editphoto', as: 'editphoto'
+    patch 'photos/:id', to: 'managements#updatephoto', as: 'updatephoto'
     get 'managealbums', to: 'managements#albums'
+    get 'albums/:id', to: 'managements#editalbum', as: 'editalbum'
+    patch 'albums/:id', to: 'managements#updatealbum', as: 'updatealbum'
     get 'manageusers', to: 'managements#users'
     get 'users/:id/edit', to: 'managements#edituser', as: 'edituser'
     patch 'users/:id', to: 'managements#updateavtuser', as: 'updateavtuser'

@@ -6,7 +6,8 @@
     <hr>
     <div class="d-flex justify-content-center px-3">
       <div class="edit-form flex-grow-1">
-      <%= form_with model: @album, html: { multipart: true }, local: true, id: 'album-upload', class: 'form-group' do |f| %>
+      <% url = current_page?(admin_editalbum_path) ? admin_updatealbum_path : album_path %>
+      <%= form_with model: @album, url: url, html: { multipart: true }, local: true, id: 'album-upload', class: 'form-group' do |f| %>
         <div class="row">
           <div class="col-sm-6">
             <div>

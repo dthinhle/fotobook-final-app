@@ -8,7 +8,7 @@
       <div class="edit-form flex-grow-1">
         <%= form_with model: @user, html: { multipart: true }, url: admin_updateavtuser_path(@user), local: true, id: 'user-profile-picture' do |f| %>
         <div class="form-group row">
-          <%= f.label :profile_photo, t(".profile-photo"), class: "col-sm-4 col-form-label text-right font-weight-bold align-self-center" %>
+          <%= f.label :profile_photo, t(".profile-photo"), class: "col-sm-4 col-form-label text-sm-right font-weight-bold align-self-center" %>
           <div class="col-sm-8">
             <div>
               <div class="img-uploader">
@@ -42,7 +42,7 @@
           </div>
         </div>
         <div class="form-group row">
-          <%= f.label :first_name, t(".first-name"), class: "col-sm-4 col-form-label text-right font-weight-bold" %>
+          <%= f.label :first_name, t(".first-name"), class: "col-sm-4 col-form-label text-sm-right font-weight-bold" %>
           <div class="col-sm-8">
             <%= f.text_field :first_name, class: "form-control" %>
             <div class="error-notice">
@@ -51,7 +51,7 @@
           </div>
         </div>
         <div class="form-group row">
-          <%= f.label :last_name, t(".last-name"), class: "col-sm-4 col-form-label text-right font-weight-bold" %>
+          <%= f.label :last_name, t(".last-name"), class: "col-sm-4 col-form-label text-sm-right font-weight-bold" %>
           <div class="col-sm-8">
             <%= f.text_field :last_name, class: "form-control" %>
             <div class="error-notice">
@@ -60,7 +60,7 @@
           </div>
         </div>
         <div class="form-group row">
-          <%= f.label :email, t(".email"), class: "col-sm-4 col-form-label text-right font-weight-bold" %>
+          <%= f.label :email, t(".email"), class: "col-sm-4 col-form-label text-sm-right font-weight-bold" %>
           <div class="col-sm-8">
             <%= f.email_field :email, class: "form-control" %>
             <div class="error-notice">
@@ -69,7 +69,7 @@
           </div>
         </div>
         <div class="form-group row">
-          <%= f.label :password, t(".password"), class: "col-sm-4 col-form-label text-right font-weight-bold" %>
+          <%= f.label :password, t(".password"), class: "col-sm-4 col-form-label text-sm-right font-weight-bold" %>
           <div class="col-sm-8">
             <%= f.password_field :password, class: "form-control" %>
             <div class="error-notice">

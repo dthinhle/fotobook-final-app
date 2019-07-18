@@ -6,6 +6,47 @@ class Admin::ManagementsController < ApplicationController
     @albums = Album.order(:id).page params[:page]
   end
 
+  def editalbum
+    @album = Album.find params[:id]
+    render 'albums/edit'
+  end
+
+  def updatealbum
+    a_params = album_params.to_h
+    a_params.delete(:img)
+    @album = Album.find params[:id]
+    if @album.update(a_params)
+      a_params[:title] += "_album"
+      if album_params[:img]
+        album_params[:img].each do |x|
+          Photo.transaction do
+            photo = Photo.new(a_params)
+            photo.img = x
+            photo.imageable = @album
+            photo.save!
+          end
+        end
+      end
+      redirect_to admin_managealbums_path
+    else
+      render 'albums/edit'
+    end
+  end
+
+  def editphoto
+    @photo = Photo.find params[:id]
+    render 'photos/edit'
+  end
+
+  def updatephoto
+    @photo = Photo.find(params[:id])
+    if @photo.update(photo_params)
+        redirect_to admin_managephotos_path
+    else
+      render 'photos/edit'
+    end
+  end
+
   def photos
     @photos = Photo.single_photos.order(:id).page params[:page]
   end
@@ -52,6 +93,14 @@ class Admin::ManagementsController < ApplicationController
   end
 
   private
+
+  def photo_params
+    params.require(:photo).permit(:title, :private, :desc, :img)
+  end
+
+  def album_params
+    params.require(:album).permit(:title, :private, :desc, {img: [] })
+  end
 
   def user_avatar_params
     params.require(:user).permit(:avatar)

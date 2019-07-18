@@ -1,7 +1,6 @@
 class AlbumsController < ApplicationController
   def new
     @album = Album.new
-    session[:referrer] = request.referer
   end
 
   def create
@@ -20,11 +19,7 @@ class AlbumsController < ApplicationController
         end
       end
       begin
-        referrer = session.delete(:referrer)
-        redirect_to referrer
-      rescue => exception
-        redirect_to myprofile_path
-      end
+      redirect_to myprofile_path
     else
       render 'new'
     end
@@ -32,7 +27,6 @@ class AlbumsController < ApplicationController
 
   def edit
     @album = Album.find params[:id]
-    session[:referrer] = request.referer
   end
 
   def update
@@ -40,22 +34,19 @@ class AlbumsController < ApplicationController
     a_params.delete(:img)
     @album = Album.find params[:id]
     if @album.update(a_params)
-      AlbumWorker.perform_async(album_params, @album)
-      # a_params[:title] += "_album"
-      # album_params[:img].each do |x|
-      #   Photo.transaction do
-      #     photo = Photo.new(a_params)
-      #     photo.img = x
-      #     photo.imageable = @album
-      #     photo.save!
-      #   end
-      # end
-      begin
-        referrer = session.delete(:referrer)
-        redirect_to referrer
-      rescue => exception
-        redirect_to myprofile_path
+      a_params[:title] += "_album"
+
+      if album_params[:img]
+        album_params[:img].each do |x|
+          Photo.transaction do
+            photo = Photo.new(a_params)
+            photo.img = x
+            photo.imageable = @album
+            photo.save!
+          end
+        end
       end
+      redirect_to myprofile_path
     else
       render 'new'
     end

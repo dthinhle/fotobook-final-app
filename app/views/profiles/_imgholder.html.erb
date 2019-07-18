@@ -36,17 +36,33 @@
         <% end %>
       </div>
       <% if (edit == true) %>
-        <% if mode == 'photo' %>
-          <%= link_to edit_photo_path(src) do %>
-            <div class="btn-edit-photo text-white text-center btn-overlay">
-              <%= t(:edit) %>
-            </div>
+        <% if admin == true %>
+          <% if mode == 'photo' %>
+            <%= link_to admin_editphoto_path(src) do %>
+              <div class="btn-edit-photo text-white text-center btn-overlay">
+                <%= t(:edit) %>
+              </div>
+            <% end %>
+          <% else %>
+            <%= link_to admin_editalbum_path(src) do %>
+              <div class="btn-edit-photo text-white text-center btn-overlay">
+                <%= t(:edit) %>
+              </div>
+            <% end %>
           <% end %>
         <% else %>
-          <%= link_to edit_album_path(src) do %>
-            <div class="btn-edit-photo text-white text-center btn-overlay">
-              <%= t(:edit) %>
-            </div>
+          <% if mode == 'photo' %>
+            <%= link_to edit_photo_path(src) do %>
+              <div class="btn-edit-photo text-white text-center btn-overlay">
+                <%= t(:edit) %>
+              </div>
+            <% end %>
+          <% else %>
+            <%= link_to edit_album_path(src) do %>
+              <div class="btn-edit-photo text-white text-center btn-overlay">
+                <%= t(:edit) %>
+              </div>
+            <% end %>
           <% end %>
         <% end %>
       <% end %>
