@@ -18,7 +18,6 @@ class AlbumsController < ApplicationController
           photo.save!
         end
       end
-      begin
       redirect_to myprofile_path
     else
       render 'new'
@@ -46,6 +45,7 @@ class AlbumsController < ApplicationController
           end
         end
       end
+
       redirect_to myprofile_path
     else
       render 'new'
