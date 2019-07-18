@@ -91,13 +91,14 @@ $(document).on "turbolinks:load", ->
     $(this).removeClass("lock")
     id = $(this).next().children().attr("data-id")
 
-    Rails.ajax
-      type: "POST"
-      url: "/task"
-      data: "request[task]=lock&request[param]="+id.toString()
-      dataType: 'json'
-      success: () ->
-        false
+    unless !id or id.length == 0
+      Rails.ajax
+        type: "POST"
+        url: "/task"
+        data: "request[task]=lock&request[param]="+id.toString()
+        dataType: 'json'
+        success: () ->
+          false
 
   $(".collection").on "click", ".unlock", ->
     $(this).removeClass("bg-danger")
@@ -105,36 +106,39 @@ $(document).on "turbolinks:load", ->
     $(this).removeClass("unlock")
     id = $(this).next().children().attr("data-id")
 
-    Rails.ajax
-      type: "POST"
-      url: "/task"
-      data: "request[task]=unlock&request[param]="+id.toString()
-      dataType: 'json'
-      success: () ->
-        false
+    unless !id or id.length == 0
+      Rails.ajax
+        type: "POST"
+        url: "/task"
+        data: "request[task]=unlock&request[param]="+id.toString()
+        dataType: 'json'
+        success: () ->
+          false
 
   $(".collection").on "click",".img-fit",->
     id = $(this).attr("data-id")
-    Rails.ajax
-      type: "GET"
-      url: "/photopreview"
-      data: "request[param]="+id.toString()
-      dataType: 'script'
-      success: () ->
-        $("#imgPreviewModal").modal('show')
-        false
+    unless !id or id.length == 0
+      Rails.ajax
+        type: "GET"
+        url: "/photopreview"
+        data: "request[param]="+id.toString()
+        dataType: 'script'
+        success: () ->
+          $("#imgPreviewModal").modal('show')
+          false
 
 
   $(".collection").on "click",".img-above-2", ->
     id = $(this).attr("data-id")
-    Rails.ajax
-      type: "GET"
-      url: "/albumpreview"
-      data: "request[param]="+id.toString()
-      dataType : 'script'
-      success: () ->
-        $("#imgPreviewModal").modal('show')
-        false
+    unless !id or id.length == 0
+      Rails.ajax
+        type: "GET"
+        url: "/albumpreview"
+        data: "request[param]="+id.toString()
+        dataType : 'script'
+        success: () ->
+          $("#imgPreviewModal").modal('show')
+          false
 
   $(".collection").on "click", "#follow-group", ->
     followee_id = $(this).attr("data-id")

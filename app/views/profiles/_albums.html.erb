@@ -1,0 +1,7 @@
+<% is_current_user = profile == current_user %>
+
+<% albums_private = is_current_user ? profile.albums : profile.albums.public_albums %>
+<% albums = albums_private.page(page).per(12) %>
+<% albums.each do |a| %>
+  <%= render partial: 'profiles/imgholder', locals: {mode: 'album', src: a, edit: is_current_user} %>
+<% end %>

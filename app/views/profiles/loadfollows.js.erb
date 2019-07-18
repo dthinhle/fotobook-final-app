@@ -1,0 +1,7 @@
+
+$(".follow-collection").append('<%= j (render partial: "profiles/follows", locals: {profile: @user, page: @page, mode: @mode}) %>')
+<% if @follow.next_page %>
+  $('.pagination').replaceWith('<%= j paginate @follow %>');
+<% else %>
+  $('.pagination').html("");
+<% end %>

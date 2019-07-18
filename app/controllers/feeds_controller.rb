@@ -4,12 +4,10 @@ class FeedsController < ApplicationController
   def home
     if current_user
       user_lst = current_user.followees.map {|x| x.id} <<current_user.id
-      @photo = Photo.where(imageable_type: 'User').where(imageable_id: user_lst).page
-      @album = Album.includes(:photos).where(user_id: user_lst).page
-
+      @photo = Photo.where(imageable_type: 'User').where(imageable_id: user_lst).page(1).per(10)
+      @album = Album.includes(:photos).where(user_id: user_lst).page(1).per(10)
       begin
         @mode = mode_params[:mode]
-        puts @mode
       rescue => e
       end
     else
@@ -24,13 +22,15 @@ class FeedsController < ApplicationController
   def discover
     unless current_user.nil?
       user_lst = current_user.followees.map {|x| x.id} <<current_user.id
-      @photo = Photo.where(imageable_type: 'User').where.not(imageable_id: user_lst).page params[:page]
-      @album = Album.where.not(user_id: user_lst).page params[:page]
+      @photo = Photo.where(imageable_type: 'User').where.not(imageable_id: user_lst)
+      @album = Album.includes(:photos).where.not(user_id: user_lst)
     else
       # @photo = Photo.where(imageable_type: 'User')
-      @photo = Photo.all
+      @photo = Photo.where(imageable_type: 'User')
       @album = Album.all
     end
+    @photo = @photo.page(1).per(10)
+    @album = @album.page(1).per(10)
     begin
       @mode = mode_params[:mode]
     rescue => e
@@ -43,30 +43,42 @@ class FeedsController < ApplicationController
   end
 
   def loaddiscover
-    user_lst = current_user.followees.map {|x| x.id} <<current_user.id
-    @photo = Photo.where(imageable_type: 'User').where.not(imageable_id: user_lst).page params[:page]
-    @album = Album.where.not(user_id: user_lst).page params[:page]
+    unless current_user.nil?
+      user_lst = current_user.followees.map {|x| x.id} <<current_user.id
+      @photo = Photo.where(imageable_type: 'User').where.not(imageable_id: user_lst)
+      @album = Album.includes(:photos).where.not(user_id: user_lst)
+    else
+      @photo = Photo.where(imageable_type: 'User')
+      @album = Album.all
+    end
+    @photo = @photo.page(params[:page]).per(10)
+    @album = @album.page(params[:page]).per(10)
     begin
       @mode = mode_params[:mode]
     rescue => e
       @mode = 'photos'
     end
-    puts @mode
     respond_to do |format|
       format.js
     end
   end
 
   def loadhome
-    user_lst = current_user.followees.map {|x| x.id} <<current_user.id
-    @photo = Photo.where(imageable_type: 'User').where(imageable_id: user_lst).page params[:page]
-    @album = Album.where(user_id: user_lst).page params[:page]
+    unless current_user.nil?
+      user_lst = current_user.followees.map {|x| x.id} <<current_user.id
+      @photo = Photo.where(imageable_type: 'User').where.not(imageable_id: user_lst)
+      @album = Album.includes(:photos).where.not(user_id: user_lst)
+    else
+      @photo = Photo.all
+      @album = Album.all
+    end
+    @photo = @photo.page(params[:page]).per(10)
+    @album = @album.page(params[:page]).per(10)
     begin
       @mode = mode_params[:mode]
     rescue => e
       @mode = 'photos'
     end
-    puts @mode
     respond_to do |format|
       format.js
     end
@@ -88,13 +100,6 @@ class FeedsController < ApplicationController
     end
     respond_to do |format|
       format.js
-    end
-  end
-
-  def pagination
-    photo = Photo.where(imageable_type: 'User').where(imageable_id: user_lst).page(params[:page])
-    photo.each do |image|
-      render partial: "feeds/thumbnail", locals: {mode: 'photo', src: image}
     end
   end
 

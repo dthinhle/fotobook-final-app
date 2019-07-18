@@ -27,7 +27,6 @@ class ProfilesController < ApplicationController
 
   def update_password
     @user = current_user
-    puts profile_password_params
 
     if profile_password_params[:password] == profile_password_params[:current_password]
       flash[:notice] = "Your new password can not be identical to the old one!"
@@ -46,9 +45,7 @@ class ProfilesController < ApplicationController
       @user.errors.each {|key, value| msg <<value}
       flash[:notice] = msg
     else
-      puts profile_info_params
       flash[:notice] = "Your info is successfully changed."
-      # bypass_sign_in(@user)
     end
     redirect_to editprofile_path
   end
@@ -61,9 +58,40 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def loadphotos
+    @page = params[:page]
+    @user = User.includes(:photos, :albums).find(profile_data_params[:param])
+    @mode = profile_data_params[:mode]
+    if @mode == 'photos'
+      @photo = @user.id == current_user.id ? @user.photos : @user.photos.public_photos
+      @photo = @photo.page(@page).per(12)
+    else
+      @album = @user.id == current_user.id ? @user.albums : @user.albums.public_albums
+      @album = @album.page(@page).per(12)
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def getprofilefollows
     @user = User.includes(:followers, :followees).find(profile_data_params[:param])
     @mode = profile_data_params[:mode]
+    @page = params[:page]
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def loadfollows
+    @page = params[:page]
+    @user = User.includes(:photos, :albums).find(profile_data_params[:param])
+    @mode = profile_data_params[:mode]
+    if @mode == 'followers'
+      @follow = @user.followers.page(@page).per(12)
+    else
+      @follow = @user.followees.page(@page).per(12)
+    end
     respond_to do |format|
       format.js
     end
@@ -74,6 +102,10 @@ class ProfilesController < ApplicationController
   end
 
   private
+  def pagination_params
+    params.require(:request).permit(:mode)
+  end
+
   def profile_data_params
     params.require(:data).permit(:param,:mode)
   end

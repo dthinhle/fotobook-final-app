@@ -2,10 +2,16 @@
 
 <% albums_private = is_current_user ? profile.albums : profile.albums.public_albums %>
   <% if albums_private.size > 0 %>
+    <% albums = albums_private.page(page).per(12) %>
     <div class="row px-1 pb-2 album-collection">
-      <% albums_private.each do |a| %>
+      <% albums.each do |a| %>
         <%= render partial: 'profiles/imgholder', locals: {mode: 'album', src: a, edit: is_current_user} %>
       <% end %>
+    </div>
+    <div class="row justify-content-center d-flex ">
+      <div id="infinite-scrolling-profile" data-mode="albums">
+        <%= paginate albums %>
+      </div>
     </div>
   <% else %>
   <%= render partial: 'nocontentnotice', locals: {notice: t("no-albums-notice")} %>

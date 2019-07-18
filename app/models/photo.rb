@@ -5,7 +5,7 @@ class Photo < ApplicationRecord
   scope :single_photos, -> { where(imageable_type: "User")}
   default_scope {order(created_at: :desc)}
 
-  paginates_per 20
+  paginates_per 40
 
   mount_uploader :img, PhotoUploader
 
