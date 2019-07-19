@@ -51,7 +51,7 @@ en:
         title: "Manage Users"
 
   albums:
-    albumtemplate:
+    album_template:
       title: "New Album"
       f-title: "Album Title"
       f-sharing: "Sharing Mode"

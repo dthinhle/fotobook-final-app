@@ -1,4 +1,7 @@
 class AlbumsController < ApplicationController
+
+  befor_filter :find_album, only: [:edit, :update, :destroy]
+
   def new
     @album = Album.new
   end
@@ -25,13 +28,12 @@ class AlbumsController < ApplicationController
   end
 
   def edit
-    @album = Album.find params[:id]
+
   end
 
   def update
     a_params = album_params.to_h
     a_params.delete(:img)
-    @album = Album.find params[:id]
     if @album.update(a_params)
       a_params[:title] += "_album"
 
@@ -53,12 +55,16 @@ class AlbumsController < ApplicationController
   end
 
   def destroy
-    @album = Album.find params[:id]
     @album.destroy
     redirect_to myprofile_path
   end
 
   private
+
+  def find_album
+    @album = Album.find params[:id]
+  end
+
   def album_params
     params.require(:album).permit(:title, :private, :desc, {img: [] })
   end

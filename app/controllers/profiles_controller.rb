@@ -1,19 +1,20 @@
 class ProfilesController < ApplicationController
+
+  ITEMS_PER_PAGE = 12
+
   def show
     @user = User.includes(:photos,:albums,:followers,:followees).find(params[:id])
   end
 
   def task
     task = task_params[:task]
+    photo = Photo.find task_params[:param]
     if task == 'lock'
-      photo = Photo.find task_params[:param]
       photo.private = true
-      photo.save
     elsif task == 'unlock'
-      photo = Photo.find task_params[:param]
       photo.private = false
-      photo.save
     end
+    photo.save
   end
 
   def update_avatar
@@ -51,7 +52,7 @@ class ProfilesController < ApplicationController
   end
 
   def getprofilephotos
-    @user = User.includes(:photos, :albums).find(profile_data_params[:param])
+    loaduser
     @mode = profile_data_params[:mode]
     respond_to do |format|
       format.js
@@ -60,14 +61,14 @@ class ProfilesController < ApplicationController
 
   def loadphotos
     @page = params[:page]
-    @user = User.includes(:photos, :albums).find(profile_data_params[:param])
+    loaduser
     @mode = profile_data_params[:mode]
     if @mode == 'photos'
       @photo = @user.id == current_user.id ? @user.photos : @user.photos.public_photos
-      @photo = @photo.page(@page).per(12)
+      @photo = @photo.page(@page).per(ITEMS_PER_PAGE)
     else
       @album = @user.id == current_user.id ? @user.albums : @user.albums.public_albums
-      @album = @album.page(@page).per(12)
+      @album = @album.page(@page).per(ITEMS_PER_PAGE)
     end
     respond_to do |format|
       format.js
@@ -85,12 +86,12 @@ class ProfilesController < ApplicationController
 
   def loadfollows
     @page = params[:page]
-    @user = User.includes(:photos, :albums).find(profile_data_params[:param])
+    loaduser
     @mode = profile_data_params[:mode]
     if @mode == 'followers'
-      @follow = @user.followers.page(@page).per(12)
+      @follow = @user.followers.page(@page).per(ITEMS_PER_PAGE)
     else
-      @follow = @user.followees.page(@page).per(12)
+      @follow = @user.followees.page(@page).per(ITEMS_PER_PAGE)
     end
     respond_to do |format|
       format.js
@@ -102,6 +103,11 @@ class ProfilesController < ApplicationController
   end
 
   private
+
+  def loaduser
+    @user = User.includes(:photos, :albums).find(profile_data_params[:param])
+  end
+
   def pagination_params
     params.require(:request).permit(:mode)
   end

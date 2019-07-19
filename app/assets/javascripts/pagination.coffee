@@ -27,7 +27,7 @@ $(document).on "turbolinks:load", ->
       else
         url = "follows"
 
-      if more_posts_url && $(window).scrollTop() > $(document).height() - $(window).height() - 200
+      if more_posts_url && $(window).scrollTop() > $(document).height() - $(window).height() - 400
         $('.pagination').html('<img src="https://i.imgur.com/uMQxKUN.gif" alt="Loading..." title="Loading..." />')
         Rails.ajax
           type: "GET"

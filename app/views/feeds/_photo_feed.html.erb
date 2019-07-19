@@ -14,7 +14,7 @@
   </div>
   <% else %>
     <div class="container-fluid collection">
-    <%= render partial: 'profiles/nocontentnotice', locals: {notice: t('no-images-notice')} %>
+    <%= render partial: 'profiles/no_content_notice', locals: {notice: t('no-images-notice')} %>
     </div>
   <% end  %>
 <% elsif @mode == 'photos' %>
@@ -33,7 +33,7 @@
     </div>
   <% else %>
     <div class="container-fluid collection">
-    <%= render partial: 'profiles/nocontentnotice', locals: {notice: t('no-images-notice')} %>
+    <%= render partial: 'profiles/no_content_notice', locals: {notice: t('no-images-notice')} %>
     </div>
   <% end  %>
 <% end %>
