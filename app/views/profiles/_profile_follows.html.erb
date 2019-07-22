@@ -12,7 +12,7 @@
   </div>
   <div class="row justify-content-center d-flex ">
     <div id="infinite-scrolling-profile" data-mode="<%= mode %>">
-      <%= paginate follow %>
+      <%= paginate follow, remote: true %>
     </div>
   </div>
 <% else %>

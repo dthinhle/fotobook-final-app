@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   get 'discover', to: 'feeds#discover', as: 'discover'
   get 'loaddiscover', to: 'feeds#loaddiscover'
   get 'albumpreview', to: 'feeds#albumpreview'
-  get 'photopreview', to: 'feeds#photopreview'
+  get 'photo_preview', to: 'feeds#photo_preview'
+  get 'blocked', to: 'feeds#blocked', as: 'blocked'
 
   # Profiles controller
 
@@ -45,7 +46,7 @@ Rails.application.routes.draw do
     patch 'albums/:id', to: 'managements#updatealbum', as: 'updatealbum'
     get 'manageusers', to: 'managements#users'
     get 'users/:id/edit', to: 'managements#edituser', as: 'edituser'
-    patch 'users/:id', to: 'managements#updateavtuser', as: 'updateavtuser'
+    patch 'users/:id/avatar', to: 'managements#updateavtuser', as: 'updateavtuser'
     patch 'users/:id', to: 'managements#updateuser', as: 'updateuser'
     delete 'users/:id', to: 'managements#deleteuser', as: 'deleteuser'
   end
@@ -53,6 +54,7 @@ Rails.application.routes.draw do
   authenticated :user do
     root 'feeds#home', as: :authenticated_root
   end
+
   root 'feeds#discover'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -66,7 +66,7 @@ en:
       f-create: "Add Album"
 
   feeds:
-    albumpreview:
+    album_preview:
       c-prev: "Previous"
       c-next: "Next"
 
@@ -74,7 +74,7 @@ en:
     home:
 
   photos:
-    phototemplate:
+    photo_template:
       title: "New Photos"
       f-title: "Photo Title"
       f-sharing: "Sharing Mode"
@@ -123,14 +123,20 @@ en:
     one: "1 view",
     other: "%{count} views"
   }
+
+  editprofile: "Edit Profile"
+  search: "Search"
+  logout: "Logout"
+  new-photo: "Add Photo"
+  new-album: "Add Album"
+
+  # Notice
   notice: "Notice"
   no-albums-notice: "This user haven't uploaded any public albums yet"
   no-photos-notice: "This user haven't uploaded any public photos yet"
   no-followers-notice: "This user doesn't have any followers"
   no-followees-notice: "Nobody has followed this user yet"
   no-images-notice: "There aren't any posts to display"
-  editprofile: "Edit Profile"
-  search: "Search"
-  logout: "Logout"
-  new-photo: "Add Photo"
-  new-album: "Add Album"
+  already-follow-notice: "You are already following this user"
+  not-follow-notice: "You are not following this user yet"
+  not-owner-notice: "You can not modify other people posts"

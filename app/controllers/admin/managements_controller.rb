@@ -18,8 +18,8 @@ class Admin::ManagementsController < ApplicationController
     if @album.update(a_params)
       a_params[:title] += "_album"
       if album_params[:img]
-        album_params[:img].each do |x|
-          Photo.transaction do
+        Photo.transaction do
+          album_params[:img].each do |x|
             photo = Photo.new(a_params)
             photo.img = x
             photo.imageable = @album
@@ -69,9 +69,9 @@ class Admin::ManagementsController < ApplicationController
   end
 
   def updateuser
+    byebug
     @user = User.find(params[:id])
     params[:user].delete(:password) if params[:user][:password].blank?
-    params[:user].delete(:password_confirmation) if params[:user][:password].blank? and params[:user][:password_confirmation].blank?
 
     if @user.update(user_params)
       flash[:notice] = "Successfully updated user."
@@ -107,6 +107,7 @@ class Admin::ManagementsController < ApplicationController
   end
 
   def user_params
+    byebug
     params.require(:user).permit(:first_name, :last_name, :email, :password, :blocked)
   end
 

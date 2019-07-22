@@ -40,6 +40,10 @@
   cursor: pointer;
 }
 
+.pointer-disabled {
+  cursor: not-allowed;
+}
+
 .animate {
   animation: heart-burst .8s steps(28);
 }

@@ -25,7 +25,7 @@
           </div>
           <div class="row justify-content-center d-flex ">
             <div id="infinite-scrolling" data-mode="photos">
-              <%= paginate @photo %>
+              <%= paginate @photo, remote: true %>
             </div>
           </div>
         <% else %>

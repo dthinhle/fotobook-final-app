@@ -60,8 +60,8 @@ class ProfilesController < ApplicationController
   end
 
   def loadphotos
-    @page = params[:page]
     loaduser
+    @page = params[:page]
     @mode = profile_data_params[:mode]
     if @mode == 'photos'
       @photo = @user.id == current_user.id ? @user.photos : @user.photos.public_photos

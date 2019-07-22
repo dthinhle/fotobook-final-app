@@ -8,7 +8,7 @@
     </div>
     <div class="row justify-content-center d-flex ">
       <div id="infinite-scrolling" data-mode="albums">
-        <%= paginate @album %>
+        <%= paginate @album, remote: true %>
       </div>
     </div>
   </div>
@@ -27,7 +27,7 @@
       </div>
       <div class="row justify-content-center d-flex ">
         <div id="infinite-scrolling" data-mode="photos">
-          <%= paginate @photo %>
+          <%= paginate @photo, remote: true %>
         </div>
       </div>
     </div>
