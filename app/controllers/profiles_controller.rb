@@ -23,7 +23,7 @@ class ProfilesController < ApplicationController
     unless @user.save
       flash[:notice] = "Your selected file is invalid"
     end
-    redirect_to editprofile_path
+    redirect_to edit_profile_path
   end
 
   def update_password
@@ -36,7 +36,7 @@ class ProfilesController < ApplicationController
     else
       @user.update_with_password(profile_password_params)
     end
-    redirect_to editprofile_path
+    redirect_to edit_profile_path
   end
 
   def update_info
@@ -48,7 +48,7 @@ class ProfilesController < ApplicationController
     else
       flash[:notice] = "Your info is successfully changed."
     end
-    redirect_to editprofile_path
+    redirect_to edit_profile_path
   end
 
   def get_profile_photos
