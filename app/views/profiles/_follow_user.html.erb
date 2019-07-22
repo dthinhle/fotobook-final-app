@@ -2,13 +2,15 @@
   <div class="card shadow-sm">
     <div class="profile-card d-flex flex-column">
         <div class="flex-grow-1 justify-content-center d-flex align-items-center">
-          <%= link_to profile_path(src) do%>
-            <% if src.avatar.url %>
-              <%= image_tag  src.avatar.thumb.url, class: 'myprofile-follow shadow my-3' %>
-            <% else %>
-              <%= image_tag  dummy_avatar(src), class: 'myprofile-follow shadow my-3' %>
+          <div>
+            <%= link_to profile_path(src) do%>
+              <% if src.avatar.url %>
+                <%= image_tag  src.avatar.thumb.url, class: 'myprofile-follow shadow my-3' %>
+              <% else %>
+                <%= image_tag  dummy_avatar(src), class: 'myprofile-follow shadow my-3' %>
+              <% end %>
             <% end %>
-          <% end %>
+          </div>
         </div>
       <div class="interact-section">
       <p class="text-center h4">

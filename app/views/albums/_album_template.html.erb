@@ -6,7 +6,11 @@
     <hr>
     <div class="d-flex justify-content-center px-3">
       <div class="edit-form flex-grow-1">
-      <% url = current_page?(admin_editalbum_path) ? admin_updatealbum_path : album_path %>
+      <% unless current_page?(new_album_path) %>
+        <% url = current_page?(admin_edit_album_path(@album)) ? admin_update_album_path(@album) : album_path(@album) %>
+      <% else %>
+        <% url = albums_path %>
+      <% end %>
       <%= form_with model: @album, url: url, html: { multipart: true }, local: true, id: 'album-upload', class: 'form-group' do |f| %>
         <div class="row">
           <div class="col-sm-6">
@@ -41,7 +45,7 @@
             </p>
               <div class="album-upload-container d-flex flex-wrap align-content-start">
                 <% @album.photos.each do |photo| %>
-                  <%= render partial: 'albumthumbnail', locals: {photo: photo} %>
+                  <%= render partial: 'albums/album_thumbnail', locals: {photo: photo} %>
                 <% end %>
 
               </div>

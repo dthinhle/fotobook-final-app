@@ -76,16 +76,16 @@
         <% photos = photos_private.page(1).per(12) %>
         <div class="row px-1 pb-2 photo-collection">
           <% photos.each do |i| %>
-            <%= render partial: 'profiles/imgholder', locals: {mode: 'photo', src: i, edit: is_current_user, admin: false} %>
+            <%= render partial: 'profiles/img_holder', locals: {mode: 'photo', src: i, edit: is_current_user, admin: false} %>
           <% end %>
         </div>
         <div class="row justify-content-center d-flex ">
           <div id="infinite-scrolling-profile" data-mode="photos">
-            <%= paginate photos %>
+            <%= paginate photos, remote: true %>
           </div>
         </div>
       <% else %>
-        <%= render partial: 'nocontentnotice', locals: {notice: t("no-photos-notice")} %>
+        <%= render partial: 'no_content_notice', locals: {notice: t("no-photos-notice")} %>
       <% end %>
     </div>
   </div>

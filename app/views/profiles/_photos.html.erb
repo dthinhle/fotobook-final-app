@@ -2,5 +2,5 @@
 <% photos_private = is_current_user ? profile.photos : profile.photos.public_photos %>
 <% photos = photos_private.page(page).per(12) %>
 <% photos.each do |i| %>
-  <%= render partial: 'profiles/imgholder', locals: {mode: 'photo', src: i, edit: is_current_user, admin: false} %>
+  <%= render partial: 'profiles/img_holder', locals: {mode: 'photo', src: i, edit: is_current_user, admin: false} %>
 <% end %>

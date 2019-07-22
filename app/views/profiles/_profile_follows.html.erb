@@ -7,18 +7,18 @@
 <% if follow.size > 0 %>
   <div class="row px-xl-3 px-2 pb-2 follow-collection">
     <% follow.each do |a| %>
-      <%= render partial: 'profiles/followuser', locals: {src: a} %>
+      <%= render partial: 'profiles/follow_user', locals: {src: a} %>
     <% end %>
   </div>
   <div class="row justify-content-center d-flex ">
     <div id="infinite-scrolling-profile" data-mode="<%= mode %>">
-      <%= paginate follow %>
+      <%= paginate follow, remote: true %>
     </div>
   </div>
 <% else %>
   <% if mode == 'followers' %>
-    <%= render partial: 'nocontentnotice', locals: {notice: t("no-followers-notice")} %>
+    <%= render partial: 'no_content_notice', locals: {notice: t("no-followers-notice")} %>
   <% else %>
-    <%= render partial: 'nocontentnotice', locals: {notice: t("no-followees-notice")} %>
+    <%= render partial: 'no_content_notice', locals: {notice: t("no-followees-notice")} %>
   <% end %>
 <% end %>

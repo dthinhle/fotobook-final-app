@@ -18,8 +18,8 @@ class Admin::ManagementsController < ApplicationController
     if @album.update(a_params)
       a_params[:title] += "_album"
       if album_params[:img]
-        album_params[:img].each do |x|
-          Photo.transaction do
+        Photo.transaction do
+          album_params[:img].each do |x|
             photo = Photo.new(a_params)
             photo.img = x
             photo.imageable = @album
@@ -27,10 +27,14 @@ class Admin::ManagementsController < ApplicationController
           end
         end
       end
-      redirect_to admin_managealbums_path
+      redirect_to admin_manage_albums_path
     else
       render 'albums/edit'
     end
+  end
+
+  def photos
+    @photos = Photo.single_photos.order(:id).page params[:page]
   end
 
   def editphoto
@@ -41,14 +45,10 @@ class Admin::ManagementsController < ApplicationController
   def updatephoto
     @photo = Photo.find(params[:id])
     if @photo.update(photo_params)
-        redirect_to admin_managephotos_path
+        redirect_to admin_manage_photos_path
     else
       render 'photos/edit'
     end
-  end
-
-  def photos
-    @photos = Photo.single_photos.order(:id).page params[:page]
   end
 
   def users
@@ -65,17 +65,17 @@ class Admin::ManagementsController < ApplicationController
     unless @user.save
       flash[:notice] = "Your selected file is invalid"
     end
-    redirect_back(fallback_location: admin_manageusers_path)
+    redirect_back(fallback_location: admin_manage_users_path)
   end
 
   def updateuser
+    byebug
     @user = User.find(params[:id])
     params[:user].delete(:password) if params[:user][:password].blank?
-    params[:user].delete(:password_confirmation) if params[:user][:password].blank? and params[:user][:password_confirmation].blank?
 
     if @user.update(user_params)
       flash[:notice] = "Successfully updated user."
-      redirect_to admin_manageusers_path
+      redirect_to admin_manage_users_path
     else
       render :action => 'edit'
     end
@@ -88,7 +88,7 @@ class Admin::ManagementsController < ApplicationController
       @user = User.find(params[:id])
       @user.destroy
       flash[:notice] = "Successfully deleted user."
-      redirect_to admin_manageusers_path
+      redirect_to admin_manage_users_path
     end
   end
 
@@ -107,6 +107,7 @@ class Admin::ManagementsController < ApplicationController
   end
 
   def user_params
+    byebug
     params.require(:user).permit(:first_name, :last_name, :email, :password, :blocked)
   end
 

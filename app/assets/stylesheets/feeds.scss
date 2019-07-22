@@ -13,6 +13,7 @@
   top: 0rem;
   bottom: 0rem;
   overflow: scroll;
+  min-height: 5rem;
   max-height: 12rem;
 }
 
@@ -37,6 +38,10 @@
   width: 50px;
   /* margin: 0 auto; */
   cursor: pointer;
+}
+
+.pointer-disabled {
+  cursor: not-allowed;
 }
 
 .animate {
@@ -108,7 +113,8 @@
 }
 
 .interactive-bar {
-  position: relative;
+  width: 100%;
+  position: absolute;
   bottom: 0;
 }
 

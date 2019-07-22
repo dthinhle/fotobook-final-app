@@ -1,19 +1,20 @@
 class ProfilesController < ApplicationController
+
+  ITEMS_PER_PAGE = 12
+
   def show
     @user = User.includes(:photos,:albums,:followers,:followees).find(params[:id])
   end
 
   def task
     task = task_params[:task]
+    photo = Photo.find task_params[:param]
     if task == 'lock'
-      photo = Photo.find task_params[:param]
       photo.private = true
-      photo.save
     elsif task == 'unlock'
-      photo = Photo.find task_params[:param]
       photo.private = false
-      photo.save
     end
+    photo.save
   end
 
   def update_avatar
@@ -22,7 +23,7 @@ class ProfilesController < ApplicationController
     unless @user.save
       flash[:notice] = "Your selected file is invalid"
     end
-    redirect_to editprofile_path
+    redirect_to edit_profile_path
   end
 
   def update_password
@@ -35,7 +36,7 @@ class ProfilesController < ApplicationController
     else
       @user.update_with_password(profile_password_params)
     end
-    redirect_to editprofile_path
+    redirect_to edit_profile_path
   end
 
   def update_info
@@ -47,34 +48,34 @@ class ProfilesController < ApplicationController
     else
       flash[:notice] = "Your info is successfully changed."
     end
-    redirect_to editprofile_path
+    redirect_to edit_profile_path
   end
 
-  def getprofilephotos
-    @user = User.includes(:photos, :albums).find(profile_data_params[:param])
+  def get_profile_photos
+    load_user
     @mode = profile_data_params[:mode]
     respond_to do |format|
       format.js
     end
   end
 
-  def loadphotos
+  def load_photos
+    load_user
     @page = params[:page]
-    @user = User.includes(:photos, :albums).find(profile_data_params[:param])
     @mode = profile_data_params[:mode]
     if @mode == 'photos'
       @photo = @user.id == current_user.id ? @user.photos : @user.photos.public_photos
-      @photo = @photo.page(@page).per(12)
+      @photo = @photo.page(@page).per(ITEMS_PER_PAGE)
     else
       @album = @user.id == current_user.id ? @user.albums : @user.albums.public_albums
-      @album = @album.page(@page).per(12)
+      @album = @album.page(@page).per(ITEMS_PER_PAGE)
     end
     respond_to do |format|
       format.js
     end
   end
 
-  def getprofilefollows
+  def get_profile_follows
     @user = User.includes(:followers, :followees).find(profile_data_params[:param])
     @mode = profile_data_params[:mode]
     @page = params[:page]
@@ -83,25 +84,30 @@ class ProfilesController < ApplicationController
     end
   end
 
-  def loadfollows
+  def load_follows
     @page = params[:page]
-    @user = User.includes(:photos, :albums).find(profile_data_params[:param])
+    load_user
     @mode = profile_data_params[:mode]
     if @mode == 'followers'
-      @follow = @user.followers.page(@page).per(12)
+      @follow = @user.followers.page(@page).per(ITEMS_PER_PAGE)
     else
-      @follow = @user.followees.page(@page).per(12)
+      @follow = @user.followees.page(@page).per(ITEMS_PER_PAGE)
     end
     respond_to do |format|
       format.js
     end
   end
 
-  def editprofile
+  def edit_profile
     @user = current_user
   end
 
   private
+
+  def load_user
+    @user = User.includes(:photos, :albums).find(profile_data_params[:param])
+  end
+
   def pagination_params
     params.require(:request).permit(:mode)
   end

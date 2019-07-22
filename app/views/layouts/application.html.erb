@@ -6,6 +6,18 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+
+
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
@@ -15,7 +27,7 @@
 
 
 <header class="navbar navbar-expand-lg navbar-dark ">
-  <a class="navbar-brand font-weight-bold" href="#">Fotobook <%= ' Admin' if current_user.nil? ? false :  current_user.admin %></a>
+  <a class="navbar-brand font-weight-bold" href="<%= root_path %>">Fotobook <%= ' Admin' if current_user.nil? ? false :  current_user.admin %></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -53,7 +65,7 @@
     </li>
     <% unless current_user.nil? %>
     <li class="nav-item">
-      <%= link_to "#{current_user.first_name.capitalize} #{current_user.last_name.capitalize}", myprofile_path, class: 'nav-link font-weight-bold'%>
+      <%= link_to "#{current_user.first_name.capitalize} #{current_user.last_name.capitalize}", my_profile_path, class: 'nav-link font-weight-bold'%>
     </li>
     <li class="nav-item">
       <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'nav-link font-weight-bold'  %>
@@ -72,21 +84,23 @@
       <div class="col-12 col-md-3 col-xl-2 d-flex">
         <div class="my-2 mt-md-3 flex-fill">
           <ul class="nav row justify-content-center">
-            <li class="nav-item col-6 col-md-12 text-center text-md-left">
-              <%= link_to  "Feeds", home_path, class: 'nav-link active' %>
-            </li>
+            <% if !current_user.nil? %>
+              <li class="nav-item col-6 col-md-12 text-center text-md-left">
+                <%= link_to  "Feeds", home_path, class: 'nav-link active' %>
+              </li>
+            <% end %>
             <li class="nav-item col-6 col-md-12 text-center text-md-left">
               <%= link_to  "Discover", discover_path, class: 'nav-link active' %>
             </li>
             <% if !current_user.nil? && current_user.admin %>
               <li class="nav-item col-6 col-md-12 text-center text-md-left">
-                <%= link_to  "Manage Photos", admin_managephotos_path, class: 'nav-link active' %>
+                <%= link_to  "Manage Photos", admin_manage_photos_path, class: 'nav-link active' %>
               </li>
                 <li class="nav-item col-6 col-md-12 text-center text-md-left">
-                <%= link_to  "Manage Albums", admin_managealbums_path, class: 'nav-link active' %>
+                <%= link_to  "Manage Albums", admin_manage_albums_path, class: 'nav-link active' %>
               </li>
               <li class="nav-item col-6 col-md-12 text-center text-md-left">
-                <%= link_to  "Manage Users", admin_manageusers_path, class: 'nav-link active' %>
+                <%= link_to  "Manage Users", admin_manage_users_path, class: 'nav-link active' %>
               </li>
             <% end %>
           <% current_user = nil %>

@@ -4,21 +4,22 @@ Rails.application.routes.draw do
   # Feeds controller
 
   get 'home', to: 'feeds#home', as: 'home'
-  get 'loadhome', to: 'feeds#loadhome'
+  get 'load_home', to: 'feeds#load_home'
   get 'discover', to: 'feeds#discover', as: 'discover'
-  get 'loaddiscover', to: 'feeds#loaddiscover'
-  get 'albumpreview', to: 'feeds#albumpreview'
-  get 'photopreview', to: 'feeds#photopreview'
+  get 'load_discover', to: 'feeds#load_discover'
+  get 'album_preview', to: 'feeds#album_preview'
+  get 'photo_preview', to: 'feeds#photo_preview'
+  get 'blocked', to: 'feeds#blocked', as: 'blocked'
 
   # Profiles controller
 
-  get 'myprofile', to: 'profiles#myprofile', as: 'myprofile'
+  get 'my_profile', to: 'profiles#my_profile', as: 'my_profile'
   post 'task', to: 'profiles#task'
-  get 'editprofile', to: 'profiles#editprofile', as: 'editprofile'
-  get 'getphotos',to: 'profiles#getprofilephotos', as: 'getphotos'
-  get 'loadphotos', to: 'profiles#loadphotos'
-  get 'loadfollows', to: 'profiles#loadfollows'
-  get 'getfollows', to: 'profiles#getprofilefollows', as: 'getfollows'
+  get 'edit_profile', to: 'profiles#edit_profile', as: 'edit_profile'
+  get 'get_photos',to: 'profiles#get_profile_photos', as: 'get_photos'
+  get 'load_photos', to: 'profiles#load_photos'
+  get 'load_follows', to: 'profiles#load_follows'
+  get 'get_follows', to: 'profiles#get_profile_follows', as: 'get_follows'
   resources 'profiles', only: ['show', 'edit'] do
     patch 'update_password'
     patch 'update_info'
@@ -37,22 +38,23 @@ Rails.application.routes.draw do
   # Admin dashboard
 
   namespace :admin do
-    get 'managephotos', to: 'managements#photos'
-    get 'photos/:id', to: 'managements#editphoto', as: 'editphoto'
-    patch 'photos/:id', to: 'managements#updatephoto', as: 'updatephoto'
-    get 'managealbums', to: 'managements#albums'
-    get 'albums/:id', to: 'managements#editalbum', as: 'editalbum'
-    patch 'albums/:id', to: 'managements#updatealbum', as: 'updatealbum'
-    get 'manageusers', to: 'managements#users'
-    get 'users/:id/edit', to: 'managements#edituser', as: 'edituser'
-    patch 'users/:id', to: 'managements#updateavtuser', as: 'updateavtuser'
-    patch 'users/:id', to: 'managements#updateuser', as: 'updateuser'
-    delete 'users/:id', to: 'managements#deleteuser', as: 'deleteuser'
+    get 'manage_photos', to: 'managements#photos'
+    get 'photos/:id', to: 'managements#edit_photo', as: 'edit_photo'
+    patch 'photos/:id', to: 'managements#update_photo', as: 'update_photo'
+    get 'manage_albums', to: 'managements#albums'
+    get 'albums/:id', to: 'managements#editalbum', as: 'edit_album'
+    patch 'albums/:id', to: 'managements#updatealbum', as: 'update_album'
+    get 'manage_users', to: 'managements#users'
+    get 'users/:id/edit', to: 'managements#edit_user', as: 'edit_user'
+    patch 'users/:id/avatar', to: 'managements#update_avt_user', as: 'update_avt_user'
+    patch 'users/:id', to: 'managements#update_user', as: 'update_user'
+    delete 'users/:id', to: 'managements#delete_user', as: 'delete_user'
   end
 
   authenticated :user do
     root 'feeds#home', as: :authenticated_root
   end
+
   root 'feeds#discover'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

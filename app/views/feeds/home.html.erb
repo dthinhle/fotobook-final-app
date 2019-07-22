@@ -25,15 +25,15 @@
           </div>
           <div class="row justify-content-center d-flex ">
             <div id="infinite-scrolling" data-mode="photos">
-              <%= paginate @photo %>
+              <%= paginate @photo, remote: true %>
             </div>
           </div>
         <% else %>
           <div class="container-fluid collection">
-          <%= render partial: 'profiles/nocontentnotice', locals: {notice: t('no-images-notice')} %>
+          <%= render partial: 'profiles/no_content_notice', locals: {notice: t('no-images-notice')} %>
           </div>
         <% end  %>
       </div>
-  <%= render "modal" %>
   </div>
 </main>
+<%= render "modal" %>

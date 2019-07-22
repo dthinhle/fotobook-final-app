@@ -1,5 +1,0 @@
-<% if @mode == "followers" %>
-$(".collection").html('<%= j (render partial: "profiles/profilefollows", locals: {mode: "followers", profile: @user, page: 1}) %>')
-<% elsif @mode == "followees" %>
-$(".collection").html('<%= j (render partial: "profiles/profilefollows", locals: {mode: "followees", profile: @user, page: 1}) %>')
-<% end %>

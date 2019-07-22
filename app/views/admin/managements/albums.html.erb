@@ -8,7 +8,7 @@
       <div class="manage-view w-100">
         <div class="row px-1 photo-collection">
           <% @albums.each do |album| %>
-            <%= render partial: 'profiles/imgholder', locals: {mode: 'album', src: album, edit: true, admin: true} %>
+            <%= render partial: 'profiles/img_holder', locals: {mode: 'album', src: album, edit: true, admin: true} %>
           <% end %>
         </div>
 

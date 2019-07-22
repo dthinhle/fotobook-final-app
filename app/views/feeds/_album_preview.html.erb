@@ -1,4 +1,4 @@
-<div id="albumPreview" class="carousel slide w-100" data-ride="carousel">
+<div id="album-preview" class="carousel slide w-100" data-ride="carousel">
   <div class="carousel-inner" role="listbox">
     <% album.photos.each_with_index do |photo,idx| %>
       <% if idx == 0 %>
@@ -12,11 +12,11 @@
         </div>
     <% end %>
   </div>
-  <a class="carousel-control-prev" href="#albumPreview" role="button" data-slide="prev">
+  <a class="carousel-control-prev" href="#album-preview" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="sr-only"><%= t '.c-prev' %></span>
   </a>
-  <a class="carousel-control-next" href="#albumPreview" role="button" data-slide="next">
+  <a class="carousel-control-next" href="#album-preview" role="button" data-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only"><%= t '.c-next' %></span>
   </a>

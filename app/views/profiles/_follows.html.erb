@@ -5,5 +5,5 @@
 <% end %>
 <% follow = follow.page(page).per(12) %>
 <% follow.each do |a| %>
-  <%= render partial: 'profiles/followuser', locals: {src: a} %>
+  <%= render partial: 'profiles/follow_user', locals: {src: a} %>
 <% end %>

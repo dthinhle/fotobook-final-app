@@ -6,12 +6,12 @@ $(document).on "turbolinks:load", ->
   $(".content-field").on "click", ".heart-animation", (event) ->
     if $(this).attr("data-guest") == "false"
       heartBtn = $(this)
+
+      mode = heartBtn.attr("data-mode")
+      id = heartBtn.attr("data-id")
       if $(heartBtn).hasClass("heart-on")
         $(this).removeClass "animate"
         $(this).removeClass "heart-on"
-
-        mode = heartBtn.attr("data-mode")
-        id = heartBtn.attr("data-id")
 
         heartBtn.next().text(parseInt(heartBtn.next().text()) - 1)
 
@@ -23,12 +23,7 @@ $(document).on "turbolinks:load", ->
             false
       else
         $(this).addClass "animate"
-        setTimeout ->
-          heartBtn.addClass "heart-on"
-        , 1
-
-        mode = heartBtn.attr("data-mode")
-        id = heartBtn.attr("data-id")
+        $(this).addClass "heart-on"
 
         heartBtn.next().text(parseInt(heartBtn.next().text()) + 1)
 
@@ -65,7 +60,7 @@ $(document).on "turbolinks:load", ->
     id = $(this).attr("data-id")
     Rails.ajax
       type: "GET"
-      url: "/photopreview"
+      url: "/photo_preview"
       data: "request[param]="+id.toString()
       dataType: 'script'
       success: () ->
@@ -86,7 +81,7 @@ $(document).on "turbolinks:load", ->
     id = $(this).attr("data-id")
     Rails.ajax
       type: "GET"
-      url: "/albumpreview"
+      url: "/album_preview"
       data: "request[param]="+id.toString()
       dataType : 'script'
       success: () ->

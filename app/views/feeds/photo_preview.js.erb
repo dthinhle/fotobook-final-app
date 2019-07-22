@@ -1,6 +1,7 @@
 img = "<img class='img-fluid view-model' src='<%= j @photo.img.url%>'>"
 $(".img-preview-body").children().replaceWith(img)
 $("#imgPreview").text()
-
 <% author_txt = "#{@author.first_name} #{@author.last_name}"%>
 $("#imgPreviewModal").find('.text-primary').text('<%= j author_txt%>')
+$("p.text-secondary").text("<%= @photo.desc.html_safe  %>")
+$("h5.modal-title").text("<%= @photo.title %>")

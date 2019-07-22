@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
 
   before_action :authenticate_user!
+  before_action :is_blocked?
 
   before_action :configure_permitted_parameters, if: :devise_controller?
   helper_method :dummy_avatar
@@ -15,5 +16,15 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :avatar])
     devise_parameter_sanitizer.permit(:sign_in, keys: [:first_name, :last_name, :avatar])
     devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :avatar])
+  end
+
+  def is_blocked?
+    begin
+      if current_user.blocked
+        redirect_to blocked_path
+      end
+    rescue => exception
+
+    end
   end
 end
