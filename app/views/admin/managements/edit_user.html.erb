@@ -33,7 +33,7 @@
           </div>
         </div>
         <% end %>
-        <%= form_with model: @user, url: admin_updateuser_path(@user), local: true, class: 'mt-5', id: 'user-info-form' do |f| %>
+        <%= form_with model: @user, url: admin_update_user_path(@user), local: true, class: 'mt-5', id: 'user-info-form' do |f| %>
         <div class="form-group row">
           <div class="col-sm-8 offset-sm-4">
             <span class="h5 text-primary">

@@ -1,6 +1,6 @@
 class FeedsController < ApplicationController
 
-  skip_before_action :authenticate_user!, only: [:discover, :loaddiscover]
+  skip_before_action :authenticate_user!, only: [:discover, :load_discover]
   skip_before_action :is_blocked?, only: [:blocked]
 
   ITEMS_PER_PAGE = 10

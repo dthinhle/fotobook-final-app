@@ -81,7 +81,7 @@ $(document).on "turbolinks:load", ->
     id = $(this).attr("data-id")
     Rails.ajax
       type: "GET"
-      url: "/albumpreview"
+      url: "/album_preview"
       data: "request[param]="+id.toString()
       dataType : 'script'
       success: () ->

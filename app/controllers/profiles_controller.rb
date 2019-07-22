@@ -51,16 +51,16 @@ class ProfilesController < ApplicationController
     redirect_to editprofile_path
   end
 
-  def getprofilephotos
-    loaduser
+  def get_profile_photos
+    load_user
     @mode = profile_data_params[:mode]
     respond_to do |format|
       format.js
     end
   end
 
-  def loadphotos
-    loaduser
+  def load_photos
+    load_user
     @page = params[:page]
     @mode = profile_data_params[:mode]
     if @mode == 'photos'
@@ -75,7 +75,7 @@ class ProfilesController < ApplicationController
     end
   end
 
-  def getprofilefollows
+  def get_profile_follows
     @user = User.includes(:followers, :followees).find(profile_data_params[:param])
     @mode = profile_data_params[:mode]
     @page = params[:page]
@@ -84,9 +84,9 @@ class ProfilesController < ApplicationController
     end
   end
 
-  def loadfollows
+  def load_follows
     @page = params[:page]
-    loaduser
+    load_user
     @mode = profile_data_params[:mode]
     if @mode == 'followers'
       @follow = @user.followers.page(@page).per(ITEMS_PER_PAGE)
@@ -98,13 +98,13 @@ class ProfilesController < ApplicationController
     end
   end
 
-  def editprofile
+  def edit_profile
     @user = current_user
   end
 
   private
 
-  def loaduser
+  def load_user
     @user = User.includes(:photos, :albums).find(profile_data_params[:param])
   end
 

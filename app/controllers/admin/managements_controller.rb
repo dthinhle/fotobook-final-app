@@ -27,7 +27,7 @@ class Admin::ManagementsController < ApplicationController
           end
         end
       end
-      redirect_to admin_managealbums_path
+      redirect_to admin_manage_albums_path
     else
       render 'albums/edit'
     end
@@ -45,7 +45,7 @@ class Admin::ManagementsController < ApplicationController
   def updatephoto
     @photo = Photo.find(params[:id])
     if @photo.update(photo_params)
-        redirect_to admin_managephotos_path
+        redirect_to admin_manage_photos_path
     else
       render 'photos/edit'
     end
@@ -65,7 +65,7 @@ class Admin::ManagementsController < ApplicationController
     unless @user.save
       flash[:notice] = "Your selected file is invalid"
     end
-    redirect_back(fallback_location: admin_manageusers_path)
+    redirect_back(fallback_location: admin_manage_users_path)
   end
 
   def updateuser
@@ -75,7 +75,7 @@ class Admin::ManagementsController < ApplicationController
 
     if @user.update(user_params)
       flash[:notice] = "Successfully updated user."
-      redirect_to admin_manageusers_path
+      redirect_to admin_manage_users_path
     else
       render :action => 'edit'
     end
@@ -88,7 +88,7 @@ class Admin::ManagementsController < ApplicationController
       @user = User.find(params[:id])
       @user.destroy
       flash[:notice] = "Successfully deleted user."
-      redirect_to admin_manageusers_path
+      redirect_to admin_manage_users_path
     end
   end
 

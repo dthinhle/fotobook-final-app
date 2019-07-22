@@ -53,7 +53,7 @@
             <% end %>
             <div class="mb-2">
             <% unless author == current_user %>
-              <% discover = current_page?(discover_path) || current_page?(loaddiscover_path) %>
+              <% discover = current_page?(discover_path) || current_page?(load_discover_path) %>
               <% if !current_user.nil? && discover %>
                 <% if current_user.followees.pluck(:id).exclude? author.id %>
                 <button class="badge badge-pill btn-outline-primary btn-badge-border pull-right small mr-2"

@@ -10,7 +10,7 @@ $(document).on "turbolinks:load", ->
     id = $(".myprofile-avatar").attr('data-id')
     Rails.ajax
       type: "GET"
-      url: "/getphotos"
+      url: "/get_photos"
       data: "data[param]="+id.toString()+"&data[mode]=photos"
       dataType: 'script'
       success: () ->
@@ -23,7 +23,7 @@ $(document).on "turbolinks:load", ->
     id = $(".myprofile-avatar").attr('data-id')
     Rails.ajax
       type: "GET"
-      url: "/getphotos"
+      url: "/get_photos"
       data: "data[param]="+id.toString()+"&data[mode]=albums"
       dataType: 'script'
       success: () ->
@@ -36,7 +36,7 @@ $(document).on "turbolinks:load", ->
     id = $(".myprofile-avatar").attr('data-id')
     Rails.ajax
       type: "GET"
-      url: "/getfollows"
+      url: "/get_follows"
       data: "data[param]="+id.toString()+"&data[mode]=followers"
       dataType: 'script'
       success: () ->
@@ -49,14 +49,14 @@ $(document).on "turbolinks:load", ->
     id = $(".myprofile-avatar").attr('data-id')
     Rails.ajax
       type: "GET"
-      url: "/getfollows"
+      url: "/get_follows"
       data: "data[param]="+id.toString()+"&data[mode]=followees"
       dataType: 'script'
       success: () ->
         false
 
   $("#editprofile").click ->
-     window.location.href = "/editprofile"
+     window.location.href = "/edit_profile"
 
   $(".button-container").on "click","#follow", ->
     followee_id = $(this).attr("data-id")
@@ -133,7 +133,7 @@ $(document).on "turbolinks:load", ->
     unless !id or id.length == 0
       Rails.ajax
         type: "GET"
-        url: "/albumpreview"
+        url: "/album_preview"
         data: "request[param]="+id.toString()
         dataType : 'script'
         success: () ->

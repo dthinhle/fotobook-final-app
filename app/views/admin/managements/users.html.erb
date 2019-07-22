@@ -26,8 +26,8 @@
               <td> <%= u.last_sign_in_at %></td>
               <% unless u.admin %>
               <td>
-                <%= link_to  "Edit", admin_edituser_path(u), class: 'text-primary'%>
-                <%= link_to  "Delete", admin_deleteuser_path(u), class: 'text-danger', method: :delete, data: {confirm: 'Are you sure you want to delete this user?'} %> </td>
+                <%= link_to  "Edit", admin_edit_user_path(u), class: 'text-primary'%>
+                <%= link_to  "Delete", admin_delete_user_path(u), class: 'text-danger', method: :delete, data: {confirm: 'Are you sure you want to delete this user?'} %> </td>
             <% end %>
             </tr>
             <% end %>

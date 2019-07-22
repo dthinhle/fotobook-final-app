@@ -11,7 +11,7 @@ class AlbumsController < ApplicationController
     @album.user_id = current_user.id
     if @album.save
       create_photos(album_params[:img], album_params)
-      redirect_to myprofile_path
+      redirect_to my_profile_path
     else
       render 'new'
     end
@@ -25,7 +25,7 @@ class AlbumsController < ApplicationController
       if album_params[:img]
         create_photos(album_params[:img], album_params)
       end
-      redirect_to myprofile_path
+      redirect_to my_profile_path
     else
       render 'new'
     end
@@ -37,7 +37,7 @@ class AlbumsController < ApplicationController
     else
       flash[:notice] = t("not-owner-notice")
     end
-    redirect_to myprofile_path
+    redirect_to my_profile_path
   end
 
   private

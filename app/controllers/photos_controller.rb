@@ -11,7 +11,7 @@ class PhotosController < ApplicationController
     @photo.imageable = current_user
     if @photo.save
       @photo.img = photo_params[:img]
-      redirect_to myprofile_path
+      redirect_to my_profile_path
     else
       render 'new'
     end
@@ -23,7 +23,7 @@ class PhotosController < ApplicationController
   def update
     is_owner = @photo.imageable_id == current_user.id
     if @photo.update(photo_params) && is_owner
-      redirect_to myprofile_path
+      redirect_to my_profile_path
     elsif is_owner
       render 'edit'
     else
@@ -40,7 +40,7 @@ class PhotosController < ApplicationController
     begin
       delete_task_params[:task] == "delete"
     rescue => exception
-      redirect_to myprofile_path
+      redirect_to my_profile_path
     end
   end
 

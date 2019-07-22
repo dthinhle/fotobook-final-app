@@ -7,7 +7,7 @@
     <div class="d-flex justify-content-center px-3">
       <div class="edit-form flex-grow-1">
       <% unless current_page?(new_album_path) %>
-        <% url = current_page?(admin_editalbum_path(@album)) ? admin_updatealbum_path(@album) : album_path(@album) %>
+        <% url = current_page?(admin_edit_album_path(@album)) ? admin_update_album_path(@album) : album_path(@album) %>
       <% else %>
         <% url = albums_path %>
       <% end %>
@@ -45,7 +45,7 @@
             </p>
               <div class="album-upload-container d-flex flex-wrap align-content-start">
                 <% @album.photos.each do |photo| %>
-                  <%= render partial: 'album_thumbnail', locals: {photo: photo} %>
+                  <%= render partial: 'albums/album_thumbnail', locals: {photo: photo} %>
                 <% end %>
 
               </div>
