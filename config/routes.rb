@@ -38,17 +38,10 @@ Rails.application.routes.draw do
   # Admin dashboard
 
   namespace :admin do
-    get 'manage_photos', to: 'managements#photos'
-    get 'photos/:id', to: 'managements#edit_photo', as: 'edit_photo'
-    patch 'photos/:id', to: 'managements#update_photo', as: 'update_photo'
-    get 'manage_albums', to: 'managements#albums'
-    get 'albums/:id', to: 'managements#editalbum', as: 'edit_album'
-    patch 'albums/:id', to: 'managements#updatealbum', as: 'update_album'
-    get 'manage_users', to: 'managements#users'
-    get 'users/:id/edit', to: 'managements#edit_user', as: 'edit_user'
-    patch 'users/:id/avatar', to: 'managements#update_avt_user', as: 'update_avt_user'
-    patch 'users/:id', to: 'managements#update_user', as: 'update_user'
-    delete 'users/:id', to: 'managements#delete_user', as: 'delete_user'
+    resources 'photos', except: ['new', 'create', 'show']
+    resources 'albums', except: ['new', 'create', 'show']
+    resources 'users', except: ['new', 'create', 'show']
+    patch 'users/:id/avatar', to: 'managements#update_avatar_user', as: 'update_avatar'
   end
 
   authenticated :user do

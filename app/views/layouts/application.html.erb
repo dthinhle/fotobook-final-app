@@ -68,11 +68,11 @@
       <%= link_to "#{current_user.first_name.capitalize} #{current_user.last_name.capitalize}", my_profile_path, class: 'nav-link font-weight-bold'%>
     </li>
     <li class="nav-item">
-      <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'nav-link font-weight-bold'  %>
+      <%= link_to "Logout", destroy_user_session_path, method: :delete, class:  'nav-link font-weight-bold'  %>
     </li>
     <% else %>
     <li class="nav-item">
-      <%= link_to "Log in", new_user_session_path, :class => 'nav-link font-weight-bold'  %>
+      <%= link_to "Log in", new_user_session_path, class:  'nav-link font-weight-bold'  %>
     </li>
     <% end %>
   </ul>
@@ -94,13 +94,13 @@
             </li>
             <% if !current_user.nil? && current_user.admin %>
               <li class="nav-item col-6 col-md-12 text-center text-md-left">
-                <%= link_to  "Manage Photos", admin_manage_photos_path, class: 'nav-link active' %>
+                <%= link_to  "Manage Photos", admin_photos_path, class: 'nav-link active' %>
               </li>
                 <li class="nav-item col-6 col-md-12 text-center text-md-left">
-                <%= link_to  "Manage Albums", admin_manage_albums_path, class: 'nav-link active' %>
+                <%= link_to  "Manage Albums", admin_albums_path, class: 'nav-link active' %>
               </li>
               <li class="nav-item col-6 col-md-12 text-center text-md-left">
-                <%= link_to  "Manage Users", admin_manage_users_path, class: 'nav-link active' %>
+                <%= link_to  "Manage Users", admin_users_path, class: 'nav-link active' %>
               </li>
             <% end %>
           <% current_user = nil %>
