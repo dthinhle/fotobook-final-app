@@ -3,7 +3,7 @@ class Admin::AlbumsController < Admin::ManagementsController
   before_action :find_album, only: [:edit, :update, :destroy]
 
   def index
-    @albums = Album.order(:id).page params[:page]
+    @albums = Album.includes(:photos).order(:id).page params[:page]
   end
 
   def edit
@@ -39,7 +39,7 @@ class Admin::AlbumsController < Admin::ManagementsController
   private
 
   def find_album
-    @album = Album.find params[:id]
+    @album = Album.includes(:photos).find params[:id]
   end
 
   def album_params

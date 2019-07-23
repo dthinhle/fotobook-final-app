@@ -17,10 +17,8 @@ $(document).on "turbolinks:load", ->
 
         Rails.ajax
           type: "POST"
-          url: "/"+mode+"s/"+id+"/unlike"
+          url: "/#{mode}s/#{id}/unlike"
           dataType: 'script'
-          success: () ->
-            false
       else
         $(this).addClass "animate"
         $(this).addClass "heart-on"
@@ -29,39 +27,33 @@ $(document).on "turbolinks:load", ->
 
         Rails.ajax
           type: "POST"
-          url: "/"+mode+"s/"+id+"/like"
+          url: "/#{mode}s/#{id}/like"
           dataType: 'script'
-          success: () ->
-            false
 
 
   $(".photo-mode").click ->
     site = $(this).children().attr("data-site")
     Rails.ajax
       type: "GET"
-      url: "/"+site
+      url: "/#{site}"
       data: "request[mode]=photos"
       dataType: 'script'
-      success: () ->
-        false
 
 
   $(".album-mode").click ->
     site = $(this).children().attr("data-site")
     Rails.ajax
       type: "GET"
-      url: "/"+site
+      url: "/#{site}"
       data: "request[mode]=albums"
       dataType: 'script'
-      success: () ->
-        false
 
   $(".content-field").on "click",".img-photo",->
     id = $(this).attr("data-id")
     Rails.ajax
       type: "GET"
       url: "/photo_preview"
-      data: "request[param]="+id.toString()
+      data: "request[param]=#{id}"
       dataType: 'script'
       success: () ->
         $("#imgPreviewModal").modal('show')
@@ -82,7 +74,7 @@ $(document).on "turbolinks:load", ->
     Rails.ajax
       type: "GET"
       url: "/album_preview"
-      data: "request[param]="+id.toString()
+      data: "request[param]=#{id}"
       dataType : 'script'
       success: () ->
         $("#imgPreviewModal").modal('show')

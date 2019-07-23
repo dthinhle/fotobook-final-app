@@ -6,7 +6,7 @@
 <% follow = follow.page(page).per(12) %>
 <% if follow.size > 0 %>
   <div class="row px-xl-3 px-2 pb-2 follow-collection">
-    <% follow.each do |a| %>
+    <% follow.includes(:photos, :albums).each do |a| %>
       <%= render partial: 'profiles/follow_user', locals: {src: a} %>
     <% end %>
   </div>

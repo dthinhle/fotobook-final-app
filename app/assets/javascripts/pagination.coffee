@@ -10,10 +10,8 @@ $(document).on "turbolinks:load", ->
         loadpath = if path == null then "discover" else path
         Rails.ajax
           type: "GET"
-          url: "/load_" + loadpath
-          data: "page=" + /\d+/.exec(more_posts_url) + "&request[mode]=" + mode
-          success: () ->
-            false
+          url: "/load_#{loadpath}"
+          data: "page=#{/\d+/.exec(more_posts_url)}&request[mode]=#{mode}"
       return
     return
 
@@ -31,9 +29,7 @@ $(document).on "turbolinks:load", ->
         $('.pagination').html('<img src="https://i.imgur.com/uMQxKUN.gif" alt="Loading..." title="Loading..." />')
         Rails.ajax
           type: "GET"
-          url: "/load_" + url
-          data: "page=" + (/page=\d+/.exec(more_posts_url)).toString().substr(5) + "&data[param]=" + user_id + "&data[mode]=" + mode
-          success: () ->
-            false
+          url: "/load_#{url}"
+          data: "page=#{(/page=\d+/.exec(more_posts_url)).toString().substr(5)}&data[param]=#{user_id}&data[mode]=#{mode}"
       return
     return

@@ -5,7 +5,7 @@
     <% photos = photos_private.page(page).per(12) %>
     <div class="row px-1 pb-2 photo-collection">
       <% photos.each do |i| %>
-        <%= render partial: 'profiles/img_holder', locals: {mode: 'photo', src: i, edit: is_current_user, admin: false} %>
+        <%= render partial: 'profiles/photo_holder', locals: {mode: 'photo', src: i, edit: is_current_user, admin: false} %>
       <% end %>
     </div>
     <div class="row justify-content-center d-flex ">
