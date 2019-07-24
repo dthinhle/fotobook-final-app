@@ -8,7 +8,7 @@ class AlbumsController < ApplicationController
 
   def create
     @album = Album.new(album_properties(album_params))
-    @album.user_id = current_user.id
+    @album.user = current_user
     if @album.save
       create_photos(album_params[:img], album_params)
       redirect_to my_profile_path
@@ -21,19 +21,24 @@ class AlbumsController < ApplicationController
   end
 
   def update
-    if @album.update(album_properties(album_params)) && @album.user_id == current_user
+    byebug
+
+    if @album.update(album_properties(album_params)) && @album.user == current_user
       if album_params[:img]
         create_photos(album_params[:img], album_params)
+
       end
       redirect_to my_profile_path
     else
-      render 'new'
+      render 'edit'
     end
   end
 
   def destroy
-    if @album.user_id == current_user.id
-      @album.destroy
+    if @album.user == current_user
+      Photo.transaction do
+        @album.destroy
+      end
     else
       flash[:notice] = t("not-owner-notice")
     end
