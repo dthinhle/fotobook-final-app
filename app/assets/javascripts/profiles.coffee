@@ -11,7 +11,7 @@ $(document).on "turbolinks:load", ->
     Rails.ajax
       type: "GET"
       url: "/get_photos"
-      data: "data[param]="+id.toString()+"&data[mode]=photos"
+      data: "data[param]=#{id}&data[mode]=photos"
       dataType: 'script'
       success: () ->
         false
@@ -24,7 +24,7 @@ $(document).on "turbolinks:load", ->
     Rails.ajax
       type: "GET"
       url: "/get_photos"
-      data: "data[param]="+id.toString()+"&data[mode]=albums"
+      data: "data[param]=#{id}&data[mode]=albums"
       dataType: 'script'
       success: () ->
         false
@@ -37,7 +37,7 @@ $(document).on "turbolinks:load", ->
     Rails.ajax
       type: "GET"
       url: "/get_follows"
-      data: "data[param]="+id.toString()+"&data[mode]=followers"
+      data: "data[param]=#{id}&data[mode]=followers"
       dataType: 'script'
       success: () ->
         false
@@ -50,7 +50,7 @@ $(document).on "turbolinks:load", ->
     Rails.ajax
       type: "GET"
       url: "/get_follows"
-      data: "data[param]="+id.toString()+"&data[mode]=followees"
+      data: "data[param]=#{id}&data[mode]=followees"
       dataType: 'script'
       success: () ->
         false
@@ -67,10 +67,8 @@ $(document).on "turbolinks:load", ->
     Rails.ajax
       type: "POST"
       url: "/follows"
-      data: "follow[followee]="+followee_id.toString()
+      data: "follow[followee]=#{followee_id}"
       dataType: 'json'
-      success: () ->
-        false
 
   $(".button-container").on "click","#unfollow", ->
     followee_id = $(this).attr("data-id")
@@ -79,11 +77,9 @@ $(document).on "turbolinks:load", ->
     $(this).attr("id","follow")
     Rails.ajax
       type: "DELETE"
-      url: "/follows/"+followee_id.toString()
-      data: "follow[id]="+followee_id.toString()
+      url: "/follows/#{followee_id}"
+      data: "follow[id]=#{followee_id}"
       dataType: 'json'
-      success: () ->
-        false
 
   $(".collection").on "click", ".lock", ->
     $(this).addClass("bg-danger")
@@ -95,10 +91,8 @@ $(document).on "turbolinks:load", ->
       Rails.ajax
         type: "POST"
         url: "/task"
-        data: "request[task]=lock&request[param]="+id.toString()
+        data: "request[task]=lock&request[param]=#{id}"
         dataType: 'json'
-        success: () ->
-          false
 
   $(".collection").on "click", ".unlock", ->
     $(this).removeClass("bg-danger")
@@ -110,10 +104,8 @@ $(document).on "turbolinks:load", ->
       Rails.ajax
         type: "POST"
         url: "/task"
-        data: "request[task]=unlock&request[param]="+id.toString()
+        data: "request[task]=unlock&request[param]=#{id}"
         dataType: 'json'
-        success: () ->
-          false
 
   $(".collection").on "click",".img-fit",->
     id = $(this).attr("data-id")
@@ -121,7 +113,7 @@ $(document).on "turbolinks:load", ->
       Rails.ajax
         type: "GET"
         url: "/photo_preview"
-        data: "request[param]="+id.toString()
+        data: "request[param]=#{id}"
         dataType: 'script'
         success: () ->
           $("#imgPreviewModal").modal('show')
@@ -134,7 +126,7 @@ $(document).on "turbolinks:load", ->
       Rails.ajax
         type: "GET"
         url: "/album_preview"
-        data: "request[param]="+id.toString()
+        data: "request[param]=#{id}"
         dataType : 'script'
         success: () ->
           $("#imgPreviewModal").modal('show')
@@ -142,7 +134,7 @@ $(document).on "turbolinks:load", ->
 
   $(".collection").on "click", "#follow-group", ->
     followee_id = $(this).attr("data-id")
-    followBtns = $("#follow-group\[data-id\=\'" + followee_id.toString() + "\'\]")
+    followBtns = $("#follow-group\[data-id\=\'#{followee_id}\'\]")
     followBtns.text("Unfollow")
     followBtns.addClass("active")
     followBtns.attr("id","unfollow-group")
@@ -150,21 +142,17 @@ $(document).on "turbolinks:load", ->
     Rails.ajax
       type: "POST"
       url: "/follows"
-      data: "follow[followee]="+followee_id.toString()
-      success: () ->
-        false
+      data: "follow[followee]=#{followee_id}"
 
   $(".collection").on "click","#unfollow-group", ->
     followee_id = $(this).attr("data-id")
-    unfollowBtns = $("#unfollow-group\[data-id\=\'" + followee_id.toString() + "\'\]")
+    unfollowBtns = $("#unfollow-group\[data-id\=\'#{followee_id}\'\]")
     unfollowBtns.text("Follow")
     unfollowBtns.removeClass("active")
     unfollowBtns.attr("id","follow-group")
     Rails.ajax
       type: "DELETE"
-      url: "/follows/"+followee_id.toString()
-      success: () ->
-        false
+      url: "/follows/#{followee_id}"
 
 # Edit profile
 
@@ -204,7 +192,6 @@ $(document).on "turbolinks:load", ->
 # jQuery validations
 
   jQuery.validator.addMethod "notEqual", ((value, element, param) ->
-    console.log(value.toString() + $(param).val().toString())
     value != $(param).val()
   ), "Your new password can't be your old password"
 

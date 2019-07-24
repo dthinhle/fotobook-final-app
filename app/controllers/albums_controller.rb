@@ -66,7 +66,7 @@ class AlbumsController < ApplicationController
   end
 
   def find_album
-    @album = Album.find params[:id]
+    @album = Album.includes(:photos).find params[:id]
   end
 
   def album_params

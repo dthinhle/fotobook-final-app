@@ -41,12 +41,12 @@ $(document).on "turbolinks:load", ->
           return
         else
           len = index / album.length *100
-          $("#progress-bar").css("width", len.toString() + "%" )
+          $("#progress-bar").css("width", "#{len}%" )
           file = album[index];
           reader.onload = (e) ->
             mimeType = reader.result.split(",")[0].split(":")[1].split(";")[0];
             if ["image/png","image/jpeg","image/jpg","image/gif"].includes(mimeType)
-              $(".album-container").append("<div class=\"album-fragment\"><img src=\""+reader.result+"\" class=\"album-fragment img-fit\"></div>")
+              $(".album-container").append("<div class=\"album-fragment\"><img src=\"#{reader.result}\" class=\"album-fragment img-fit\"></div>")
             readFile(index+1)
           reader.readAsDataURL(file);
 
@@ -58,9 +58,9 @@ $(document).on "turbolinks:load", ->
     Rails.ajax
       type: "DELETE"
       data: "album[task]=delete"
-      url: "/photos/"+photo_id.toString()
+      url: "/photos/#{photo_id}"
       beforeSend: ->
         confirm('Are you sure you want to delete this photo?')
       success: ->
-        $(".btn-delete-photo[data-id="+photo_id.toString()+"]").parent().remove()
+        $(".btn-delete-photo[data-id=#{photo_id}]").parent().remove()
         false

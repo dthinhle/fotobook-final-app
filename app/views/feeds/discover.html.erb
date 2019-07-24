@@ -15,10 +15,10 @@
     <hr>
     <div class="container-fluid px-0">
       <div class="content-field collection">
-        <% if @photo.length > 0 %>
+        <% if @photo.size > 0 %>
           <div class="container-fluid px-0">
             <div class="row no-gutters pb-2 feed-photo">
-                <%  @photo.each do |photo| %>
+                <%  @photo.includes(:imageable).each do |photo| %>
                   <%= render partial: "feeds/thumbnail", locals: {mode: 'photo', src: photo} %>
                 <% end %>
             </div>

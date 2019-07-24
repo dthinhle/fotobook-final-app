@@ -19,7 +19,7 @@
       <div class="d-flex flex-wrap justify-content-around text-center text-primary">
         <div>
           <p class="h2">
-            <%= "#{src.photos.count} "%>
+            <%= "#{src.photos.size} "%>
           </p>
           <p class="my-0">
             <%= t(:photo).pluralize %>
@@ -27,7 +27,7 @@
         </div>
         <div>
           <p class="h2">
-            <%="#{src.albums.count} " %>
+            <%="#{src.albums.size} " %>
           </p>
           <p class="my-0">
             <%= t(:album).pluralize %>

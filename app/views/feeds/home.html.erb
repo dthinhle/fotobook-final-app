@@ -4,11 +4,11 @@
       <div class="btn-group btn-group-toggle" data-toggle="buttons">
         <label class="btn btn-outline-primary active photo-mode">
           <input type="radio" name="photo" id="photo-radio"
-          autocomplete="off" data-site="home" checked> Photo
+          autocomplete="off" data-site="home" checked> <%= t :photo %>
         </label>
         <label class="btn btn-outline-primary album-mode">
           <input type="radio" name="album" id="album-radio"
-          autocomplete="off" data-site="home"> Album
+          autocomplete="off" data-site="home"> <%= t :album %>
         </label>
       </div>
     </div>
@@ -18,7 +18,7 @@
         <% if @photo.length > 0 %>
           <div class="container-fluid px-0">
             <div class="row no-gutters pb-2 feed-photo">
-                <%  @photo.each do |photo| %>
+                <%  @photo.includes(:imageable).each do |photo| %>
                   <%= render partial: "feeds/thumbnail", locals: {mode: 'photo', src: photo} %>
                 <% end %>
             </div>

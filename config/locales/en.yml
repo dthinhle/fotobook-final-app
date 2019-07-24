@@ -31,9 +31,16 @@
 
 en:
   admin:
-    managements:
-      edit_user:
-        save: "Save"
+    users:
+      index:
+        title: "Manage Users"
+        first-name: "First Name"
+        last-name: "Last Name"
+        email: "Email"
+        last-signed-in: "Last Signed In"
+        action: "Action"
+
+      edit:
         title: "Edit User Profile"
         profile-photo: "Profile Photo"
         upl-avatar: "Choose Image"
@@ -41,14 +48,17 @@ en:
         first-name: "First Name"
         last-name: "Last Name"
         email: "Email"
+        last-signed-in: "Last Signed In"
+        action: "Action"
         password: "Password"
         blocked: "Active?"
-      photos:
+        save: "Save"
+    photos:
+      index:
         title: "Manage Photos"
-      albums:
+    albums:
+      index:
         title: "Manage Albums"
-      users:
-        title: "Manage Users"
 
   albums:
     album_template:
@@ -81,7 +91,7 @@ en:
       f-private: "Private"
       f-public: "Public"
       f-desc: "Description"
-      f-upl-photo: "New Photo"
+      f-upl-photo: "Photo"
       f-update: "Update Photo"
       f-delete: "Delete Photo"
       f-delete-message: "Are you sure you want to delete this photo?"

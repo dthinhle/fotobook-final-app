@@ -3,7 +3,7 @@ class ProfilesController < ApplicationController
   ITEMS_PER_PAGE = 12
 
   def show
-    @user = User.includes(:photos,:albums,:followers,:followees).find(params[:id])
+    @user = User.includes(:photos).find(params[:id])
   end
 
   def task

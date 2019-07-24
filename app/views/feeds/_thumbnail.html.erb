@@ -1,5 +1,4 @@
 <div class="col-12 col-lg-6 p-2">
-<% puts "===========", params %>
   <div class="card shadow-sm">
     <div class="row no-gutters">
       <div class="col-xl-6 col-12 pr-xl-0 img-section">
@@ -65,7 +64,7 @@
               <% end %>
             <% end %>
             <span class="text-primary">
-              <%= link_to "#{author.first_name} #{author.last_name}", profile_path(author)%>
+              <%= link_to "#{author.name}", profile_path(author)%>
             </span>
             </div>
             <div class="flex-xl-grow-1 desc mb-5">

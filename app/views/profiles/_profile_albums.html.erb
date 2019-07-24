@@ -4,8 +4,8 @@
   <% if albums_private.size > 0 %>
     <% albums = albums_private.page(page).per(12) %>
     <div class="row px-1 pb-2 album-collection">
-      <% albums.each do |a| %>
-        <%= render partial: 'profiles/img_holder', locals: {mode: 'album', src: a, edit: is_current_user, admin: false} %>
+      <% albums.includes(:photos).each do |a| %>
+        <%= render partial: 'profiles/photo_holder', locals: {mode: 'album', src: a, edit: is_current_user, admin: false} %>
       <% end %>
     </div>
     <div class="row justify-content-center d-flex ">

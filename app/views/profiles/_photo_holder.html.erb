@@ -38,13 +38,13 @@
       <% if (edit == true) %>
         <% if admin == true %>
           <% if mode == 'photo' %>
-            <%= link_to admin_edit_photo_path(src) do %>
+            <%= link_to edit_admin_photo_path(src) do %>
               <div class="btn-edit-photo text-white text-center btn-overlay">
                 <%= t(:edit) %>
               </div>
             <% end %>
           <% else %>
-            <%= link_to admin_edit_album_path(src) do %>
+            <%= link_to edit_admin_album_path(src) do %>
               <div class="btn-edit-photo text-white text-center btn-overlay">
                 <%= t(:edit) %>
               </div>

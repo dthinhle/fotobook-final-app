@@ -9,6 +9,10 @@ class User < ApplicationRecord
 
   mount_uploader :avatar, AvatarUploader
 
+  def name
+    "#{self.first_name} #{self.last_name}"
+  end
+
   has_many :photos, as: :imageable
   has_many :albums
 

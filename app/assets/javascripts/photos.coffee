@@ -36,7 +36,7 @@ $(document).on "turbolinks:load", ->
       reader.onload = (e) ->
         mimeType = reader.result.split(",")[0].split(":")[1].split(";")[0];
         if ["image/png","image/jpeg","image/jpg","image/gif"].includes(mimeType)
-          $(".photo-upload").html("<img src=\""+reader.result+"\" class=\"photo-upload img-fit\">")
+          $(".photo-upload").html("<img src=\"#{reader.result}\" class=\"photo-upload img-fit\">")
         else
           # $(this).trigger("reset")
           $(this).val('')
