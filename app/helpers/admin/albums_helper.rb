@@ -1,7 +1,6 @@
 module Admin::AlbumsHelper
 
   def album_form_url(mode)
-    puts 'In helper'
     begin
       url = current_page?(edit_admin_album_path) ? admin_album_path : album_path
       return url

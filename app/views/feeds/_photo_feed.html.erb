@@ -1,8 +1,8 @@
 <% if mode == 'albums' %>
-  <% if @album.length > 0 %>
+  <% if @album.size > 0 %>
   <div class="container-fluid px-0">
     <div class="row no-gutters pb-2 feed-photo">
-        <%  @album.each do |photo| %>
+        <%  @album.includes(:photos, :user).each do |photo| %>
         <%= render partial: "feeds/thumbnail", locals: {mode: 'album', src: photo} %>
         <% end %>
     </div>
@@ -17,11 +17,11 @@
     <%= render partial: 'profiles/no_content_notice', locals: {notice: t('no-images-notice')} %>
     </div>
   <% end  %>
-<% elsif @mode == 'photos' %>
-  <% if @photo.length > 0 %>
+<% elsif mode == 'photos' %>
+  <% if @photo.size > 0 %>
     <div class="container-fluid px-0">
       <div class="row no-gutters pb-2 feed-photo">
-          <%  @photo.each do |photo| %>
+          <%  @photo.includes(:imageable).each do |photo| %>
           <%= render partial: "feeds/thumbnail", locals: {mode: 'photo', src: photo} %>
           <% end %>
       </div>

@@ -1,6 +1,6 @@
 class FeedsController < ApplicationController
 
-  skip_before_action :authenticate_user!, only: [:discover, :load_discover]
+  skip_before_action :authenticate_user!, except: [:home, :load_home, :blocked]
   skip_before_action :is_blocked?, only: [:blocked]
 
   ITEMS_PER_PAGE = 10
@@ -55,7 +55,7 @@ class FeedsController < ApplicationController
   end
 
   def album_preview
-    @album = Album.find preview_params[:param]
+    @album = Album.includes(:photos, :user).find preview_params[:param]
     respond_to do |format|
       format.js
     end

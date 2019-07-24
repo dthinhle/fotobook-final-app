@@ -1,3 +1,3 @@
-<% @photo.each do |photo| %>
+<% @photo.includes(:imageable).each do |photo| %>
   <%= render partial: "feeds/thumbnail", locals: {mode: 'photo', src: photo} %>
 <% end %>
