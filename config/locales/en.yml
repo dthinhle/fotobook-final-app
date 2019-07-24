@@ -56,9 +56,8 @@ en:
     photos:
       index:
         title: "Manage Photos"
-      edit:
     albums:
-      edit:
+      index:
         title: "Manage Albums"
 
   albums:

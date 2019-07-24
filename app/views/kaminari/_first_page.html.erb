@@ -7,7 +7,5 @@
     remote:        data-remote
 -%>
 <li class="page-item">
-  <%= link_to_unless current_page.first?, t('views.pagination.first').html_safe, url, class: 'page-link', remote: remote do %>
-    <span class ="page-link active"> <%= t('views.pagination.first') %> 2313 </span>
-  <% end %>
+  <%= link_to_unless current_page.first?, t('views.pagination.first').html_safe, url, class: 'page-link', remote: remote%>
 </li>
