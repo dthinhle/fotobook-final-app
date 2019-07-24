@@ -1,5 +1,8 @@
 class ProfilesController < ApplicationController
 
+  before_action :get_current_user, only: [:remove_avatar, :update_avatar, :update_password, :update_info, :edit_profile]
+  before_action :load_user, only: [:get_profile_photos, :load_photos]
+  before_action :load_follow, only: [:get_profile_follows, :load_follows]
   ITEMS_PER_PAGE = 12
 
   def show
@@ -18,7 +21,6 @@ class ProfilesController < ApplicationController
   end
 
   def update_avatar
-    @user = current_user
     @user.avatar =  profile_avt_params[:avatar]
     unless @user.save
       flash[:notice] = "Your selected file is invalid"
@@ -26,9 +28,15 @@ class ProfilesController < ApplicationController
     redirect_to edit_profile_path
   end
 
-  def update_password
-    @user = current_user
+  def remove_avatar
+    @user.remove_avatar!
+    if @user.save
+      flash[:notice] = "Your avatar has successfully deleted"
+    end
+    redirect_to edit_profile_path
+  end
 
+  def update_password
     if profile_password_params[:password] == profile_password_params[:current_password]
       flash[:notice] = "Your new password can not be identical to the old one!"
     elsif profile_password_params[:password] != profile_password_params[:password_confirmation]
@@ -40,7 +48,6 @@ class ProfilesController < ApplicationController
   end
 
   def update_info
-    @user = current_user
     unless @user.update(profile_info_params)
       msg = []
       @user.errors.each {|key, value| msg <<value}
@@ -52,7 +59,6 @@ class ProfilesController < ApplicationController
   end
 
   def get_profile_photos
-    load_user
     @mode = profile_data_params[:mode]
     respond_to do |format|
       format.js
@@ -60,7 +66,6 @@ class ProfilesController < ApplicationController
   end
 
   def load_photos
-    load_user
     @page = params[:page]
     @mode = profile_data_params[:mode]
     if @mode == 'photos'
@@ -76,7 +81,6 @@ class ProfilesController < ApplicationController
   end
 
   def get_profile_follows
-    @user = User.includes(:followers, :followees).find(profile_data_params[:param])
     @mode = profile_data_params[:mode]
     @page = params[:page]
     respond_to do |format|
@@ -86,7 +90,6 @@ class ProfilesController < ApplicationController
 
   def load_follows
     @page = params[:page]
-    load_user
     @mode = profile_data_params[:mode]
     if @mode == 'followers'
       @follow = @user.followers.page(@page).per(ITEMS_PER_PAGE)
@@ -103,6 +106,14 @@ class ProfilesController < ApplicationController
   end
 
   private
+
+  def get_current_user
+    @user = current_user
+  end
+
+  def load_follow
+    @user = User.includes(:followers, :followees).find(profile_data_params[:param])
+  end
 
   def load_user
     @user = User.includes(:photos, :albums).find(profile_data_params[:param])
