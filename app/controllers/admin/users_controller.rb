@@ -1,24 +1,32 @@
 class Admin::UsersController < Admin::ManagementsController
 
+  before_action :find_user, only: [:edit, :update, :update_avatar, :remove_avatar]
+
   def index
     @users = User.order(:id).page params[:page]
   end
 
   def edit
-    @user = User.find params[:id]
   end
 
   def update_avatar
-    @user = User.find params[:id]
     @user.avatar =  user_avatar_params[:avatar]
     unless @user.save
       flash[:notice] = "Your selected file is invalid"
     end
-    redirect_back(fallback_location: admin_users_path)
+    redirect_to edit_admin_user_path
+  end
+
+
+  def remove_avatar
+    @user.remove_avatar!
+    if @user.save
+      flash[:notice] = "User's avatar has successfully deleted"
+    end
+    redirect_to edit_admin_user_path
   end
 
   def update
-    @user = User.find(params[:id])
     params[:user].delete(:password) if params[:user][:password].blank?
 
     if @user.update(user_params)
@@ -41,6 +49,10 @@ class Admin::UsersController < Admin::ManagementsController
   end
 
   private
+
+  def find_user
+    @user = User.find(params[:id])
+  end
 
   def user_avatar_params
     params.require(:user).permit(:avatar)

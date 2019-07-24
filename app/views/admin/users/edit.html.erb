@@ -30,6 +30,11 @@
         <div class="form-group row">
           <div class="col-sm-8 offset-sm-4">
             <button id="avatar-submit" type="submit" class="btn btn-primary"> <%= t(".save") %></button>
+            <%= link_to admin_remove_avatar_path(@user), method: :delete, data: {confirm: t('.delete-message')} do %>
+              <div class="btn btn-danger">
+                <%= t('.remove-avatar') %>
+              </div>
+            <% end %>
           </div>
         </div>
         <% end %>

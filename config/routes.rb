@@ -42,7 +42,8 @@ Rails.application.routes.draw do
     resources 'photos', except: ['new', 'create', 'show']
     resources 'albums', except: ['new', 'create', 'show']
     resources 'users', except: ['new', 'create', 'show']
-    patch 'users/:id/avatar', to: 'managements#update_avatar_user', as: 'update_avatar'
+    patch 'users/:id/avatar', to: 'users#update_avatar', as: 'update_avatar'
+    delete 'users/:id/avatar', to: 'users#remove_avatar', as:  'remove_avatar'
   end
 
   authenticated :user do
