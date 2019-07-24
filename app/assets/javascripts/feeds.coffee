@@ -48,17 +48,6 @@ $(document).on "turbolinks:load", ->
       data: "request[mode]=albums"
       dataType: 'script'
 
-  # $(".content-field").on "click",".img-photo",->
-  #   id = $(this).attr("data-id")
-  #   Rails.ajax
-  #     type: "GET"
-  #     url: "/photo_preview"
-  #     data: "request[param]=#{id}"
-  #     dataType: 'script'
-  #     success: () ->
-  #       $("#imgPreviewModal").modal('show')
-  #       false
-
   $(".content-field").on "mouseenter",".img-above-2", ->
     $(this).toggleClass('album-animation-0')
     $(this).siblings(".img-above-1").toggleClass('album-animation-1')
@@ -68,14 +57,3 @@ $(document).on "turbolinks:load", ->
     $(this).toggleClass('album-animation-0')
     $(this).siblings(".img-above-1").toggleClass('album-animation-1')
     true
-
-  # $(".content-field").on "click",".img-above-2", ->
-  #   id = $(this).attr("data-id")
-  #   Rails.ajax
-  #     type: "GET"
-  #     url: "/album_preview"
-  #     data: "request[param]=#{id}"
-  #     dataType : 'script'
-  #     success: () ->
-  #       $("#imgPreviewModal").modal('show')
-  #       false
