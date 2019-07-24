@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     patch 'update_password'
     patch 'update_info'
     patch 'update_avatar'
+    delete 'remove_avatar'
   end
 
   # Photos and Albums interaction

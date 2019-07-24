@@ -103,6 +103,8 @@ en:
       save: "Save"
       title: "Edit Your Profile"
       profile-photo: "Profile Photo"
+      remove-avatar: "Delete"
+      delete-message: "Are you sure you want to remove your avatar?"
       upl-avatar: "Choose Image"
       user-info: "User Infomation"
       first-name: "First Name"
