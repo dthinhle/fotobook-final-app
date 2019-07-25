@@ -50,6 +50,11 @@ Rails.application.routes.draw do
     root 'feeds#home', as: :authenticated_root
   end
 
+  # Notification channel
+
+  mount ActionCable.server => '/cable'
+  post 'seen', to: "profiles#seen"
+
   root 'feeds#discover'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

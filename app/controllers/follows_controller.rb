@@ -8,6 +8,7 @@ class FollowsController < ApplicationController
     else
       flash[:notice] = t('already-follow-notice')
     end
+    Notification.create(event: "follow", user_id: followee.id, params: [current_user.id])
   end
 
   def destroy

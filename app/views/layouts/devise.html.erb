@@ -18,8 +18,8 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
-  <%= stylesheet_link_tag    'application', media: 'all',
-    'data-turbolinks-track': 'reload', cache: 'cached/all' %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload', cache: 'cached/all' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', cache: 'cached/all' %>
 </head>
 
 <body>
@@ -48,8 +48,6 @@
     <div class="col-12 col-md-3 col-xl-4">
     </div>
   </div>
-  <%= javascript_include_tag 'application',
-    'data-turbolinks-track': 'reload', cache: 'cached/all' %>
 
 </body>
 

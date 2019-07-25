@@ -36,6 +36,21 @@ class ProfilesController < ApplicationController
     redirect_to edit_profile_path
   end
 
+  def seen
+    notis = current_user.notifications.unread_notifications
+    unless notis.empty?
+      Notification.transaction do
+        current_user.notifications.unread_notifications.each do |noti|
+          noti.read = true
+          noti.save!
+        end
+      end
+    end
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def update_password
     if profile_password_params[:password] == profile_password_params[:current_password]
       flash[:notice] = "Your new password can not be identical to the old one!"

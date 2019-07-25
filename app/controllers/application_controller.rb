@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_user!
   before_action :is_blocked?, unless: :devise_controller?
+  before_action :load_notifications
 
   before_action :configure_permitted_parameters, if: :devise_controller?
   helper_method :dummy_avatar
@@ -27,6 +28,14 @@ class ApplicationController < ActionController::Base
       end
     rescue => exception
 
+    end
+  end
+
+  def load_notifications
+    if current_user
+      notis = current_user.notifications
+      @unread = notis.unread_notifications.size
+      @notifications = notis.last(5).reverse
     end
   end
 end

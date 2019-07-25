@@ -1,0 +1,32 @@
+<li class="nav-item">
+  <div class="dropdown">
+    <button class="btn nav-link mr-3 dropdown-toggle noti-toggle"
+            type="button" id="dropdown-noti" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false" data-offset="100,200">
+      <i class="fa fa-bell">
+        <div class="position-relative">
+          <div class="noti-count<%= " d-none" if @unread == 0 %>">
+            <div id="notification-count" class="badge badge-danger">
+              <%= @unread %>
+            </div>
+          </div>
+        </div>
+      </i>
+    </button>
+    <div class="dropdown-menu noti-position" aria-labelledby="dropdown-noti">
+      <div class="noti-container">
+        <div class="card noti-container-body shadow">
+          <div class="card-header">
+            Notifications
+          </div>
+          <div id="notification-list">
+            <% @notifications.each_with_index do |x, idx| %>
+              <% break if idx > 5 %>
+              <%= render partial: 'notifications/notification_post', locals: {noti: x} %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>

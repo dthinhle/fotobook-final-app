@@ -1,0 +1,26 @@
+<div class="notification-post">
+  <div class="p-3">
+    <div class="row">
+      <div class="col-auto">
+        <div class="noti-image">
+          <% begin %>
+            <%= image_tag  noti.image, class: 'img-fit border rounded' %>
+          <% rescue => e %>
+            <%= image_tag  "dummy-photo-thumb.jpg", class: 'img-fit border rounded' %>
+          <% end %>
+        </div>
+      </div>
+      <div class="col">
+        <span class="noti-text">
+          <%= noti.message %>
+        </span>
+      </div>
+      <div class="col-auto">
+        <span class="noti-text">
+          <%= noti.time_since %>
+        </span>
+      </div>
+    </div>
+  </div>
+  <hr class="m-0">
+</div>
