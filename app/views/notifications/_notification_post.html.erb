@@ -3,7 +3,11 @@
     <div class="row">
       <div class="col-auto">
         <div class="noti-image">
-          <%= image_tag  "dummy-profile.png", class: 'img-fit border rounded' %>
+          <% begin %>
+            <%= image_tag  noti.image, class: 'img-fit border rounded' %>
+          <% rescue => e %>
+            <%= image_tag  "dummy-photo-thumb.jpg", class: 'img-fit border rounded' %>
+          <% end %>
         </div>
       </div>
       <div class="col">

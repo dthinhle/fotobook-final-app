@@ -154,3 +154,23 @@ en:
   already-follow-notice: "You are already following this user"
   not-follow-notice: "You are not following this user yet"
   not-owner-notice: "You can not modify other people posts"
+
+  seconds-ago:
+    zero: "A few moment ago"
+    one: "1 second ago"
+    other: "%{count} seconds ago"
+
+  minutes-ago:
+    zero: "A few minutes ago"
+    one: "1 minute ago"
+    other: "%{count} minutes ago"
+
+  hours-ago:
+    zero: "A few hours ago"
+    one: "1 hour ago"
+    other: "%{count} hours ago"
+
+  days-ago:
+    zero: "A few days ago"
+    one: "1 day ago"
+    other: "%{count} days ago"

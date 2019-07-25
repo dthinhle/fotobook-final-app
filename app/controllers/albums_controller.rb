@@ -1,6 +1,8 @@
 class AlbumsController < ApplicationController
-
   before_action :find_album, only: [:edit, :update, :destroy]
+  before_action :find_album_id, only: [:like, :unlike]
+
+  ALBUM_NOTI = 1
 
   def new
     @album = Album.new
@@ -12,9 +14,11 @@ class AlbumsController < ApplicationController
     if @album.save
       create_photos(album_params[:img], album_params)
       redirect_to my_profile_path
-      Notification.transaction do
-        current_user.followers.each do |user|
-          Notification.create(event: "newpost", user_id: @album.user_id, params: [current_user.id, @album.id, ALBUM_MODE])
+      if album_params[:private] == false
+        Notification.transaction do
+          current_user.followers.each do |user|
+            Notification.create(event: "newpost", user_id: user.id, params: [current_user.id, @album.id, ALBUM_NOTI])
+          end
         end
       end
     else
@@ -26,8 +30,6 @@ class AlbumsController < ApplicationController
   end
 
   def update
-    byebug
-
     if @album.update(album_properties(album_params)) && @album.user == current_user
       if album_params[:img]
         create_photos(album_params[:img], album_params)
@@ -48,6 +50,22 @@ class AlbumsController < ApplicationController
       flash[:notice] = t("not-owner-notice")
     end
     redirect_to my_profile_path
+  end
+
+  def like
+    unless @album.likes.include?(current_user.id)
+      @album.likes << current_user.id
+      if @album.save
+        Notification.create(event: "like", user_id: @album.user_id, params: [current_user.id, @album.id, ALBUM_NOTI])
+      end
+    end
+  end
+
+  def unlike
+    if @album.likes.include?(current_user.id)
+      @album.likes.delete current_user.id
+      @album.save
+    end
   end
 
   private
@@ -77,6 +95,10 @@ class AlbumsController < ApplicationController
 
   def find_album
     @album = Album.includes(:photos).find params[:id]
+  end
+
+  def find_album_id
+    @album = Album.includes(:photos).find params[:album_id]
   end
 
   def album_params

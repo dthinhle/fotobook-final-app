@@ -1,0 +1,5 @@
+<% notifications = user.notifications.last(5) %>
+
+<% notifications.reverse_each do |x| %>
+  <%= render partial: 'notifications/notification_post', locals: {noti: x} %>
+<% end %>

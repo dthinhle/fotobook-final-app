@@ -7,15 +7,29 @@ class Notification < ApplicationRecord
   def time_since
     t_since = Time.zone.now - self.created_at
     if t_since < 60
-      "#{t_since.floor} second(s) ago"
+      I18n.translate('seconds-ago', count: t_since.floor )
+      # "#{t_since.floor} second(s) ago"
     elsif t_since/60 < 60
-      "#{(t_since/60).floor} minute(s) ago"
+      I18n.translate('minutes-ago', count: (t_since/60).floor )
     elsif t_since/3600 < 24
-      "#{(t_since/36000).floor} hour(s) ago"
+      I18n.translate('hours-ago', count: (t_since/3600).floor)
     elsif t_since/86400 < 30
-      "#{(t_since/86400).floor} day(s) ago"
+      I18n.translate('days-ago', count: (t_since/86400).floor)
     else
       "A long time ago"
+    end
+  end
+
+  def image
+    if event == 'follow'
+      user = User.find(self.params[0])
+      return user.avt_url
+    else
+      if self.params[2] == 0
+        return Photo.find(self.params[1]).img.thumb.url
+      else
+        return Album.find(self.params[1]).photos[0].img.thumb.url
+      end
     end
   end
 
@@ -26,15 +40,15 @@ class Notification < ApplicationRecord
       return "#{name} follows you"
     else
       if self.params[2] == 0
-        item = Photo.find(self.params[1]).title
+        item = "photo #{Photo.find(self.params[1]).title}"
       else
-        item = Album.find(self.params[1]).title
+        item = "album #{Album.find(self.params[1]).title}"
       end
 
       if event == 'like'
-        return "#{self.params[0]} likes your post #{self.params[1]}"
+        return "#{name} likes your #{item}"
       else event == 'newpost'
-        return "#{name} posts a new photo"
+        return "#{name} posts a new #{item}"
       end
     end
   end

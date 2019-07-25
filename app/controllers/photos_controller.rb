@@ -2,8 +2,7 @@ class PhotosController < ApplicationController
   before_action :find_photo, only: [:edit, :update, :destroy]
   before_action :find_photo_id, only: [:like, :unlike]
 
-  PHOTO_MODE = 0
-  ALBUM_MODE = 1
+  PHOTO_NOTI = 0
 
   def new
     @photo = Photo.new
@@ -14,6 +13,11 @@ class PhotosController < ApplicationController
     @photo.imageable = current_user
     if @photo.save
       @photo.img = photo_params[:img]
+      Notification.transaction do
+        current_user.followers.each do |user|
+          Notification.create(event: "newpost", user_id: user.id, params: [current_user.id, @photo.id, PHOTO_NOTI])
+        end
+      end
       redirect_to my_profile_path
     else
       render 'new'
@@ -51,7 +55,7 @@ class PhotosController < ApplicationController
     unless @photo.likes.include?(current_user.id)
       @photo.likes << current_user.id
       if @photo.save
-        Notification.create(event: "like", user_id: @photo.imageable.id, params: [current_user.id, @photo.id, PHOTO_MODE])
+        Notification.create(event: "like", user_id: @photo.imageable.id, params: [current_user.id, @photo.id, PHOTO_NOTI])
       end
     end
   end

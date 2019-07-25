@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  include LetterAvatar::AvatarHelper
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -11,6 +12,14 @@ class User < ApplicationRecord
 
   def name
     "#{self.first_name} #{self.last_name}"
+  end
+
+  def avt_url
+    unless self.avatar.url.nil?
+      return self.avatar.url
+    else
+      return letter_avatar_url(self.name, 256)
+    end
   end
 
   has_many :notifications

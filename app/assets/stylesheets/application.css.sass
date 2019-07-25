@@ -173,9 +173,19 @@ html, body
   position: absolute
   top: 0
   right: -3rem
+  z-index: inherit
+@media (max-width: 991px)
+  .noti-container
+    right: 0
+    width: 90vw
+
 
 .noti-container-body
   width: 400px
+@media (max-width: 991px)
+  .noti-container-body
+    width: 100%
+
 
 .noti-image
   height: 3rem
