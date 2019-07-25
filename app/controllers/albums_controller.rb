@@ -12,6 +12,11 @@ class AlbumsController < ApplicationController
     if @album.save
       create_photos(album_params[:img], album_params)
       redirect_to my_profile_path
+      Notification.transaction do
+        current_user.followers.each do |user|
+          Notification.create(event: "newpost", user_id: @album.user_id, params: [current_user.id, @album.id, ALBUM_MODE])
+        end
+      end
     else
       render 'new'
     end

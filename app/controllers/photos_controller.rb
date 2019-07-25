@@ -2,6 +2,9 @@ class PhotosController < ApplicationController
   before_action :find_photo, only: [:edit, :update, :destroy]
   before_action :find_photo_id, only: [:like, :unlike]
 
+  PHOTO_MODE = 0
+  ALBUM_MODE = 1
+
   def new
     @photo = Photo.new
   end
@@ -47,7 +50,9 @@ class PhotosController < ApplicationController
   def like
     unless @photo.likes.include?(current_user.id)
       @photo.likes << current_user.id
-      @photo.save
+      if @photo.save
+        Notification.create(event: "like", user_id: @photo.imageable.id, params: [current_user.id, @photo.id, PHOTO_MODE])
+      end
     end
   end
 

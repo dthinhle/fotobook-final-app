@@ -3,8 +3,8 @@ class NotificationBroadcastJob < ApplicationJob
 
   def perform(notification)
     user = notification.user_id
-    counter = User.find(user).notifications.size
-    ActionCable.server.broadcast 'notification_channel', counter: counter, notification: render_notification(notification)
+    counter = User.find(user).notifications.unread_notifications.size
+    ActionCable.server.broadcast "user_#{user}", counter: counter, notification: render_notification(notification)
   end
 
   private

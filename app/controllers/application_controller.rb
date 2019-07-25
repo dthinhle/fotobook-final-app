@@ -33,7 +33,9 @@ class ApplicationController < ActionController::Base
 
   def load_notifications
     if current_user
-      @notifications = current_user.notifications.last(5).reverse
+      notis = current_user.notifications
+      @unread = notis.unread_notifications.size
+      @notifications = notis.last(5).reverse
     end
   end
 end
