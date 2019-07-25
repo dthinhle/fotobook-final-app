@@ -6,3 +6,5 @@ $(".img-preview-body").html('<%= j (render partial: "feeds/album_preview", local
 $("#imgPreviewModal").find('.modal-title').text('<%= j @album.title%>')
 $("#imgPreviewModal").find('.text-primary').text('<%= j author_txt%>')
 $("#imgPreviewModal").find('.text-secondary').text('<%= j @album.desc.html_safe %>')
+
+$("#imgPreviewModal").modal('show')

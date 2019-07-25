@@ -115,9 +115,6 @@ $(document).on "turbolinks:load", ->
         url: "/photo_preview"
         data: "request[param]=#{id}"
         dataType: 'script'
-        success: () ->
-          $("#imgPreviewModal").modal('show')
-          false
 
 
   $(".collection").on "click",".img-above-2", ->
@@ -128,9 +125,6 @@ $(document).on "turbolinks:load", ->
         url: "/album_preview"
         data: "request[param]=#{id}"
         dataType : 'script'
-        success: () ->
-          $("#imgPreviewModal").modal('show')
-          false
 
   $(".collection").on "click", "#follow-group", ->
     followee_id = $(this).attr("data-id")

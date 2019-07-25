@@ -5,3 +5,5 @@ $("#imgPreview").text()
 $("#imgPreviewModal").find('.text-primary').text('<%= j author_txt%>')
 $("p.text-secondary").text("<%= @photo.desc.html_safe  %>")
 $("h5.modal-title").text("<%= @photo.title %>")
+
+$("#imgPreviewModal").modal('show')
