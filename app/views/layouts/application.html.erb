@@ -22,6 +22,7 @@
   <%= csp_meta_tag %>
 
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload', cache: 'cached/all' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', cache: 'cached/all' %>
 </head>
 
 
@@ -49,6 +50,11 @@
 
 
   <ul class="navbar-nav">
+    <% unless current_user.nil? %>
+    <li class="nav-item">
+      <%= render partial: "notifications/notifications" %>
+    </li>
+    <% end %>
     <li class="nav-item d-none d-lg-flex align-self-center mr-1">
       <div class="image-holder">
         <% unless current_user.nil? %>
@@ -137,7 +143,6 @@
       </div>
     </div>
   </div>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', cache: 'cached/all' %>
 </body>
 
 </html>

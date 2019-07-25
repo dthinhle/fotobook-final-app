@@ -13,6 +13,8 @@ class User < ApplicationRecord
     "#{self.first_name} #{self.last_name}"
   end
 
+  has_many :notifications
+
   has_many :photos, as: :imageable
   has_many :albums
 
