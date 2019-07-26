@@ -1,0 +1,14 @@
+development: &development
+  :url: redis://localhost:6379
+  :host: localhost
+  :port: 6379
+  :timeout: 1
+  :inline: true
+test: *development
+production: &production
+  :url: redis://redistogo:3849c7032ba123fb8fa0495d576df519@hammerjaw.redistogo.com:10616
+  :host: hammerjaw.redistogo.com
+  :port: 10616
+  :password: 3849c7032ba123fb8fa0495d576df519
+  :inline: true
+  :timeout: 1

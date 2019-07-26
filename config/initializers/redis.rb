@@ -1,0 +1,1 @@
+$redis = Redis::Namespace.new("fotobook-final-app", :redis => Redis.new)
