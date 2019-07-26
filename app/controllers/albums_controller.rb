@@ -14,7 +14,8 @@ class AlbumsController < ApplicationController
     if @album.save
       create_photos(album_params[:img], album_params)
       redirect_to my_profile_path
-      if album_params[:private] == false
+      byebug
+      if album_params[:private] == 'false'
         Notification.transaction do
           current_user.followers.each do |user|
             Notification.create(event: "newpost", user_id: user.id, params: [current_user.id, @album.id, ALBUM_NOTI])

@@ -13,9 +13,11 @@ class PhotosController < ApplicationController
     @photo.imageable = current_user
     if @photo.save
       @photo.img = photo_params[:img]
-      Notification.transaction do
-        current_user.followers.each do |user|
-          Notification.create(event: "newpost", user_id: user.id, params: [current_user.id, @photo.id, PHOTO_NOTI])
+      if photo_params[:private] == 'false'
+        Notification.transaction do
+          current_user.followers.each do |user|
+            Notification.create(event: "newpost", user_id: user.id, params: [current_user.id, @photo.id, PHOTO_NOTI])
+          end
         end
       end
       redirect_to my_profile_path
