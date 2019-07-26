@@ -57,7 +57,9 @@ class AlbumsController < ApplicationController
     unless @album.likes.include?(current_user.id)
       @album.likes << current_user.id
       if @album.save
-        Notification.create(event: "like", user_id: @album.user_id, params: [current_user.id, @album.id, ALBUM_NOTI])
+        unless @album.user == current_user
+          Notification.create(event: "like", user_id: @album.user_id, params: [current_user.id, @album.id, ALBUM_NOTI])
+        end
       end
     end
   end

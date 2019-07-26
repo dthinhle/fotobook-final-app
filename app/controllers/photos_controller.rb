@@ -57,7 +57,9 @@ class PhotosController < ApplicationController
     unless @photo.likes.include?(current_user.id)
       @photo.likes << current_user.id
       if @photo.save
-        Notification.create(event: "like", user_id: @photo.imageable.id, params: [current_user.id, @photo.id, PHOTO_NOTI])
+        unless @photo.imageable == current_user
+          Notification.create(event: "like", user_id: @photo.imageable.id, params: [current_user.id, @photo.id, PHOTO_NOTI])
+        end
       end
     end
   end
