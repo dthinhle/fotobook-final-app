@@ -44,7 +44,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'jquery-rails'
 gem 'jquery-validation-rails'
 gem 'bootstrap', '~> 4.3.1'
-gem 'bootstrap-sass', '~> 3.2.0'
+gem 'bootstrap-sass', '~> 3.4.1'
 gem 'autoprefixer-rails'
 gem "font-awesome-rails"
 
