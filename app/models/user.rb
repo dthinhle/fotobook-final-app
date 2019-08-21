@@ -22,10 +22,10 @@ class User < ApplicationRecord
     end
   end
 
-  has_many :notifications
+  has_many :notifications, dependent: :destroy
 
-  has_many :photos, as: :imageable
-  has_many :albums
+  has_many :photos, as: :imageable, dependent: :destroy
+  has_many :albums, dependent: :destroy
 
   validates :first_name, presence: true, length: { maximum: 25, too_long: "Your first name are too long, 25 characters are maximum allowed!" }
   validates :last_name, presence: true, length: { maximum: 25, too_long: "Your last name are too long, 25 characters are maximum allowed!" }
